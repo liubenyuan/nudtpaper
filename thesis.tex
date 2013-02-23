@@ -1,0 +1,106 @@
+%%
+%% This is file `thesis.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% nudtpaper.dtx  (with options: `thesis')
+%% 
+%% This is a generated file.
+%% 
+%% Copyright (C) 2012 by Liu Benyuan <liubenyuan@gmail.com>
+%% 
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3a
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in:
+%% 
+%% http://www.latex-project.org/lppl.txt
+%% 
+%% and version 1.3a or later is part of all distributions of LaTeX
+%% version 2004/10/01 or later.
+%% 
+%% To produce the documentation run the original source files ending with `.dtx'
+%% through LaTeX.
+%% 
+%% Any Suggestions : LiuBenYuan <liubenyuan@gmail.com>
+%% Thanks Xue Ruini <xueruini@gmail.com> for the thuthesis class!
+%% Thanks sofoot for the original NUDT paper class!
+%% 
+%1. 规范硕士导言
+% \documentclass[master,ttf]{nudtpaper}
+%2. 规范博士导言
+% \documentclass[doctor,twoside,ttf]{nudtpaper}
+%3. 如果使用是Vista
+% \documentclass[master,ttf,vista]{nudtpaper}
+%4. 建议使用OTF字体获得较好的页面显示效果
+%   OTF字体从网上获得，各个系统名称统一，不用加vista选项
+%   如果你下载的是最新的(1201)OTF英文字体，建议修改nudtpaper.cls，使用
+%   Times New Roman PS Std
+% \documentclass[doctor,twoside,otf]{nudtpaper}
+%5. 如果想生成盲评，传递anon即可，仍需修改个人成果部分
+% \documentclass[master,otf,anon]{nudtpaper}
+%
+\documentclass[master,otf]{nudtpaper}
+\usepackage{mynudt}
+
+\classification{TP957}
+\serialno{0123456}
+\confidentiality{公开}
+\UDC{}
+\title{国防科大学位论文\LaTeX{}模板\\
+使用手册}
+\displaytitle{国防科学技术大学学位论文\LaTeX{}模板}
+\author{张三}
+\zhdate{\zhtoday}
+\entitle{How to Use the \LaTeX{} Document Class for NUDT Dissertations}
+\enauthor{Zhang San}
+\endate{\entoday}
+\subject{通信与信息工程}
+\ensubject{Information and Communication Engineering}
+\researchfield{自动目标识别与模糊工程}
+\supervisor{李四\quad{}教授}
+\cosupervisor{王五\quad{}副教授} % 没有就空着
+\ensupervisor{Professor Li Si}
+\encosupervisor{}
+\papertype{工学}
+\enpapertype{Engineering}
+% 加入makenomenclature命令可用nomencl制作符号列表。
+
+\begin{document}
+\graphicspath{{figures/}}
+% 制作封面，生成目录，插入摘要，插入符号列表 \\
+% 默认符号列表使用denotation.tex，如果要使用nomencl \\
+% 需要注释掉denotation，并取消下面两个命令的注释。 \\
+% cleardoublepage% \\
+% printnomenclature% \\
+\maketitle
+\frontmatter
+\tableofcontents
+\listoftables
+\listoffigures
+
+\midmatter
+\input{data/abstract}
+\input{data/denotation}
+
+%书写正文，可以根据需要增添章节; 正文还包括致谢，参考文献与成果
+\mainmatter
+\input{data/chap01}
+\input{data/chap02}
+
+\input{data/ack}
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{参考文献}
+\bibliographystyle{bstutf8}
+\bibliography{ref/refs}
+
+\input{data/resume}
+% 最后，需要的话还要生成附录，全文随之结束。
+\appendix
+\backmatter
+\input{data/appendix01}
+
+\end{document}

@@ -1,0 +1,28 @@
+\documentclass{article}
+\usepackage[paperwidth=22cm,paperheight=29.7cm,
+  left=0cm, right=0cm]{geometry}
+\usepackage{graphicx}
+\usepackage[boldfont,slantfont,CJKnumber]{xeCJK}
+
+% 设定竖排字体，当前需要OTF字体！请参考说明文档进行下载
+\setmainfont{Adobe Garamond Pro}
+\setCJKmainfont{Adobe Song Std}
+\setCJKfamilyfont{vert}[RawFeature={vertical}]{Adobe Song Std}
+
+\newcommand{\envert}[1]{\raisebox{-.4em}{#1}}
+
+% 你需要改动下面的变量(英文用\envert包含进来)
+\providecommand{\thesistitle}{国防科学技术大学\envert{NUDT}~学位论文\envert{\LaTeX}模板}
+\providecommand{\thesisauthor}{李四}
+
+\pagestyle{empty}
+\begin{document}
+
+\flushright
+\CJKfamily{vert} \quad
+\rotatebox{-90}{\thesistitle\qquad\thesisauthor}
+\vfill
+\rotatebox{-90}{国防科学技术大学研究生院}
+
+\end{document}
+

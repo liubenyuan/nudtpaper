@@ -1,0 +1,104 @@
+%%
+%% Any Suggestions : LiuBenYuan <liubenyuan@gmail.com>
+%%
+
+\ProvidesPackage{doctor}
+
+\RequirePackage{calc}
+\RequirePackage[includeheadfoot]{geometry}
+\geometry{top=1.67in,bottom=1.67in,left=1.6in,right=1.6in}
+\geometry{headheight=7mm,headsep=1mm,footskip=8mm}
+\RequirePackage[center,pagestyles]{titlesec}
+\RequirePackage{amsmath,amssymb,bm}
+\RequirePackage{txfonts}
+\RequirePackage{url}
+\RequirePackage{xcolor}
+\RequirePackage[no-math]{xeCJK}
+\RequirePackage{xltxtra}
+\RequirePackage{indentfirst}
+\RequirePackage{array,longtable,booktabs}
+\RequirePackage[neverdecrease]{paralist}
+\RequirePackage{fancybox,fancyvrb}
+\RequirePackage[colorlinks,linkcolor=blue,citecolor=red,pdfborder=0 1 1]{hyperref}
+
+\defaultfontfeatures{Mapping=tex-text}
+\xeCJKsetcharclass{"0}{"2E7F}{0}
+\xeCJKsetcharclass{"2E80}{"FFFF}{1}
+\setmainfont{Times New Roman PS Std}
+\setsansfont{Minion Pro}
+\setmonofont{Courier New}
+\setCJKmainfont[BoldFont={Adobe Heiti Std},ItalicFont={Adobe Kaiti Std}]{Adobe Song Std}
+\setCJKsansfont{Adobe Heiti Std}
+\setCJKmonofont{Adobe Kaiti Std}
+\setCJKfamilyfont{song}{Adobe Song Std}
+\setCJKfamilyfont{hei}{Adobe Heiti Std}
+\setCJKfamilyfont{fs}{Adobe Fangsong Std}
+\newcommand{\hei}{\CJKfamily{hei}}
+\newcommand{\song}{\CJKfamily{song}}
+\newcommand{\fs}{\CJKfamily{fs}}
+
+\setlength{\topskip}{0pt}
+\setlength{\parskip}{4pt plus1pt minus0pt}
+\setlength{\topsep}{0pt}
+\setlength{\partopsep}{0pt}
+\setlength{\parindent}{20pt}
+\addtolength{\oddsidemargin}{-1cm}
+\advance\textwidth 1.5cm
+\addtolength{\topmargin}{-1cm}
+\addtolength{\headsep}{0.3cm}
+\addtolength{\textheight}{2.3cm}
+
+\renewcommand{\baselinestretch}{1.3}
+
+\setlength{\shadowsize}{2pt}
+\def\DescribeOption#1{\SpecialOptionIndex{#1}}
+\def\SpecialOptionIndex#1{\index{#1\actualchar\textbf{#1}}}
+
+\renewenvironment{description}
+  {\list{}{\setlength\labelwidth{2cm}%
+           \setlength\labelsep{3pt}%
+           \setlength\leftmargin{\labelwidth+\labelsep}%
+           \addtolength{\itemsep}{3pt}%
+           \renewcommand\makelabel[1]{%
+             \shadowbox{\color{blue!90}\texttt##1}\DescribeOption{##1}}}
+  }{\endlist}
+\DefineVerbatimEnvironment{example}{Verbatim}%
+  {frame=single,framerule=0.3mm,rulecolor=\color{red!75!green!50!blue},%
+   fillcolor=\color{red!75!green!50!blue!15},framesep=1mm,baselinestretch=1.2,%
+   fontsize=\small,gobble=1}
+\DefineVerbatimEnvironment{shell}{Verbatim}%
+  {frame=single,framerule=0.3mm,rulecolor=\color{red!85!green!60},%
+   fillcolor=\color{red!85!green!10},framesep=1mm,fontsize=\small,gobble=1}
+
+\long\def\myentry#1{\vskip5pt\par\noindent\llap{{\color{blue}\fs #1}}\marginpar{\strut}\hskip\parindent}
+\def\tableofcontents{\renewcommand{\baselinestretch}{1.0}\@starttoc{toc}}
+\def\DescribeMacro{\Describe@Macro}
+\def\Describe@Macro#1{\PrintDescribeMacro{#1}\SpecialUsageIndex{#1}}
+\def\PrintDescribeMacro#1{{\color{-red!75!green!50!blue!55}\MacroFont \string #1\hskip1em}}
+
+\newcommand{\sectionbreak}{%
+\addpenalty{-300}%
+\vspace*{0pt}%
+}
+
+\titleformat{\chapter}{\filcenter\huge\bfseries}{\S\,\thechapter}{1em}{}
+\titleformat{\section}{\filcenter\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\bfseries}{\thesubsubsection}{1em}{}
+\titlespacing{\chapter}{0pt}{2.4ex-\topskip-\heightof{A}}{2.4ex}
+\titlespacing{\section}{0pt}{2ex}{2ex}
+\titlespacing{\subsection}{2em}{2ex}{2ex}
+\titlespacing{\subsubsection}{2em}{1ex}{0ex}
+
+\newpagestyle{mainpage}{
+\sethead{\sectiontitle}{}{\sc \thepage}
+\setfoot{}{}{}
+\headrule}
+
+\thispagestyle{empty}
+\AtBeginDocument{
+\setcounter{section}{-1}
+}
+\endinput
+%%
+%% End of file `nudtx.sty'.

@@ -1,0 +1,79 @@
+\ProvidesPackage{mynudt}[2009/08/20 by you]
+% 这里添加你的论文中专门使用的宏包
+
+% 原先preamble中的\usepackage{...}用\RequirePackage{...}代替
+
+% 算法以及列表环境
+\RequirePackage{cases,listings}
+\RequirePackage{fancyvrb}
+\RequirePackage[chapter]{algorithm}
+\RequirePackage{algorithmic}
+
+% 配置Lstlisting
+\lstset{
+  columns=flexible,sensitive=true,lineskip=-3pt,
+  basicstyle=\small\ttfamily,
+  keywordstyle=\color{blue}\bfseries,
+  stringstyle=\ttfamily,
+  commentstyle=\color{red!50!green!50!blue!50},
+  numbers=left,numberstyle=\tiny,
+  xleftmargin=0.5em,xrightmargin=0.5em,aboveskip=0.5em,
+  showstringspaces=false,breaklines=true,extendedchars=true,escapeinside=``,
+  frame=shadowbox,rulesepcolor=\color{red!20!green!20!blue!20}}
+
+% 配置算法包
+\algsetup{indent=3em}
+\floatname{algorithm}{算法}
+\renewcommand{\algorithmicrequire}{\textbf{已知:}}
+\renewcommand{\algorithmicensure}{\textbf{求:}}
+
+\DefineVerbatimEnvironment{code}{Verbatim}%
+  {frame=lines,framerule=0.5mm,rulecolor=\color{black},%
+  fontseries=tt,xleftmargin=4mm,numbers=left,numbersep=1.5mm}
+%   gobble=2,numbers=left,xleftmargin=5mm}
+
+% 自定义其他命令
+\newcommand{\mynudt}{我的导言}
+\newcommand{\ve}[1]{\ensuremath{\bm #1}}
+
+% tabularx 中的 Z 环境，居中自动调整
+\newcolumntype{Z}{>{\centering\arraybackslash}X}
+
+% 0. 符号表
+\RequirePackage[intoc,norefeq,refpage]{nomencl}
+\renewcommand{\nomname}{重要符号表}
+\renewcommand{\nomgroup}[1]{}%
+% 1. 定制nom条目
+\def\pagedeclaration#1{\nobreakspace#1}%
+\def\@@nomenclature[#1]#2#3#4{\endgroup\@esphack}
+\def\@@@nomenclature[#1]#2#3#4{%
+ \def\@tempa{#2}\def\@tempb{#3}%
+ \protected@write\@nomenclaturefile{}%
+  {\string\nomenclatureentry{#1\nom@verb\@tempa @{\nom@verb\@tempa}&%
+      \begingroup\nom@verb\@tempb\endgroup &\begingroup#4\endgroup&%
+      \begingroup\protect%
+        |nompageref}{\thepage}}%
+ \endgroup%
+ \@esphack}
+% 2. 定制nom表格
+\def\thenomenclature{%
+  \@ifundefined{chapter}%
+  {
+    \section*{\nomname}
+    \if@intoc\addcontentsline{toc}{section}{\nomname}\fi%
+  }%
+  {
+    \chapter*{\nomname}
+    \if@intoc\addcontentsline{toc}{chapter}{\nomname}\fi%
+  }%
+\nompreamble%
+\begin{longtable}[c]{@{}lp{23em}ll@{}}%
+{\hei 符~号} & {\hei 定~义} & {\hei 单~位} & {\hei 页~码} \\
+}
+\def\endthenomenclature{%
+\end{longtable}%
+\nompostamble%
+}
+
+% %
+\endinput

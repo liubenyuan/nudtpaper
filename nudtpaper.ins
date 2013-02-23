@@ -1,0 +1,73 @@
+%%
+%% Copyright (C) 2009 by Liu Benyuan <liubenyuan@gmail.com>
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3a
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in:
+%% 
+%% http://www.latex-project.org/lppl.txt
+%% 
+%% and version 1.3a or later is part of all distributions of LaTeX 
+%% version 2004/10/01 or later.
+%%
+
+\input docstrip
+\askforoverwritefalse
+\showprogress
+\keepsilent
+
+\usedir{tex/latex/nudtpaper}
+
+\preamble
+
+This is a generated file.
+
+Copyright (C) \the\year by Liu Benyuan <liubenyuan@gmail.com>
+
+This file may be distributed and/or modified under the
+conditions of the LaTeX Project Public License, either version 1.3a
+of this license or (at your option) any later version.
+The latest version of this license is in:
+
+http://www.latex-project.org/lppl.txt
+
+and version 1.3a or later is part of all distributions of LaTeX 
+version 2004/10/01 or later.
+
+To produce the documentation run the original source files ending with `.dtx'
+through LaTeX.
+
+Any Suggestions : LiuBenYuan <liubenyuan@gmail.com>
+Thanks Xue Ruini <xueruini@gmail.com> for the thuthesis class!
+Thanks sofoot for the original NUDT paper class!
+
+\endpreamble
+
+\generate{
+	\file{\jobname.cls}{\from{\jobname.dtx}{cls}}
+	\file{\jobname.cfg}{\from{\jobname.dtx}{cfg}}
+	\nopostamble
+	\file{thesis.tex}{\from{\jobname.dtx}{thesis}}
+}
+%	\file{nudtx.sty}{\from{\jobname.dtx}{nudtx}}
+
+\ifToplevel{
+\Msg{***********************************************************}
+\Msg{*}
+\Msg{* To finish the installation you have to move the following}
+\Msg{* files into a directory searched by TeX:}
+\Msg{*}
+\Msg{* The recommended directory is TEXMF/tex/latex/nudtpaper}
+\Msg{*}
+\Msg{* \space\space nudtpaper.cls}
+\Msg{* \space\space nudtpaper.cfg}
+\Msg{*}
+\Msg{* To produce the documentation run the files ending with}
+\Msg{* `.dtx' through LaTeX.}
+\Msg{*}
+\Msg{* Happy TeXing!}
+\Msg{***********************************************************}
+}
+
+\endbatchfile
