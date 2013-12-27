@@ -8,7 +8,7 @@
 %% 
 %% This is a generated file.
 %% 
-%% Copyright (C) 2012 by Liu Benyuan <liubenyuan@gmail.com>
+%% Copyright (C) 2013 by Liu Benyuan <liubenyuan@gmail.com>
 %% 
 %% This file may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3a
@@ -31,7 +31,9 @@
 \ProvidesClass{nudtpaper}
 [2011/07/17 v2.2 NUDT paper template]
 \newif\ifismaster\ismastertrue
-\newif\ifisttf\isttftrue
+\newif\ifisttf\isttffalse
+\newif\ifisfz\isfzfalse
+\newif\ifisotf\isotffalse
 \DeclareOption{master}{\ismastertrue}
 \DeclareOption{doctor}{\ismasterfalse}
 \newif\ifisanon\isanonfalse
@@ -39,7 +41,8 @@
 \newif\ifistwoside\istwosidefalse
 \DeclareOption{twoside}{\istwosidetrue}
 \DeclareOption{ttf}{\isttftrue}
-\DeclareOption{otf}{\isttffalse}
+\DeclareOption{fz}{\isfztrue}
+\DeclareOption{otf}{\isotftrue}
 \newif\ifisvista\isvistafalse
 \DeclareOption{vista}{\isvistatrue}
 \DeclareOption*{\PackageWarning{nudtpaper}{Unknown Option '\CurrentOption'}}
@@ -64,16 +67,17 @@
 \RequirePackage{slashbox}
 \RequirePackage[neverdecrease]{paralist}
 \RequirePackage{xcolor}
-\RequirePackage[cmex10]{amsmath}
+\RequirePackage{amsmath,amssymb}
+\RequirePackage{txfonts}
 \RequirePackage[Symbolsmallscale]{upgreek}
-\RequirePackage{amssymb,bm}
+\interdisplaylinepenalty=2500
+\RequirePackage{bm}
 \RequirePackage[T1]{fontenc}
 \RequirePackage[amsmath,thmmarks,hyperref]{ntheorem}
-\interdisplaylinepenalty=2500
 \RequirePackage[CJKnumber,CJKchecksingle,no-math]{xeCJK}
 \RequirePackage{indentfirst}
 \RequirePackage[numbers,sort&compress,square]{natbib}
-\RequirePackage[pdfborder=0 0 1]{hyperref}
+\RequirePackage[colorlinks=true,linkcolor=blue,citecolor=red,pdfborder=0 1 1]{hyperref}
 \defaultfontfeatures{Mapping=tex-text}
 \xeCJKsetcharclass{"0}{"2E7F}{0}
 \xeCJKsetcharclass{"2E80}{"FFFF}{1}
@@ -97,9 +101,10 @@
   \setCJKfamilyfont{hei}{SimHei}
   \setCJKfamilyfont{li}{LiSu}
   \setCJKfamilyfont{you}{YouYuan}
+  \setCJKfamilyfont{cusong}{STZhongsong}
 }
 \newcommand\installOTF{%
-  \setmainfont{Times New Roman} % could be changed to "Times New Roman PS Std"
+  \setmainfont{Times New Roman} % could be changed to "Times New Roman PS Std" !!
   \setsansfont{Arial}
   \setmonofont{Courier New}
   \setCJKmainfont[BoldFont={Adobe Heiti Std},ItalicFont={Adobe Kaiti Std}]{Adobe Song Std}
@@ -111,13 +116,32 @@
   \setCJKfamilyfont{kai}{Adobe Kaiti Std}
   \setCJKfamilyfont{li}{Adobe Kaiti Std}
   \setCJKfamilyfont{you}{Adobe Kaiti Std}
+  \setCJKfamilyfont{cusong}{STZhongsong}
 }
-\setCJKfamilyfont{cusong}{STZhongsong}
+\newcommand\installFZ{%
+  \setmainfont{Times New Roman} % could be changed to "Times New Roman PS Std" !!
+  \setsansfont{Arial}
+  \setmonofont{Courier New}
+  \setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong_GB18030-Z01}
+  \setCJKsansfont{FZHei-B01} % Hei
+  \setCJKmonofont{FZKai-Z03} % Kai
+  \setCJKfamilyfont{song}{FZShuSong_GB18030-Z01}
+  \setCJKfamilyfont{hei}{FZHei-B01}
+  \setCJKfamilyfont{fs}{FZKai-Z03} % Kai
+  \setCJKfamilyfont{kai}{FZKai-Z03} % Kai
+  \setCJKfamilyfont{li}{FZKai-Z03} % Kai
+  \setCJKfamilyfont{you}{FZKai-Z03} % Kai
+  \setCJKfamilyfont{cusong}{FZXiaoBiaoSong-B05} % 小标宋
+}
 \newcommand{\cusong}{\CJKfamily{cusong}} % 中宋作为加粗宋体
 \ifisttf
   \installTTF
 \else
-  \installOTF
+  \ifisfz
+    \installFZ
+  \else
+    \installOTF
+  \fi
 \fi
 \newcommand{\song}{\CJKfamily{song}}    % 宋体
 \newcommand{\fs}{\CJKfamily{fs}}        % 仿宋体
@@ -286,19 +310,20 @@
 }
 \setlength{\topskip}{0pt}
 \setcounter{secnumdepth}{3}
-\titleformat{\chapter}{\filcenter \heiti\sanhao[1.25]}{第\CJKnumber{\thechapter}章\,}{1em}{}
-\titleformat{\section}{\filcenter \cusong\sihao[1.25]}{\thesection}{1em}{}
-\titleformat{\subsection}{\heiti\xiaosi[1.25]}{\thesubsection}{1em}{}
-\titleformat{\subsubsection}{\cusong\xiaosi[1.25]}{\thesubsubsection}{1em}{}
-\titlespacing{\chapter}{0pt}{2.4ex-\topskip-\heightof{A}}{2.4ex \@plus 2bp \@minus 2bp}
-\titlespacing{\section}{0pt}{2ex-\heightof{a}}{2ex \@plus 2bp \@minus 2bp}
-\titlespacing{\subsection}{2em}{2ex \@plus 2bp \@minus 2bp}{2ex \@plus 2bp \@minus 2bp}
-\titlespacing{\subsubsection}{2em}{1ex \@plus 2bp \@minus 2bp}{0ex \@plus 2bp \@minus 2bp}
+\setlength{\footnotesep}{2.2ex \@minus 2bp}
+\titleformat{\chapter}{\filcenter\sf \heiti\sanhao[1.25]}{第\CJKnumber{\thechapter}章\,}{1em}{}
+\titleformat{\section}{\filcenter\bfseries \cusong\sihao[1.25]}{\thesection}{1em}{}
+\titleformat{\subsection}{\sf \heiti\xiaosi[1.25]}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\bfseries \cusong\xiaosi[1.25]}{\thesubsubsection}{1em}{}
+\titlespacing{\chapter}{0pt}{2.4ex-\topskip-\heightof{A}}{2.4ex \@minus 2bp}
+\titlespacing{\section}{0pt}{2ex-\heightof{a}}{2ex \@minus 2bp}
+\titlespacing{\subsection}{2em}{2ex \@minus 2bp}{2ex \@minus 2bp}
+\titlespacing{\subsubsection}{2em}{1ex \@minus 2bp}{0ex \@minus 2bp}
 \renewcommand\normalsize{%
 \@setfontsize\normalsize{12bp}{12.87bp}%
 \renewcommand{\baselinestretch}{1.3}%
-\setlength\abovedisplayskip{10bp \@plus 1bp \@minus 1bp}%
-\setlength\abovedisplayshortskip{10bp \@plus 1bp \@minus 1bp}%
+\setlength\abovedisplayskip{10bp \@minus 1bp}%
+\setlength\abovedisplayshortskip{10bp \@minus 1bp}%
 \setlength\belowdisplayskip{\abovedisplayskip}%
 \setlength\belowdisplayshortskip{\abovedisplayshortskip}%
 }
@@ -311,7 +336,7 @@
   \CJKindent\relax
   \checkparameter\relax
 }
-\setlength{\parskip}{0bp \@plus 2bp \@minus 2bp}
+\setlength{\parskip}{0bp \@minus 2bp}
 \newcommand*{\ziju}[1]{\renewcommand{\CJKglue}{\hskip #1}}
 \renewenvironment{thebibliography}[1]{%
    \chapter*{\bibname}%
@@ -333,12 +358,12 @@
    {\def\@noitemerr
      {\@latex@warning{Empty `thebibliography' environment}}%
     \endlist\frenchspacing}
-\setlength{\floatsep}{12bp \@plus 2bp \@minus 2bp}
-\setlength{\intextsep}{12bp \@plus 2bp \@minus 2bp}
-\setlength{\textfloatsep}{12bp \@plus 2bp \@minus 2bp}
-\setlength{\@fptop}{0bp \@plus4bp}
-\setlength{\@fpsep}{12bp \@plus4bp}
-\setlength{\@fpbot}{0bp \@plus4bp}
+\setlength{\floatsep}{12bp}
+\setlength{\intextsep}{12bp}
+\setlength{\textfloatsep}{12bp}
+\setlength{\@fptop}{0bp}
+\setlength{\@fpsep}{12bp}
+\setlength{\@fpbot}{0bp}
 \renewcommand{\textfraction}{0.01}
 \renewcommand{\topfraction}{0.99}
 \renewcommand{\bottomfraction}{0.99}
@@ -361,13 +386,12 @@
 \let\thu@LT@array\LT@array
 \def\LT@array{\thu@LT@array}
 \newenvironment{denotation}[1][2.5cm]{
-    \chapter*{符号列表} % no tocline
     \noindent\begin{list}{}%
     {\vskip-30bp\xiaosi[1.5]
     \renewcommand\makelabel[1]{##1\hfil}
     \setlength{\labelwidth}{#1} % 标签盒子宽度
-    \setlength{\labelsep}{0.75cm} % 标签与列表文本距离
-    \setlength{\itemindent}{0cm} % 标签缩进量
+    \setlength{\labelsep}{0cm} % 标签与列表文本距离
+    \setlength{\itemindent}{2em} % 标签缩进量
     \setlength{\leftmargin}{\labelwidth+\labelsep} % 左边界
     \setlength{\rightmargin}{0cm}
     \setlength{\parsep}{0cm} % 段落间距

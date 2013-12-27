@@ -34,7 +34,46 @@
 
 % 自定义其他命令
 \newcommand{\mynudt}{我的导言}
-\newcommand{\ve}[1]{\ensuremath{\bm #1}}
+\newcommand{\ve}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\bhat}[1]{\ensuremath{\mathbf{\hat{{#1}}}}}
+\newcommand{\expect}[1]{\ensuremath{\langle #1\rangle}}
+\newcommand{\fcite}[1]{[{\bf #1}]}
+\newcommand{\rcite}{[{\bf\textcolor{red}{R}}]}
+\newcommand{\SI}[2]{\ensuremath{\mathrm{#1}^{#2}}}
+\newcommand{\abs}[1]{\ensuremath{\vert #1\vert}}
+\newcommand{\norm}[1]{\ensuremath{\Vert #1\Vert}}
+\newcommand{\wmark}{{\color{red}$\square$}}
+\newcommand{\rd}{\ensuremath{\mathrm{d}}}
+\newcommand{\lby}[1]{{\color{red}\kai #1}}
+\newcommand{\done}{{\color{red}\bf\ensuremath{\checkmark}}}
+\newcommand{\diag}{\ensuremath{\mathrm{diag}}}
+
+% defining values of gray
+\definecolor{shadecolor}{gray}{.85}%
+\definecolor{tintedcolor}{gray}{.90}%
+\RequirePackage{framed}%
+%
+\newenvironment{tinted}{%
+  \def\FrameCommand{\colorbox{tintedcolor}}%
+  \MakeFramed {\FrameRestore}}%
+ {\endMakeFramed}%
+%
+\newenvironment{svgraybox}%
+       {\fboxsep=12pt\relax
+        \begin{shaded}%
+        \list{}{\leftmargin=12pt\rightmargin=2\leftmargin\leftmargin=\z@\topsep=\z@\relax}%
+        \expandafter\item\parindent=0pt
+        \hskip-\listparindent}%
+       {\endlist\end{shaded}}%
+%
+\newenvironment{svtintedbox}%
+       {\fboxsep=6pt\relax
+        \begin{tinted}%
+        \list{}{\leftmargin=0pt\rightmargin=2\leftmargin\leftmargin=\z@\topsep=\z@\relax}%
+        \expandafter\item\parindent=0pt
+        \relax}%
+       {\endlist\end{tinted}}%
+%
 
 % tabularx 中的 Z 环境，居中自动调整
 \newcolumntype{Z}{>{\centering\arraybackslash}X}

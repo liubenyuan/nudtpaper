@@ -33,7 +33,7 @@
 % \def\thuthesis{\textsc{Thu}\-\textsc{Thesis}}
 % \def\nudtpaper{\textsc{Nudt}\-\textsc{Paper}}
 % 
-% \CheckSum{1204}
+% \CheckSum{1224}
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -276,6 +276,8 @@
 %<thesis>%   如果你下载的是最新的(1201)OTF英文字体，建议修改nudtpaper.cls，使用
 %<thesis>%   Times New Roman PS Std
 %<thesis>% \documentclass[doctor,twoside,otf]{nudtpaper}
+%<thesis>%   另外，新版的论文模板提供了方正字体选项FZ，效果也不错哦
+%<thesis>% \documentclass[doctor,twoside,fz]{nudtpaper}
 %<thesis>%5. 如果想生成盲评，传递anon即可，仍需修改个人成果部分
 %<thesis>% \documentclass[master,otf,anon]{nudtpaper}
 %<thesis>%
@@ -516,7 +518,9 @@
 %
 %    \begin{macrocode}
 \newif\ifismaster\ismastertrue
-\newif\ifisttf\isttftrue
+\newif\ifisttf\isttffalse
+\newif\ifisfz\isfzfalse
+\newif\ifisotf\isotffalse
 \DeclareOption{master}{\ismastertrue}
 \DeclareOption{doctor}{\ismasterfalse}
 \newif\ifisanon\isanonfalse
@@ -524,7 +528,8 @@
 \newif\ifistwoside\istwosidefalse
 \DeclareOption{twoside}{\istwosidetrue}
 \DeclareOption{ttf}{\isttftrue}
-\DeclareOption{otf}{\isttffalse}
+\DeclareOption{fz}{\isfztrue}
+\DeclareOption{otf}{\isotftrue}
 \newif\ifisvista\isvistafalse
 \DeclareOption{vista}{\isvistatrue}
 \DeclareOption*{\PackageWarning{nudtpaper}{Unknown Option '\CurrentOption'}}
@@ -601,14 +606,13 @@
 %    \end{macrocode}
 %
 % 为了排出漂亮的数学公式，\textsf{amsmath}包是必不可少的，
+% 需要注意的是，新版本的论文模板仍旧使用\textsf{txfonts}宏包，
 % 为了支持希腊正体字母，需要调用\verb|upgreek.sty|，使用方法是\verb|\up<greek>|。
 % 注意到这个宏包前面加上了\verb|Symbolsmallscale|选项，这是为了配合
-% \verb|[cmex10]|字体使用的。我们在这一版中移除了\verb|txfonts|宏包，
-% 因为我觉得这个宏包对于数学字体以及符号影响过大，很不美观。
-% 当然每个人都有自己的看法，用户也可以使用
+% \verb|txfonts|希腊字体的大小而设定的。如果用户不满意这个宏包的积分号
+% 等符号，倾向与使用传统的\LaTeX{}风格的数学符号，那么可以使用
 % \textsf{mathptmx}宏包，但要把\verb|upgreek|的选项改为\verb|Symbol|，要不然
 % 正体希腊字母要显得小一点哦。
-% 除此之外，作者强烈建议用户考虑\verb|mtpro2|宏包，这个宏包的数学符号以及字体很美。
 % 而大写斜体希腊字母(变量)可以通过\textsf{amsmath}的\verb|\var<Greek>|得到。
 % 当然，对于希腊字母的加粗推荐使用\verb|bm|宏包，一般变量的加粗那就使用
 % \verb|\mathbf|吧！
@@ -617,17 +621,22 @@
 % \changes{v2.2}{2011/07/16}{修改，仍旧使用upgreek, mathptmx, bm组合}
 % \changes{v2.2}{2011/09/25}{修改，使用upgreek, txfonts, bm组合}
 % \changes{v2.2}{2012/11/28}{给用户提供额外的选项，还是mtpro比较漂亮}
-% \changes{v2.3}{2012/12/02}{允许amsmath公式断行, 去掉txfonts, 还是原始IEEE的模板字体更为漂亮}
+% \changes{v2.3}{2013/12/27}{调整数学字体，加入mtpro使用说明，并且仿照IEEE模板，修改displaypenalty}
 %    \begin{macrocode}
-\RequirePackage[cmex10]{amsmath}
+\RequirePackage{amsmath,amssymb}
+\RequirePackage{txfonts}
 \RequirePackage[Symbolsmallscale]{upgreek}
-\RequirePackage{amssymb,bm}
+%\RequirePackage{amsmath}
+%\RequirePackage[amsbb,eufrak,compatiblegreek,subscriptcorrection,nofontinfo]{mtpro2}
+\interdisplaylinepenalty=2500
+\RequirePackage{bm}
 \RequirePackage[T1]{fontenc}
 \RequirePackage[amsmath,thmmarks,hyperref]{ntheorem}
-\interdisplaylinepenalty=2500
 %    \end{macrocode}
 % 需要注意的是，如果用户有\verb|mtpro2|包，还是强烈建议使用这个的，因为数学公式
-% 在这个包下显得特别的美观。具体在哪里下载或者怎么安装不属于这篇使用说明的范畴。
+% 在这个包下显得特别的美观。虽然下载和安装不属于这篇使用说明的范畴，但是，上面的注释部分
+% 可以给大家如何使用的一个简单的例子。当你安装好\verb|mtpro2|之后，主要取消注释，并且将
+% 上面的三个包注释掉即可。
 %
 % 本文档类直接采用\XeTeX{}引擎，方便了字体配置以及编译，
 % 这里需要调用\textsf{XeCJK}宏包，no--math的作用是不改变先前数学宏包设定的数学字体。
@@ -642,12 +651,15 @@
 %    \end{macrocode}
 %
 % 另外一个关键部分是文献索引，包括书签以及参考文献的索引，记得\textsf{hyperref}配合
-% \XeTeX{}使用时暂不能开启Unicode选项，新的发行版已经移除\textsf{hypernat}包:
+% \XeTeX{}使用时暂不能开启Unicode选项，新的发行版已经移除\textsf{hypernat}包。另外还要注意，你最终的打印版肯定
+% 不希望有花花绿绿的链接，对吧？那就把下面那行\verb|hyperref|注释掉就行了。
 % \changes{v2.1}{2010/12/29}{移除hypernat包}
 % \changes{v2.2}{2011/07/17}{移除hyperref的CJKbookmarks旋向}
+% \changes{v2.3}{2013/12/27}{加入色彩版hyperref}
 %    \begin{macrocode}
 \RequirePackage[numbers,sort&compress,square]{natbib}
-\RequirePackage[pdfborder=0 0 1]{hyperref}
+\RequirePackage[colorlinks=true,linkcolor=blue,citecolor=red,pdfborder=0 1 1]{hyperref}
+%\RequirePackage[pdfborder=0 0 1]{hyperref}
 %    \end{macrocode}
 %</cls>
 %
@@ -667,11 +679,14 @@
 %
 % 之后用\textsc{XeCJK}包提供的命令设定字体，用户可以选择使用TTF还是OTF字体，
 % Adobe的OpenType字体在排版上更具备优势，文档显示锐利，推荐使用。
+% 另外在这一个新版本中，我们推荐用户也可以使用方正的字体，只要使用\verb|FZ|选项即可。
+% 中注释掉相关的字体就可以。方正字体的有点是标点符号的位置无需修正，且字体之间配合很好。
 % \verb|setcharclass|的作用是纠正xunicode、xeCJK的一些设定:
 %
 % \changes{v0.99}{2009/08/17}{add options TTF and OTF}
 % \changes{v0.993}{2009/08/25}{加入VISTA用户选项}
 % \changes{v1.9}{2010/10/28}{定义一个cusong字体，使用的是中宋}
+% \changes{v2.3}{2013/12/27}{用户可以考虑使用方正字体，加入FZ选项}
 %
 %    \begin{macrocode}
 %<*cls>
@@ -697,9 +712,10 @@
   \setCJKfamilyfont{hei}{SimHei}
   \setCJKfamilyfont{li}{LiSu}
   \setCJKfamilyfont{you}{YouYuan}
+  \setCJKfamilyfont{cusong}{STZhongsong}
 }
 \newcommand\installOTF{%
-  \setmainfont{Times New Roman} % could be changed to "Times New Roman PS Std"
+  \setmainfont{Times New Roman} % could be changed to "Times New Roman PS Std" !!
   \setsansfont{Arial}
   \setmonofont{Courier New}
   \setCJKmainfont[BoldFont={Adobe Heiti Std},ItalicFont={Adobe Kaiti Std}]{Adobe Song Std}
@@ -711,13 +727,29 @@
   \setCJKfamilyfont{kai}{Adobe Kaiti Std}
   \setCJKfamilyfont{li}{Adobe Kaiti Std}
   \setCJKfamilyfont{you}{Adobe Kaiti Std}
+  \setCJKfamilyfont{cusong}{STZhongsong}
 }
-\setCJKfamilyfont{cusong}{STZhongsong}
+\newcommand\installFZ{%
+  \setmainfont{Times New Roman} % could be changed to "Times New Roman PS Std" !!
+  \setsansfont{Arial}
+  \setmonofont{Courier New}
+  \setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong_GB18030-Z01}
+  \setCJKsansfont{FZHei-B01} % Hei
+  \setCJKmonofont{FZKai-Z03} % Kai
+  \setCJKfamilyfont{song}{FZShuSong_GB18030-Z01}
+  \setCJKfamilyfont{hei}{FZHei-B01}
+  \setCJKfamilyfont{fs}{FZKai-Z03} % Kai
+  \setCJKfamilyfont{kai}{FZKai-Z03} % Kai
+  \setCJKfamilyfont{li}{FZKai-Z03} % Kai
+  \setCJKfamilyfont{you}{FZKai-Z03} % Kai
+  \setCJKfamilyfont{cusong}{FZXiaoBiaoSong-B05} % 小标宋
+}
 \newcommand{\cusong}{\CJKfamily{cusong}} % 中宋作为加粗宋体
 %</cls>
 %    \end{macrocode}
 %
 % \changes{v1.6}{2009/12/01}{替换OTF英文字体为标准Windows自带字体}
+% \changes{v2.3}{2013/12/27}{添加FZ字体选项}
 % 之后我们根据你的设定决定安装什么字体：
 %
 %    \begin{macrocode}
@@ -725,7 +757,11 @@
 \ifisttf
   \installTTF
 \else
-  \installOTF
+  \ifisfz
+    \installFZ
+  \else
+    \installOTF
+  \fi
 \fi
 %</cls>
 %    \end{macrocode}
@@ -1158,18 +1194,21 @@
 %    \end{macrocode}
 % \changes{v1.9}{2010/10/28}{在定义了粗宋字体之后，按照学位论文要求设定标题字体}
 % \changes{v1.9}{2010/10/28}{使用了ttltips.pdf的设置chapter距顶端距离的办法}
+% \changes{v2.3}{2013/12/27}{修改了footnotesize，当一页中有两个footnote时，间距调整正常}
+% \changes{v2.3}{2013/12/27}{修改了titleformat和titlespacing的定制，更改英文字体，修正间距}
 %
 %    \begin{macrocode}
 %<*cls>
 \setcounter{secnumdepth}{3}
-\titleformat{\chapter}{\filcenter \heiti\sanhao[1.25]}{第\CJKnumber{\thechapter}章\,}{1em}{}
-\titleformat{\section}{\filcenter \cusong\sihao[1.25]}{\thesection}{1em}{}
-\titleformat{\subsection}{\heiti\xiaosi[1.25]}{\thesubsection}{1em}{}
-\titleformat{\subsubsection}{\cusong\xiaosi[1.25]}{\thesubsubsection}{1em}{}
-\titlespacing{\chapter}{0pt}{2.4ex-\topskip-\heightof{A}}{2.4ex \@plus 2bp \@minus 2bp}
-\titlespacing{\section}{0pt}{2ex-\heightof{a}}{2ex \@plus 2bp \@minus 2bp}
-\titlespacing{\subsection}{2em}{2ex \@plus 2bp \@minus 2bp}{2ex \@plus 2bp \@minus 2bp}
-\titlespacing{\subsubsection}{2em}{1ex \@plus 2bp \@minus 2bp}{0ex \@plus 2bp \@minus 2bp}
+\setlength{\footnotesep}{2.2ex \@minus 2bp}
+\titleformat{\chapter}{\filcenter\sf \heiti\sanhao[1.25]}{第\CJKnumber{\thechapter}章\,}{1em}{}
+\titleformat{\section}{\filcenter\bfseries \cusong\sihao[1.25]}{\thesection}{1em}{}
+\titleformat{\subsection}{\sf \heiti\xiaosi[1.25]}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\bfseries \cusong\xiaosi[1.25]}{\thesubsubsection}{1em}{}
+\titlespacing{\chapter}{0pt}{2.4ex-\topskip-\heightof{A}}{2.4ex \@minus 2bp}
+\titlespacing{\section}{0pt}{2ex-\heightof{a}}{2ex \@minus 2bp}
+\titlespacing{\subsection}{2em}{2ex \@minus 2bp}{2ex \@minus 2bp}
+\titlespacing{\subsubsection}{2em}{1ex \@minus 2bp}{0ex \@minus 2bp}
 %</cls>
 %    \end{macrocode}
 %
@@ -1183,14 +1222,15 @@
 % \changes{v1.9}{2010/10/28}{在normalsize后面每一行加上\%号来吃掉多余的空格}
 % \changes{v2.2}{2011/07/16}{减小公式之间距离rubber space的上界}
 % \changes{v2.2}{2011/09/25}{减小公式之间距离rubber space的下界}
+% \changes{v2.3}{2013/12/27}{移除了abovedisplay的正向rubberspace}
 %
 %    \begin{macrocode}
 %<*cls>
 \renewcommand\normalsize{%
 \@setfontsize\normalsize{12bp}{12.87bp}%
 \renewcommand{\baselinestretch}{1.3}%
-\setlength\abovedisplayskip{10bp \@plus 1bp \@minus 1bp}%
-\setlength\abovedisplayshortskip{10bp \@plus 1bp \@minus 1bp}%
+\setlength\abovedisplayskip{10bp \@minus 1bp}%
+\setlength\abovedisplayshortskip{10bp \@minus 1bp}%
 \setlength\belowdisplayskip{\abovedisplayskip}%
 \setlength\belowdisplayshortskip{\abovedisplayshortskip}%
 }
@@ -1227,10 +1267,11 @@
 % \changes{v0.993}{2009/08/27}{修改parskip}
 % \changes{v2.2}{2011/09/25}{修改parskip，允许少量的调整，1bp}
 % \changes{v2.2}{2011/10/14}{修改parskip，仅允许负的少量调整，2bp}
+% \changes{v2.3}{2013/12/27}{移除parskip的正向rubberspace}
 %
 %    \begin{macrocode}
 %<*cls>
-\setlength{\parskip}{0bp \@plus 2bp \@minus 2bp}
+\setlength{\parskip}{0bp \@minus 2bp}
 %</cls>
 %    \end{macrocode}
 %
@@ -1288,15 +1329,16 @@
 % 图片标题在下，表格标题在上，具体实现为:
 % \changes{v1.1}{2009/09/26}{修改float浮动弹性}
 % \changes{v2.2}{2011/09/25}{去掉1.0fil改为4bp, 这样不至于生成过大的空白.}
+% \changes{v2.3}{2013/12/27}{移除了floatsep所有rubberspace. 原先为正2负2.}
 %
 %    \begin{macrocode}
 %<*cls>
-\setlength{\floatsep}{12bp \@plus 2bp \@minus 2bp}
-\setlength{\intextsep}{12bp \@plus 2bp \@minus 2bp}
-\setlength{\textfloatsep}{12bp \@plus 2bp \@minus 2bp}
-\setlength{\@fptop}{0bp \@plus4bp}
-\setlength{\@fpsep}{12bp \@plus4bp}
-\setlength{\@fpbot}{0bp \@plus4bp}
+\setlength{\floatsep}{12bp}
+\setlength{\intextsep}{12bp}
+\setlength{\textfloatsep}{12bp}
+\setlength{\@fptop}{0bp}
+\setlength{\@fpsep}{12bp}
+\setlength{\@fpbot}{0bp}
 %</cls>
 %    \end{macrocode}
 %
@@ -1353,17 +1395,17 @@
 % 有些论文需要在正文前面加入符号列表, 其内容格式是简单的列表环境:
 % \changes{v2.2}{2011/09/10}{略微减小列表间距，与行距相等}
 % \changes{v2.2}{2011/09/13}{略微减小标签和说明间距}
+% \changes{v2.3}{2013/12/27}{重新制作了denotation, 参见样例文件}
 %
 %    \begin{macrocode}
 %<*cls>
 \newenvironment{denotation}[1][2.5cm]{
-    \chapter*{符号列表} % no tocline
     \noindent\begin{list}{}%
     {\vskip-30bp\xiaosi[1.5]
     \renewcommand\makelabel[1]{##1\hfil}
     \setlength{\labelwidth}{#1} % 标签盒子宽度
-    \setlength{\labelsep}{0.75cm} % 标签与列表文本距离
-    \setlength{\itemindent}{0cm} % 标签缩进量
+    \setlength{\labelsep}{0cm} % 标签与列表文本距离
+    \setlength{\itemindent}{2em} % 标签缩进量
     \setlength{\leftmargin}{\labelwidth+\labelsep} % 左边界
     \setlength{\rightmargin}{0cm}
     \setlength{\parsep}{0cm} % 段落间距
