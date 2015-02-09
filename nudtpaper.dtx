@@ -33,7 +33,7 @@
 % \def\thuthesis{\textsc{Thu}\-\textsc{Thesis}}
 % \def\nudtpaper{\textsc{Nudt}\-\textsc{Paper}}
 % 
-% \CheckSum{1224}
+% \CheckSum{1225}
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -644,9 +644,11 @@
 % \changes{v1.8}{2010/10/15}{修改了默认的xeCJK的选项，为了兼容旧的xeCJK版本，normalindentfirst选项暂不使用，而是在后面添加indentfirst包}
 % \changes{v2.0}{2010/11/10}{传递no-math给xeCJK里面的fontspec宏包}
 % \changes{v2.2}{2011/07/03}{移除CJKtextspace, CJKmathspace, CJKnumber选项}
+% \changes{v2.4}{2015/02/09}{移除CJKnumber选项，添加新的CJKnum宏包。旧版本TexLive无需更改。}
 %
 %    \begin{macrocode}
-\RequirePackage[CJKnumber,CJKchecksingle,no-math]{xeCJK}
+\RequirePackage[CJKchecksingle,no-math]{xeCJK}
+\RequirePackage{CJKnumb}
 \RequirePackage{indentfirst}
 %    \end{macrocode}
 %
