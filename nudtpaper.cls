@@ -31,21 +31,21 @@
 \ProvidesClass{nudtpaper}
 [2011/07/17 v2.2 NUDT paper template]
 \newif\ifismaster\ismastertrue
-\newif\ifisttf\isttffalse
-\newif\ifisfz\isfzfalse
-\newif\ifisotf\isotffalse
 \DeclareOption{master}{\ismastertrue}
 \DeclareOption{doctor}{\ismasterfalse}
 \newif\ifisanon\isanonfalse
 \DeclareOption{anon}{\isanontrue}
 \newif\ifistwoside\istwosidefalse
 \DeclareOption{twoside}{\istwosidetrue}
-\DeclareOption{ttf}{\isttftrue}
-\DeclareOption{fz}{\isfztrue}
-\DeclareOption{otf}{\isotftrue}
-\newif\ifisvista\isvistafalse
-\DeclareOption{vista}{\isvistatrue}
 \DeclareOption*{\PackageWarning{nudtpaper}{Unknown Option '\CurrentOption'}}
+\newif\ifisttf\isttffalse
+\newif\ifisotf\isotffalse
+\newif\ifisfz\isfzfalse
+\newif\ifisfandol\isfandolfalse
+\DeclareOption{ttf}{\isttftrue}
+\DeclareOption{otf}{\isotftrue}
+\DeclareOption{fz}{\isfztrue}
+\DeclareOption{fandol}{\isfandoltrue}
 \ProcessOptions\relax
 \RequirePackage{ifthen,calc}
 \ifistwoside
@@ -68,7 +68,6 @@
 \RequirePackage[neverdecrease]{paralist}
 \RequirePackage{xcolor}
 \RequirePackage{amsmath,amssymb}
-\RequirePackage{txfonts}
 \RequirePackage[Symbolsmallscale]{upgreek}
 \interdisplaylinepenalty=2500
 \RequirePackage{bm}
@@ -82,80 +81,96 @@
 \defaultfontfeatures{Mapping=tex-text}
 \xeCJKsetcharclass{"0}{"2E7F}{0}
 \xeCJKsetcharclass{"2E80}{"FFFF}{1}
-\newcommand\installTTF{%
-  \setmainfont{Times New Roman}
-  \setsansfont{Arial}
-  \setmonofont{Courier New}
-  \ifisvista
-    \setCJKmainfont[BoldFont={SimHei},ItalicFont={KaiTi}]{SimSun}
-    \setCJKmonofont{KaiTi} % Pluto use LiSu Thu use Kaiti, orig is SimSun
-    \setCJKfamilyfont{fs}{FangSong}
-    \setCJKfamilyfont{kai}{KaiTi}
-  \else
-    \setCJKmainfont[BoldFont={SimHei},ItalicFont={KaiTi_GB2312}]{SimSun}
-    \setCJKmonofont{KaiTi_GB2312} % Pluto use LiSu Thu use Kaiti, orig is SimSun
-    \setCJKfamilyfont{fs}{FangSong_GB2312}
-    \setCJKfamilyfont{kai}{KaiTi_GB2312}
-  \fi
-  \setCJKsansfont{SimHei}
-  \setCJKfamilyfont{song}{SimSun}
-  \setCJKfamilyfont{hei}{SimHei}
-  \setCJKfamilyfont{li}{LiSu}
-  \setCJKfamilyfont{you}{YouYuan}
-  \setCJKfamilyfont{cusong}{STZhongsong}
+
+\newcommand{\installttf}{
+    %%%% Windows Thesis Fonts
+    \setmainfont{Times New Roman PS Std}
+    \setsansfont{Arial}
+    \setmonofont{Courier New}
+    %%%% Using Office Family Fonts
+    \setCJKmainfont[BoldFont={STZhongsong}]{SimSun}
+    \setCJKsansfont{SimHei} % Hei
+    \setCJKmonofont{FangSong} % Fangsong
+    %%%% alias
+    \setCJKfamilyfont{song}{SimSun}
+    \setCJKfamilyfont{hei}{SimHei}
+    \setCJKfamilyfont{fs}{FangSong} % fang-song
+    \setCJKfamilyfont{kai}{KaiTi} % Kai
 }
-\newcommand\installOTF{%
-  \setmainfont{Times New Roman} % could be changed to "Times New Roman PS Std" !!
-  \setsansfont{Arial}
-  \setmonofont{Courier New}
-  \setCJKmainfont[BoldFont={Adobe Heiti Std},ItalicFont={Adobe Kaiti Std}]{Adobe Song Std}
-  \setCJKsansfont{Adobe Heiti Std}
-  \setCJKmonofont{Adobe Kaiti Std}
-  \setCJKfamilyfont{song}{Adobe Song Std}
-  \setCJKfamilyfont{hei}{Adobe Heiti Std}
-  \setCJKfamilyfont{fs}{Adobe Fangsong Std}
-  \setCJKfamilyfont{kai}{Adobe Kaiti Std}
-  \setCJKfamilyfont{li}{Adobe Kaiti Std}
-  \setCJKfamilyfont{you}{Adobe Kaiti Std}
-  \setCJKfamilyfont{cusong}{STZhongsong}
+
+\newcommand{\installotf}{
+    %%%% Windows Thesis Fonts
+    \setmainfont{Times New Roman PS Std}
+    \setsansfont{Arial}
+    \setmonofont{Courier New}
+    %%%% Using Adobe Family Fonts
+    \setCJKmainfont[BoldFont={STZhongsong}]{Adobe Song Std}
+    \setCJKsansfont{Adobe Heiti Std} % Hei
+    \setCJKmonofont{Adobe Fangsong Std} % Fangsong
+    %%%% alias
+    \setCJKfamilyfont{song}{Adobe Song Std}
+    \setCJKfamilyfont{hei}{Adobe Heiti Std}
+    \setCJKfamilyfont{fs}{Adobe Fangsong Std} % fang-song
+    \setCJKfamilyfont{kai}{Adobe Kaiti Std} % Kai
 }
-\newcommand\installFZ{%
-  \setmainfont{Times New Roman} % could be changed to "Times New Roman PS Std" !!
-  \setsansfont{Arial}
-  \setmonofont{Courier New}
-  \setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong_GB18030-Z01}
-  \setCJKsansfont{FZHei-B01} % Hei
-  \setCJKmonofont{FZKai-Z03} % Kai
-  \setCJKfamilyfont{song}{FZShuSong_GB18030-Z01}
-  \setCJKfamilyfont{hei}{FZHei-B01}
-  \setCJKfamilyfont{fs}{FZKai-Z03} % Kai
-  \setCJKfamilyfont{kai}{FZKai-Z03} % Kai
-  \setCJKfamilyfont{li}{FZKai-Z03} % Kai
-  \setCJKfamilyfont{you}{FZKai-Z03} % Kai
-  \setCJKfamilyfont{cusong}{FZXiaoBiaoSong-B05} % 小标宋
+
+\newcommand{\installfz}{
+    %%%% Windows Thesis Fonts
+    \setmainfont{Times New Roman PS Std}
+    \setsansfont{Arial}
+    \setmonofont{Courier New}
+    %%%% Using Founder Family Fonts
+    \setCJKmainfont[BoldFont={FZYaSong-B-GBK}]{FZShuSong_GB18030-Z01}
+    \setCJKsansfont{FZHei-B01} % Hei
+    \setCJKmonofont{FZFangSong-Z02} % fs
+    %%%% alias
+    \setCJKfamilyfont{song}{FZShuSong_GB18030-Z01}
+    \setCJKfamilyfont{hei}{FZHei-B01}
+    \setCJKfamilyfont{fs}{FZFangSong-Z02} % fang-song
+    \setCJKfamilyfont{kai}{FZKai-Z03} % Kai
 }
-\newcommand{\cusong}{\CJKfamily{cusong}} % 中宋作为加粗宋体
+
+\newcommand{\installfandol}{
+    %%%% Windows Thesis Fonts
+    \setmainfont{Times New Roman PS Std}
+    \setsansfont{Arial}
+    \setmonofont{Courier New}
+    %%%% Using Fandol Family Fonts
+    \setCJKmainfont{FandolSong}
+    \setCJKsansfont{FandolHei} % Hei
+    \setCJKmonofont{FandolFang} % fs
+    %%%% alias
+    \setCJKfamilyfont{song}{FandolSong}
+    \setCJKfamilyfont{hei}{FandolHei}
+    \setCJKfamilyfont{fs}{FandolFang} % fang-song
+    \setCJKfamilyfont{kai}{FandolKai} % Kai
+}
+
 \ifisttf
-  \installTTF
-\else
-  \ifisfz
-    \installFZ
-  \else
-    \installOTF
-  \fi
+\installttf
 \fi
-\newcommand{\song}{\CJKfamily{song}}    % 宋体
-\newcommand{\fs}{\CJKfamily{fs}}        % 仿宋体
-\newcommand{\kai}{\CJKfamily{kai}}      % 楷体
-\newcommand{\hei}{\CJKfamily{hei}}      % 黑体
-\newcommand{\li}{\CJKfamily{li}}        % 隶书
-\newcommand{\you}{\CJKfamily{you}}      % 幼圆
+
+\ifisotf
+\installotf
+\fi
+
+\ifisfz
+\installfz
+\fi
+
+\ifisfandol
+\installfandol
+\fi
+
+\newcommand{\cusong}{\bfseries}
+\newcommand{\song}{\CJKfamily{song}}     % 宋体
+\newcommand{\fs}{\CJKfamily{fs}}         % 仿宋体
+\newcommand{\kai}{\CJKfamily{kai}}       % 楷体
+\newcommand{\hei}{\CJKfamily{hei}}       % 黑体
 \def\songti{\song}
 \def\fangsong{\fs}
 \def\kaishu{\kai}
 \def\heiti{\hei}
-\def\lishu{\li}
-\def\youyuan{\you}
 \newlength\thu@linespace
 \newcommand{\thu@choosefont}[2]{%
     \setlength{\thu@linespace}{#2*\real{#1}}%
@@ -184,7 +199,8 @@
 \newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}} % 上标形式引用
 \newcommand{\china}{中华人民共和国}
 \def\nudtpaper{\textsc{Nudt}\textsc{Paper}}
-\newcommand{\pozhehao}{\kern0.3ex\rule[0.8ex]{2em}{0.1ex}\kern0.3ex}
+\newcommand{\pozhehao}{\kern0.2em\rule[0.8ex]{1.6em}{0.1ex}\kern0.2em}
+\newcommand{\xiaopozhe}{\kern0.2em\rule[0.8ex]{0.6em}{0.1ex}\kern0.2em}
 \renewcommand\contentsname{目\hspace{1em}录}
 \renewcommand\listfigurename{图\hspace{1em}目\hspace{1em}录}
 \renewcommand\listtablename{表\hspace{1em}目\hspace{1em}录}
@@ -294,7 +310,7 @@
 \newcommand\ckeywordsname{关键词}
 \newcommand\ckeywords[1]{{\hei\xiaosi \ckeywordsname: #1}}
 \newcommand\ekeywordsname{Key Words}
-\newcommand\ekeywords[1]{\textsf{\xiaosi \ekeywordsname: #1}}
+\newcommand\ekeywords[1]{\textbf{\textsf{\xiaosi \ekeywordsname: #1}}}
 \newenvironment{cabstract}{%
     \chapter{\cabstractname}
     \xiaosi
@@ -319,7 +335,7 @@
 \titlespacing{\chapter}{0pt}{2.4ex-\topskip-\heightof{A}}{2.4ex \@minus 2bp}
 \titlespacing{\section}{0pt}{2ex-\heightof{a}}{2ex \@minus 2bp}
 \titlespacing{\subsection}{2em}{2ex \@minus 2bp}{2ex \@minus 2bp}
-\titlespacing{\subsubsection}{2em}{1ex \@minus 2bp}{0ex \@minus 2bp}
+\titlespacing{\subsubsection}{2em}{1ex \@minus 2bp}{1ex \@minus 2bp}
 \renewcommand\normalsize{%
 \@setfontsize\normalsize{12bp}{12.87bp}%
 \renewcommand{\baselinestretch}{1.3}%
@@ -337,7 +353,7 @@
   \CJKindent\relax
   \checkparameter\relax
 }
-\setlength{\parskip}{0bp \@minus 2bp}
+\setlength{\parskip}{0bp \@minus 1bp}
 \newcommand*{\ziju}[1]{\renewcommand{\CJKglue}{\hskip #1}}
 \renewenvironment{thebibliography}[1]{%
    \chapter*{\bibname}%
@@ -366,12 +382,12 @@
 \setlength{\@fpsep}{12bp}
 \setlength{\@fpbot}{0bp}
 \renewcommand{\textfraction}{0.01}
-\renewcommand{\topfraction}{0.99}
-\renewcommand{\bottomfraction}{0.99}
+\renewcommand{\topfraction}{0.98}
+\renewcommand{\bottomfraction}{0.98}
 \renewcommand{\floatpagefraction}{0.90}
-\clubpenalty            =   10000
-\widowpenalty           =   10000
-\displaywidowpenalty    =   10000
+\clubpenalty=5000
+\widowpenalty=5000
+\displaywidowpenalty=5000
 \let\old@tabular\@tabular
 \def\thu@tabular{\wuhao[1.25]\old@tabular}
 \DeclareCaptionLabelFormat{thu}{{\wuhao[1.25]\song #1~\rmfamily #2}}
@@ -386,18 +402,18 @@
 \renewcommand{\thesubtable}{(\alph{subtable})}
 \let\thu@LT@array\LT@array
 \def\LT@array{\thu@LT@array}
-\newenvironment{denotation}[1][2.5cm]{
-    \noindent\begin{list}{}%
+\newenvironment{denotation}[1][2.71828cm]{
+    \noindent\vskip-4bp\begin{list}{}%
     {\vskip-30bp\xiaosi[1.5]
-    \renewcommand\makelabel[1]{##1\hfil}
+    \renewcommand\makelabel[1]{\textbf{##1}\hfil}
     \setlength{\labelwidth}{#1} % 标签盒子宽度
     \setlength{\labelsep}{0cm} % 标签与列表文本距离
-    \setlength{\itemindent}{2em} % 标签缩进量
-    \setlength{\leftmargin}{\labelwidth+\labelsep} % 左边界
+    \setlength{\itemindent}{0em} % 标签缩进量
+    \setlength{\leftmargin}{\labelwidth+\labelsep+2em} % 左边界
     \setlength{\rightmargin}{0cm}
     \setlength{\parsep}{0cm} % 段落间距
     \setlength{\itemsep}{0cm} % 标签间距
-    \setlength{\listparindent}{0cm} % 段落缩进量
+    \setlength{\listparindent}{0pt} % 段落缩进量
     \setlength{\topsep}{0pt} % 标签与上文的间距
 }}{\end{list}}
 \newenvironment{ack}{%
@@ -419,7 +435,6 @@
 \theoremstyle{nonumberplain}
 \theorembodyfont{\kai\xiaosi[1.3]}
 \theoremheaderfont{\hei\xiaosi[1.3]}
-\theoremsymbol{\ensuremath{\blacksquare}}
 \theoremseparator{:\,}
 \newtheorem{proof}{证明}[chapter]
 \newtheorem{assumption}{假设}[chapter]
@@ -439,7 +454,7 @@
 \newtheorem{conjecture}{猜想}[chapter]
 \newtheorem{proposition}{命题}[chapter]
 \newtheorem{exercise}{练习}[section]
-\newtheorem{example}{例}[section]
+\newtheorem{example}{例}[chapter]
 \newtheorem{problem}{问题}[section]
 \newtheorem{remark}{注释}[section]
 \def\classification#1{\def\@classification{#1}} % 中图分类号
@@ -486,6 +501,7 @@
   \null
   \ifisanon%
   \author{}%
+  \serialno{}%
   \enauthor{}%
   \supervisor{}%
   \cosupervisor{}%

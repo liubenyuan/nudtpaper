@@ -1,4 +1,20 @@
 *.diff
+*.log
+*.aux
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.out
+*.pdf
+*.toc
+*.bbl
+*.lof
+*.lot
+*.toc
+*.thm
+*.blg
 #################
 ## Eclipse
 #################

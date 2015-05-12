@@ -16,9 +16,9 @@
 % \iffalse
 % <package>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
 % <package>\ProvidesPackage{nudtpaper}
-% <package>		[2009/08/12 v1.0 By Liu Benyuan <liubenyuan@gmail.com>]
+% <package>[2015/05/12 v2.5 By Liu Benyuan <liubenyuan@gmail.com>]
 %<*driver>
-\ProvidesFile{nudtpaper.dtx}[2009/08/12 v1.0 NUDT]
+\ProvidesFile{nudtpaper.dtx}[2015/05/12 v2.5 NUDT]
 \documentclass[11pt]{ltxdoc}
 \usepackage{nudtx}
 \EnableCrossrefs
@@ -33,7 +33,7 @@
 % \def\thuthesis{\textsc{Thu}\-\textsc{Thesis}}
 % \def\nudtpaper{\textsc{Nudt}\-\textsc{Paper}}
 % 
-% \CheckSum{1225}
+% \CheckSum{1220}
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -112,13 +112,14 @@
 % \pagestyle{mainpage}
 %
 % \section{快速上手}
-% 这部分是专门为那些想快速开始写论文的人准备的。
 % \begin{description}
 % \item[安装\TeX] 下载最新的\TeX{}live或者C\TeX{}并安装
 % \item[字体] 用户需要具备\verb|simsun.ttf|, \verb|simhei.ttf|, \verb|simkai.ttf|,
 % \verb|STZHONGS.TTF|, 上述字体都是windows自带的; 除此之外，在网上搜索(或者C\TeX{}
 % 论坛)``Adobe Opentype 中文字体''，一搜一大把，确保下载下来Adobe的四款OTF字体:
 % 宋，黑，仿宋，楷体。Linux用户可将上述字体复制到\verb|/usr/share/fonts/TTF|下。
+% 最新更新：用户可以考虑使用方正字体生成更为漂亮（颜色深均匀）的论文排版。
+% 这三个选项分别为\verb|ttf|、\verb|otf|和\verb|fz|。
 % \item[试一试] 解压缩下载的模板，双击makepdf.bat(祈祷一下)，如果生成了
 % \verb|thesis.pdf|$\rightarrow$
 % \item[那么我的那些常用的包都在么？] 你会想我的{\bf Trans}论文可以无缝
@@ -269,16 +270,14 @@
 %<thesis>% \documentclass[master,ttf]{nudtpaper}
 %<thesis>%2. 规范博士导言
 %<thesis>% \documentclass[doctor,twoside,ttf]{nudtpaper}
-%<thesis>%3. 如果使用是Vista
-%<thesis>% \documentclass[master,ttf,vista]{nudtpaper}
-%<thesis>%4. 建议使用OTF字体获得较好的页面显示效果
-%<thesis>%   OTF字体从网上获得，各个系统名称统一，不用加vista选项
+%<thesis>%3. 建议使用OTF字体获得较好的页面显示效果
+%<thesis>%   OTF字体从网上获得，各个系统名称统一。
 %<thesis>%   如果你下载的是最新的(1201)OTF英文字体，建议修改nudtpaper.cls，使用
 %<thesis>%   Times New Roman PS Std
 %<thesis>% \documentclass[doctor,twoside,otf]{nudtpaper}
 %<thesis>%   另外，新版的论文模板提供了方正字体选项FZ，效果也不错哦
 %<thesis>% \documentclass[doctor,twoside,fz]{nudtpaper}
-%<thesis>%5. 如果想生成盲评，传递anon即可，仍需修改个人成果部分
+%<thesis>%4. 如果想生成盲评，传递anon即可，仍需修改个人成果部分
 %<thesis>% \documentclass[master,otf,anon]{nudtpaper}
 %<thesis>%
 %    \end{macrocode}
@@ -303,9 +302,6 @@
 % TTF字体的优势是满足学校论文对于字体的要求，缺点是制作出来的PDF文件在浏览时可能发虚，
 % 而OTF字体屏幕显示饱满，而且字体有很多选项可以方便\XeTeX{}排版。推荐使用\textbf{otf}
 % 选项。不论何种选项，都需要安装宋体中宋(STZHONGSONG)字体(Windows自带)。
-%\item[vista]
-% 使用\textsc{vista}的用户当调用模板的TTF字体时，系统默认的楷体、仿宋名称是KaiTi和FangSong，
-% 而不是KaiTi\_GB2312，这里加入开关进行切换。
 %\item[anon]
 % 是否为盲评版本，如需盲评，请加上anon。
 %\end{description}
@@ -338,6 +334,8 @@
 % 我们提供额外的一个命令\verb|\displaytitle|用来在
 % 授权书中填入(限定为)单行的题目; 中文日期需要中文输入大写，英文日期为月年，
 % 在论文最终完成后，请\textbf{手动}设定日期。
+% \changes{v2.5}{2015/05/11}{修改英文作者和导师的格式，姓大写}
+% \changes{v2.5}{2015/05/11}{英文导师前缀为Prof.}
 %
 %    \begin{macrocode}
 %<*thesis>
@@ -347,7 +345,7 @@
 \author{张三}
 \zhdate{\zhtoday}
 \entitle{How to Use the \LaTeX{} Document Class for NUDT Dissertations}
-\enauthor{Zhang San}
+\enauthor{ZHANG San}
 \endate{\entoday}
 %</thesis>
 %    \end{macrocode}
@@ -363,7 +361,7 @@
 \researchfield{自动目标识别与模糊工程}
 \supervisor{李四\quad{}教授}
 \cosupervisor{王五\quad{}副教授} % 没有就空着
-\ensupervisor{Professor Li Si}
+\ensupervisor{Prof. LI Si}
 \encosupervisor{}
 \papertype{工学}
 \enpapertype{Engineering}
@@ -518,21 +516,22 @@
 %
 %    \begin{macrocode}
 \newif\ifismaster\ismastertrue
-\newif\ifisttf\isttffalse
-\newif\ifisfz\isfzfalse
-\newif\ifisotf\isotffalse
 \DeclareOption{master}{\ismastertrue}
 \DeclareOption{doctor}{\ismasterfalse}
 \newif\ifisanon\isanonfalse
 \DeclareOption{anon}{\isanontrue}
 \newif\ifistwoside\istwosidefalse
 \DeclareOption{twoside}{\istwosidetrue}
-\DeclareOption{ttf}{\isttftrue}
-\DeclareOption{fz}{\isfztrue}
-\DeclareOption{otf}{\isotftrue}
-\newif\ifisvista\isvistafalse
-\DeclareOption{vista}{\isvistatrue}
 \DeclareOption*{\PackageWarning{nudtpaper}{Unknown Option '\CurrentOption'}}
+% handle fonts
+\newif\ifisttf\isttffalse
+\newif\ifisotf\isotffalse
+\newif\ifisfz\isfzfalse
+\newif\ifisfandol\isfandolfalse
+\DeclareOption{ttf}{\isttftrue}
+\DeclareOption{otf}{\isotftrue}
+\DeclareOption{fz}{\isfztrue}
+\DeclareOption{fandol}{\isfandoltrue}
 \ProcessOptions\relax
 %    \end{macrocode}
 %
@@ -606,25 +605,24 @@
 %    \end{macrocode}
 %
 % 为了排出漂亮的数学公式，\textsf{amsmath}包是必不可少的，
-% 需要注意的是，新版本的论文模板仍旧使用\textsf{txfonts}宏包，
+% 需要注意的是，新版本的论文模不再使用\textsf{txfonts}宏包，
 % 为了支持希腊正体字母，需要调用\verb|upgreek.sty|，使用方法是\verb|\up<greek>|。
-% 注意到这个宏包前面加上了\verb|Symbolsmallscale|选项，这是为了配合
-% \verb|txfonts|希腊字体的大小而设定的。如果用户不满意这个宏包的积分号
+% 注意到这个宏包前面加上了\verb|Symbolsmallscale|选项，这是为了调整希腊字母的大小而设定的。
+% 如果用户不满意这个宏包的积分号
 % 等符号，倾向与使用传统的\LaTeX{}风格的数学符号，那么可以使用
 % \textsf{mathptmx}宏包，但要把\verb|upgreek|的选项改为\verb|Symbol|，要不然
-% 正体希腊字母要显得小一点哦。
+% 正体希腊字母要显得比正常字符小一点哦。
 % 而大写斜体希腊字母(变量)可以通过\textsf{amsmath}的\verb|\var<Greek>|得到。
-% 当然，对于希腊字母的加粗推荐使用\verb|bm|宏包，一般变量的加粗那就使用
-% \verb|\mathbf|吧！
+% 对于希腊字母的加粗使用\verb|bm|宏包，而一般变量的加粗那就使用\verb|\mathbf|吧！
 % \changes{v2.0}{2010/11/09}{去掉fontspec，传递no-math到xeCJK，加入bm宏包}
 % \changes{v2.2}{2011/07/16}{去掉txfonts宏包，使用lm字体，添加svgreek.sty}
 % \changes{v2.2}{2011/07/16}{修改，仍旧使用upgreek, mathptmx, bm组合}
 % \changes{v2.2}{2011/09/25}{修改，使用upgreek, txfonts, bm组合}
 % \changes{v2.2}{2012/11/28}{给用户提供额外的选项，还是mtpro比较漂亮}
 % \changes{v2.3}{2013/12/27}{调整数学字体，加入mtpro使用说明，并且仿照IEEE模板，修改displaypenalty}
+% \changes{v2.5}{2015/05/11}{去掉txfonts，用默认数学字体}
 %    \begin{macrocode}
 \RequirePackage{amsmath,amssymb}
-\RequirePackage{txfonts}
 \RequirePackage[Symbolsmallscale]{upgreek}
 %\RequirePackage{amsmath}
 %\RequirePackage[amsbb,eufrak,compatiblegreek,subscriptcorrection,nofontinfo]{mtpro2}
@@ -653,11 +651,13 @@
 %    \end{macrocode}
 %
 % 另外一个关键部分是文献索引，包括书签以及参考文献的索引，记得\textsf{hyperref}配合
-% \XeTeX{}使用时暂不能开启Unicode选项，新的发行版已经移除\textsf{hypernat}包。另外还要注意，你最终的打印版肯定
-% 不希望有花花绿绿的链接，对吧？那就把下面那行\verb|hyperref|注释掉就行了。
+% \XeTeX{}使用时暂不能开启Unicode选项，新的发行版已经移除\textsf{hypernat}包。
+% 另外还要注意，你最终的打印版肯定不希望有花花绿绿的链接对吧？
+% 那就把下面那行\verb|hyperref|注释掉就行了或者把选项改为\verb|\colorlinks=false|即可。
 % \changes{v2.1}{2010/12/29}{移除hypernat包}
 % \changes{v2.2}{2011/07/17}{移除hyperref的CJKbookmarks旋向}
 % \changes{v2.3}{2013/12/27}{加入色彩版hyperref}
+% \changes{v2.5}{2015/05/11}{提示用户在最终打印版时去掉链接颜色}
 %    \begin{macrocode}
 \RequirePackage[numbers,sort&compress,square]{natbib}
 \RequirePackage[colorlinks=true,linkcolor=blue,citecolor=red,pdfborder=0 1 1]{hyperref}
@@ -686,105 +686,121 @@
 % \verb|setcharclass|的作用是纠正xunicode、xeCJK的一些设定:
 %
 % \changes{v0.99}{2009/08/17}{add options TTF and OTF}
-% \changes{v0.993}{2009/08/25}{加入VISTA用户选项}
 % \changes{v1.9}{2010/10/28}{定义一个cusong字体，使用的是中宋}
 % \changes{v2.3}{2013/12/27}{用户可以考虑使用方正字体，加入FZ选项}
+% \changes{v2.5}{2015/05/11}{重新更改字体选项的调用方式，现在变成三个ttf、otf、fz}
+% \changes{v2.5}{2015/05/11}{这种方式用户可以特别方便的添加自己的字体集}
 %
 %    \begin{macrocode}
 %<*cls>
 \xeCJKsetcharclass{"0}{"2E7F}{0}
 \xeCJKsetcharclass{"2E80}{"FFFF}{1}
-\newcommand\installTTF{%
-  \setmainfont{Times New Roman}
-  \setsansfont{Arial}
-  \setmonofont{Courier New}
-  \ifisvista
-    \setCJKmainfont[BoldFont={SimHei},ItalicFont={KaiTi}]{SimSun}
-    \setCJKmonofont{KaiTi} % Pluto use LiSu Thu use Kaiti, orig is SimSun
-    \setCJKfamilyfont{fs}{FangSong}
-    \setCJKfamilyfont{kai}{KaiTi}
-  \else
-    \setCJKmainfont[BoldFont={SimHei},ItalicFont={KaiTi_GB2312}]{SimSun}
-    \setCJKmonofont{KaiTi_GB2312} % Pluto use LiSu Thu use Kaiti, orig is SimSun
-    \setCJKfamilyfont{fs}{FangSong_GB2312}
-    \setCJKfamilyfont{kai}{KaiTi_GB2312}
-  \fi
-  \setCJKsansfont{SimHei}
-  \setCJKfamilyfont{song}{SimSun}
-  \setCJKfamilyfont{hei}{SimHei}
-  \setCJKfamilyfont{li}{LiSu}
-  \setCJKfamilyfont{you}{YouYuan}
-  \setCJKfamilyfont{cusong}{STZhongsong}
+
+% ZhongYi 中易字体
+\newcommand{\installttf}{
+    %%%% Windows Thesis Fonts
+    \setmainfont{Times New Roman PS Std}
+    \setsansfont{Arial}
+    \setmonofont{Courier New}
+    %%%% Using Office Family Fonts
+    \setCJKmainfont[BoldFont={STZhongsong}]{SimSun}
+    \setCJKsansfont{SimHei} % Hei
+    \setCJKmonofont{FangSong} % Fangsong 
+    %%%% alias
+    \setCJKfamilyfont{song}{SimSun}
+    \setCJKfamilyfont{hei}{SimHei}
+    \setCJKfamilyfont{fs}{FangSong} % fang-song
+    \setCJKfamilyfont{kai}{KaiTi} % Kai
 }
-\newcommand\installOTF{%
-  \setmainfont{Times New Roman} % could be changed to "Times New Roman PS Std" !!
-  \setsansfont{Arial}
-  \setmonofont{Courier New}
-  \setCJKmainfont[BoldFont={Adobe Heiti Std},ItalicFont={Adobe Kaiti Std}]{Adobe Song Std}
-  \setCJKsansfont{Adobe Heiti Std}
-  \setCJKmonofont{Adobe Kaiti Std}
-  \setCJKfamilyfont{song}{Adobe Song Std}
-  \setCJKfamilyfont{hei}{Adobe Heiti Std}
-  \setCJKfamilyfont{fs}{Adobe Fangsong Std}
-  \setCJKfamilyfont{kai}{Adobe Kaiti Std}
-  \setCJKfamilyfont{li}{Adobe Kaiti Std}
-  \setCJKfamilyfont{you}{Adobe Kaiti Std}
-  \setCJKfamilyfont{cusong}{STZhongsong}
+
+% Adobe 字体
+\newcommand{\installotf}{
+    %%%% Windows Thesis Fonts
+    \setmainfont{Times New Roman PS Std}
+    \setsansfont{Arial}
+    \setmonofont{Courier New}
+    %%%% Using Adobe Family Fonts
+    \setCJKmainfont[BoldFont={STZhongsong}]{Adobe Song Std}
+    \setCJKsansfont{Adobe Heiti Std} % Hei
+    \setCJKmonofont{Adobe Fangsong Std} % Fangsong 
+    %%%% alias
+    \setCJKfamilyfont{song}{Adobe Song Std}
+    \setCJKfamilyfont{hei}{Adobe Heiti Std}
+    \setCJKfamilyfont{fs}{Adobe Fangsong Std} % fang-song
+    \setCJKfamilyfont{kai}{Adobe Kaiti Std} % Kai
 }
-\newcommand\installFZ{%
-  \setmainfont{Times New Roman} % could be changed to "Times New Roman PS Std" !!
-  \setsansfont{Arial}
-  \setmonofont{Courier New}
-  \setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong_GB18030-Z01}
-  \setCJKsansfont{FZHei-B01} % Hei
-  \setCJKmonofont{FZKai-Z03} % Kai
-  \setCJKfamilyfont{song}{FZShuSong_GB18030-Z01}
-  \setCJKfamilyfont{hei}{FZHei-B01}
-  \setCJKfamilyfont{fs}{FZKai-Z03} % Kai
-  \setCJKfamilyfont{kai}{FZKai-Z03} % Kai
-  \setCJKfamilyfont{li}{FZKai-Z03} % Kai
-  \setCJKfamilyfont{you}{FZKai-Z03} % Kai
-  \setCJKfamilyfont{cusong}{FZXiaoBiaoSong-B05} % 小标宋
+
+% fz 方正字体 [recommended]
+\newcommand{\installfz}{
+    %%%% Windows Thesis Fonts
+    \setmainfont{Times New Roman PS Std}
+    \setsansfont{Arial}
+    \setmonofont{Courier New}
+    %%%% Using Founder Family Fonts
+    \setCJKmainfont[BoldFont={FZYaSong-B-GBK}]{FZShuSong_GB18030-Z01}
+    \setCJKsansfont{FZHei-B01} % Hei
+    \setCJKmonofont{FZFangSong-Z02} % fs
+    %%%% alias
+    \setCJKfamilyfont{song}{FZShuSong_GB18030-Z01}
+    \setCJKfamilyfont{hei}{FZHei-B01}
+    \setCJKfamilyfont{fs}{FZFangSong-Z02} % fang-song
+    \setCJKfamilyfont{kai}{FZKai-Z03} % Kai
 }
-\newcommand{\cusong}{\CJKfamily{cusong}} % 中宋作为加粗宋体
+
+% fandol [incomplete in 2015]
+\newcommand{\installfandol}{
+    %%%% Windows Thesis Fonts
+    \setmainfont{Times New Roman PS Std}
+    \setsansfont{Arial}
+    \setmonofont{Courier New}
+    %%%% Using Fandol Family Fonts
+    \setCJKmainfont{FandolSong}
+    \setCJKsansfont{FandolHei} % Hei
+    \setCJKmonofont{FandolFang} % fs
+    %%%% alias
+    \setCJKfamilyfont{song}{FandolSong}
+    \setCJKfamilyfont{hei}{FandolHei}
+    \setCJKfamilyfont{fs}{FandolFang} % fang-song
+    \setCJKfamilyfont{kai}{FandolKai} % Kai
+}
+
+\ifisttf
+\installttf
+\fi
+
+\ifisotf
+\installotf
+\fi
+
+\ifisfz
+\installfz
+\fi
+
+\ifisfandol
+\installfandol
+\fi
+
 %</cls>
 %    \end{macrocode}
 %
 % \changes{v1.6}{2009/12/01}{替换OTF英文字体为标准Windows自带字体}
 % \changes{v2.3}{2013/12/27}{添加FZ字体选项}
-% 之后我们根据你的设定决定安装什么字体：
-%
-%    \begin{macrocode}
-%<*cls>
-\ifisttf
-  \installTTF
-\else
-  \ifisfz
-    \installFZ
-  \else
-    \installOTF
-  \fi
-\fi
-%</cls>
-%    \end{macrocode}
 %
 % 选定好字体之后，就是设定字体别名，这样我们就可以在文档的其他部分直接使用较短的命令来
 % 指定特定的字体了:
 %
 %    \begin{macrocode}
 %<*cls>
-\newcommand{\song}{\CJKfamily{song}}    % 宋体
-\newcommand{\fs}{\CJKfamily{fs}}        % 仿宋体
-\newcommand{\kai}{\CJKfamily{kai}}      % 楷体
-\newcommand{\hei}{\CJKfamily{hei}}      % 黑体
-\newcommand{\li}{\CJKfamily{li}}        % 隶书
-\newcommand{\you}{\CJKfamily{you}}      % 幼圆
+% command alias
+\newcommand{\cusong}{\bfseries}
+\newcommand{\song}{\CJKfamily{song}}     % 宋体
+\newcommand{\fs}{\CJKfamily{fs}}         % 仿宋体
+\newcommand{\kai}{\CJKfamily{kai}}       % 楷体
+\newcommand{\hei}{\CJKfamily{hei}}       % 黑体
 \def\songti{\song}
 \def\fangsong{\fs}
 \def\kaishu{\kai}
 \def\heiti{\hei}
-\def\lishu{\li}
-\def\youyuan{\you}
 %</cls>
 %    \end{macrocode}
 %
@@ -883,9 +899,11 @@
 \newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}} % 上标形式引用
 \newcommand{\china}{中华人民共和国}
 \def\nudtpaper{\textsc{Nudt}\textsc{Paper}}
-\newcommand{\pozhehao}{\kern0.3ex\rule[0.8ex]{2em}{0.1ex}\kern0.3ex}
+\newcommand{\pozhehao}{\kern0.2em\rule[0.8ex]{1.6em}{0.1ex}\kern0.2em}
+\newcommand{\xiaopozhe}{\kern0.2em\rule[0.8ex]{0.6em}{0.1ex}\kern0.2em}
 %</cls>
 %    \end{macrocode}
+% \changes{v2.5}{2015/05/11}{添加了一个xiaopozhe命令，用作中文连词符}
 %
 %\subsubsection{中文元素}
 %
@@ -1140,6 +1158,7 @@
 % 中文关键字以黑体小4号字另起一行，排在摘要的下方，英文关键字用Arial小4号字。
 %
 % \changes{v1.8}{2010/10/15}{ABSTRACT和英文关键字需要用Arial字体}
+% \changes{v2.5}{2015/05/11}{英文关键词也要加粗}
 %    \begin{macrocode}
 %<*cls>
 \newcommand\cabstractname{摘\hspace{1em}要}
@@ -1147,7 +1166,7 @@
 \newcommand\ckeywordsname{关键词}
 \newcommand\ckeywords[1]{{\hei\xiaosi \ckeywordsname: #1}}
 \newcommand\ekeywordsname{Key Words}
-\newcommand\ekeywords[1]{\textsf{\xiaosi \ekeywordsname: #1}}
+\newcommand\ekeywords[1]{\textbf{\textsf{\xiaosi \ekeywordsname: #1}}}
 \newenvironment{cabstract}{%
     \chapter{\cabstractname}
     \xiaosi
@@ -1210,9 +1229,11 @@
 \titlespacing{\chapter}{0pt}{2.4ex-\topskip-\heightof{A}}{2.4ex \@minus 2bp}
 \titlespacing{\section}{0pt}{2ex-\heightof{a}}{2ex \@minus 2bp}
 \titlespacing{\subsection}{2em}{2ex \@minus 2bp}{2ex \@minus 2bp}
-\titlespacing{\subsubsection}{2em}{1ex \@minus 2bp}{0ex \@minus 2bp}
+\titlespacing{\subsubsection}{2em}{1ex \@minus 2bp}{1ex \@minus 2bp}
 %</cls>
 %    \end{macrocode}
+%
+% \changes{v2.5}{2015/05/11}{添加了subsubsection下1ex的距离}
 %
 %\subsubsection{正文字体}
 % 首先确定正文中使用的字体，文档要求正文字体为小四，行距为固定值1.25倍，
@@ -1270,10 +1291,11 @@
 % \changes{v2.2}{2011/09/25}{修改parskip，允许少量的调整，1bp}
 % \changes{v2.2}{2011/10/14}{修改parskip，仅允许负的少量调整，2bp}
 % \changes{v2.3}{2013/12/27}{移除parskip的正向rubberspace}
+% \changes{v2.5}{2015/05/11}{减小parskip的负向距离至1bp}
 %
 %    \begin{macrocode}
 %<*cls>
-\setlength{\parskip}{0bp \@minus 2bp}
+\setlength{\parskip}{0bp \@minus 1bp}
 %</cls>
 %    \end{macrocode}
 %
@@ -1352,16 +1374,18 @@
 % \changes{v2.2}{2011/09/10}{重新调整floatpagefraction，使得更为宽松}
 % \changes{v2.2}{2011/09/25}{更为宽松的布置条件}
 % \changes{v2.2}{2011/09/25}{更为宽松的布置条件，仿照AMSMATH}
+% \changes{v2.5}{2015/05/11}{更为宽松的限制，penalty改为5000}
+% \changes{v2.5}{2015/05/11}{更为严格的限制，fraction改为0.98}
 %
 %    \begin{macrocode}
 %<*cls>
 \renewcommand{\textfraction}{0.01}
-\renewcommand{\topfraction}{0.99}
-\renewcommand{\bottomfraction}{0.99}
+\renewcommand{\topfraction}{0.98}
+\renewcommand{\bottomfraction}{0.98}
 \renewcommand{\floatpagefraction}{0.90}
-\clubpenalty            =   10000
-\widowpenalty           =   10000
-\displaywidowpenalty    =   10000
+\clubpenalty=5000
+\widowpenalty=5000
+\displaywidowpenalty=5000
 %</cls>
 %    \end{macrocode}
 %
@@ -1398,21 +1422,24 @@
 % \changes{v2.2}{2011/09/10}{略微减小列表间距，与行距相等}
 % \changes{v2.2}{2011/09/13}{略微减小标签和说明间距}
 % \changes{v2.3}{2013/12/27}{重新制作了denotation, 参见样例文件}
+% \changes{v2.5}{2015/05/11}{增加了denotation中条目的宽度}
+% \changes{v2.5}{2015/05/11}{减小了denotation章节标题和条目的间距-4bp}
+% \changes{v2.5}{2015/05/11}{修改denotation样式}
 %
 %    \begin{macrocode}
 %<*cls>
-\newenvironment{denotation}[1][2.5cm]{
-    \noindent\begin{list}{}%
+\newenvironment{denotation}[1][2.71828cm]{
+    \noindent\vskip-4bp\begin{list}{}%
     {\vskip-30bp\xiaosi[1.5]
-    \renewcommand\makelabel[1]{##1\hfil}
+    \renewcommand\makelabel[1]{\textbf{##1}\hfil}
     \setlength{\labelwidth}{#1} % 标签盒子宽度
     \setlength{\labelsep}{0cm} % 标签与列表文本距离
-    \setlength{\itemindent}{2em} % 标签缩进量
-    \setlength{\leftmargin}{\labelwidth+\labelsep} % 左边界
+    \setlength{\itemindent}{0em} % 标签缩进量
+    \setlength{\leftmargin}{\labelwidth+\labelsep+2em} % 左边界
     \setlength{\rightmargin}{0cm}
     \setlength{\parsep}{0cm} % 段落间距
     \setlength{\itemsep}{0cm} % 标签间距
-    \setlength{\listparindent}{0cm} % 段落缩进量
+    \setlength{\listparindent}{0pt} % 段落缩进量
     \setlength{\topsep}{0pt} % 标签与上文的间距
 }}{\end{list}}
 %</cls>
@@ -1452,6 +1479,7 @@
 % 定理环境可能数学论文中应用较多:
 % \changes{v2.0}{2010/11/09}{修改定理的分隔符和QED符号，修改字体;缩进为段落缩进;修改编号}
 % \changes{v2.2}{2011/10/14}{设定定理、定义环境的合理间隔}
+% \changes{v2.5}{2015/05/11}{去除证明环境的黑色方块QED}
 %
 %    \begin{macrocode}
 %<*cls>
@@ -1461,7 +1489,7 @@
 \theoremstyle{nonumberplain}
 \theorembodyfont{\kai\xiaosi[1.3]}
 \theoremheaderfont{\hei\xiaosi[1.3]}
-\theoremsymbol{\ensuremath{\blacksquare}}
+%\theoremsymbol{\ensuremath{\blacksquare}}
 \theoremseparator{:\,}
 \newtheorem{proof}{证明}[chapter]
 \newtheorem{assumption}{假设}[chapter]
@@ -1481,11 +1509,13 @@
 \newtheorem{conjecture}{猜想}[chapter]
 \newtheorem{proposition}{命题}[chapter]
 \newtheorem{exercise}{练习}[section]
-\newtheorem{example}{例}[section]
+\newtheorem{example}{例}[chapter]
 \newtheorem{problem}{问题}[section]
 \newtheorem{remark}{注释}[section]
 %</cls>
 %    \end{macrocode}
+%
+% \changes{v2.5}{2015/05/11}{将example的编号改为chapter}
 %
 %\subsection{论文属性}
 % 这里的内容主要用来定义封面中的一些元素，你可以像填空一样完成封面的制作：
@@ -1559,6 +1589,7 @@
 % \changes{v2.0}{2010/11/09}{标题用粗宋}
 % \changes{v2.0}{2010/11/09}{增加盲评控制}
 % \changes{v2.1}{2010/11/23}{设定页码为alph，增加cleardoublepage，这样在博士双面时方便打印}
+% \changes{v2.5}{2015/05/11}{盲评时去除serialno}
 %    \begin{macrocode}
 %<*cls>
 \def\maketitle{%
@@ -1568,6 +1599,7 @@
   \null
   \ifisanon%
   \author{}%
+  \serialno{}%
   \enauthor{}%
   \supervisor{}%
   \cosupervisor{}%
