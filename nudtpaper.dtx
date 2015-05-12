@@ -33,7 +33,7 @@
 % \def\thuthesis{\textsc{Thu}\-\textsc{Thesis}}
 % \def\nudtpaper{\textsc{Nudt}\-\textsc{Paper}}
 % 
-% \CheckSum{1220}
+% \CheckSum{1217}
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -1271,11 +1271,11 @@
 %
 % \changes{v1.3}{2009/10/03}{添加checkparameter这一选项，避免由于更新模板导致未定义的情况出现}
 % \changes{v1.7}{2010/04/30}{应当在封面制作完后替换tabular}
+% \changes{v2.5}{2015/05/12}{删除twochars囧}
 %
 %    \begin{macrocode}
 %<*cls>
 \newlength\CJK@twochars
-\def\CJK@spaceChar{\Unicode{48}{7}}
 \def\CJKindent{%
   \settowidth\CJK@twochars{中国}%
   \parindent\CJK@twochars}

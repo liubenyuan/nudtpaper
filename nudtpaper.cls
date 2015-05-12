@@ -345,7 +345,6 @@
 \setlength\belowdisplayshortskip{\abovedisplayshortskip}%
 }
 \newlength\CJK@twochars
-\def\CJK@spaceChar{\Unicode{48}{7}}
 \def\CJKindent{%
   \settowidth\CJK@twochars{中国}%
   \parindent\CJK@twochars}
