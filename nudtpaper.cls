@@ -8,7 +8,7 @@
 %% 
 %% This is a generated file.
 %% 
-%% Copyright (C) 2015 by Liu Benyuan <liubenyuan@gmail.com>
+%% Copyright (C) 2017 by Liu Benyuan <liubenyuan@gmail.com>
 %% 
 %% This file may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3a
@@ -29,7 +29,7 @@
 %% 
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{nudtpaper}
-[2011/07/17 v2.2 NUDT paper template]
+[2017/05/15 v2.6 NUDT paper template]
 \newif\ifismaster\ismastertrue
 \DeclareOption{master}{\ismastertrue}
 \DeclareOption{doctor}{\ismasterfalse}
@@ -74,7 +74,7 @@
 \RequirePackage[T1]{fontenc}
 \RequirePackage[amsmath,thmmarks,hyperref]{ntheorem}
 \RequirePackage[CJKchecksingle,no-math]{xeCJK}
-\RequirePackage{CJKnumb}
+\RequirePackage{zhnumber}
 \RequirePackage{indentfirst}
 \RequirePackage[numbers,sort&compress,square]{natbib}
 \RequirePackage[colorlinks=true,linkcolor=blue,citecolor=red,pdfborder=0 1 1]{hyperref}
@@ -211,8 +211,8 @@
 \renewcommand\figurename{图}
 \renewcommand\tablename{表}
 \renewcommand\appendixname{附录}
-\def\CJK@today{\CJKdigits{\the\year} 年 \CJKnumber{\the\month} 月}
-\newcommand\zhtoday{\CJK@today}
+\def\CJK@today{\zhdigits{\the\year} 年 \zhnumber{\the\month} 月}
+\renewcommand\zhtoday{\CJK@today}
 \newcommand\entoday{\today{}}
 \geometry{top=21mm,bottom=25.5mm,left=30mm,right=30mm}
 \geometry{headheight=9mm,headsep=1mm,footskip=9mm}
@@ -264,7 +264,7 @@
   \clearpage\fi\fi%
 }
 \titlecontents{chapter}[0pt]{\vspace{0.25\baselineskip} \heiti \xiaosi[1.25]}
-    {第\CJKnumber{\thecontentslabel}章\quad}{}
+    {第\zhnumber{\thecontentslabel}章\quad}{}
     {\hspace{.5em}\titlerule*{.}\contentspage}
 \titlecontents{section}[2em]{\songti \xiaosi[1.25]}
     {\thecontentslabel\quad}{}
@@ -328,7 +328,7 @@
 \setlength{\topskip}{0pt}
 \setcounter{secnumdepth}{3}
 \setlength{\footnotesep}{2.2ex \@minus 2bp}
-\titleformat{\chapter}{\filcenter\sf \heiti\sanhao[1.25]}{第\CJKnumber{\thechapter}章\,}{1em}{}
+\titleformat{\chapter}{\filcenter\sf \heiti\sanhao[1.25]}{第\zhnumber{\thechapter}章\,}{1em}{}
 \titleformat{\section}{\filcenter\bfseries \cusong\sihao[1.25]}{\thesection}{1em}{}
 \titleformat{\subsection}{\sf \heiti\xiaosi[1.25]}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\bfseries \cusong\xiaosi[1.25]}{\thesubsubsection}{1em}{}

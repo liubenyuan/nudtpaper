@@ -855,7 +855,7 @@ FUNCTION {format.names.for.peer.review} {
     if$
     t =				% 用当前的姓名与栈上的姓名做比较
       { nameptr int.to.str$	% 将作者序号转化为字符串
-	"\CJKnumber{" swap$ * "}" * % 使用中文数字
+	"\zhnumber{" swap$ * "}" * % 使用中文数字
 	bbl.number swap$ * bbl.author * % 加上``第''和``作者''
 %	duplicate$ debug.output
       }

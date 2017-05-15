@@ -16,9 +16,9 @@
 % \iffalse
 % <package>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
 % <package>\ProvidesPackage{nudtpaper}
-% <package>[2015/05/12 v2.5 By Liu Benyuan <liubenyuan@gmail.com>]
+% <package>[2017/05/15 v2.6 By Liu Benyuan <liubenyuan@gmail.com>]
 %<*driver>
-\ProvidesFile{nudtpaper.dtx}[2015/05/12 v2.5 NUDT]
+\ProvidesFile{nudtpaper.dtx}[2017/05/15 v2.6 NUDT]
 \documentclass[11pt]{ltxdoc}
 \usepackage{nudtx}
 \EnableCrossrefs
@@ -502,7 +502,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
 %<cls>\ProvidesClass{nudtpaper}
 %<cfg>\ProvidesFile{nudtpaper.cfg}
-%<cls|cfg>[2011/07/17 v2.2 NUDT paper template]
+%<cls|cfg>[2017/05/15 v2.6 NUDT paper template]
 %    \end{macrocode}
 %
 % \subsection{宏包配置}
@@ -642,11 +642,12 @@
 % \changes{v1.8}{2010/10/15}{修改了默认的xeCJK的选项，为了兼容旧的xeCJK版本，normalindentfirst选项暂不使用，而是在后面添加indentfirst包}
 % \changes{v2.0}{2010/11/10}{传递no-math给xeCJK里面的fontspec宏包}
 % \changes{v2.2}{2011/07/03}{移除CJKtextspace, CJKmathspace, CJKnumber选项}
-% \changes{v2.4}{2015/02/09}{移除CJKnumber选项，添加新的CJKnum宏包。旧版本TexLive无需更改。}
+% \changes{v2.4}{2015/02/09}{移除CJKnumber选项，添加新的CJKnumb宏包。旧版本TexLive无需更改。}
+% \changes{v2.6}{2017/05/15}{移除CJKnumb宏包，统一使用zhnumber宏包。推荐使用2016以后的TexLive版本。}
 %
 %    \begin{macrocode}
 \RequirePackage[CJKchecksingle,no-math]{xeCJK}
-\RequirePackage{CJKnumb}
+\RequirePackage{zhnumber}
 \RequirePackage{indentfirst}
 %    \end{macrocode}
 %
@@ -911,6 +912,8 @@
 % 我们首先将他们一一中文化：
 % \changes{v0.992}{2009/08/19}{修改图表编号格式}
 % \changes{v1.3}{2009/10/14}{修改图目录和表目录}
+% \changes{v2.6}{2017/05/15}{更新zhnumber宏包兼容命令}
+% \changes{v2.6}{2017/05/15}{重定义zhnumber宏包中的zhtoday命令}
 %
 %    \begin{macrocode}
 %<*cls>
@@ -924,8 +927,8 @@
 \renewcommand\figurename{图}
 \renewcommand\tablename{表}
 \renewcommand\appendixname{附录}
-\def\CJK@today{\CJKdigits{\the\year} 年 \CJKnumber{\the\month} 月}
-\newcommand\zhtoday{\CJK@today}
+\def\CJK@today{\zhdigits{\the\year} 年 \zhnumber{\the\month} 月}
+\renewcommand\zhtoday{\CJK@today}
 \newcommand\entoday{\today{}}
 %</cls>
 %    \end{macrocode}
@@ -1082,11 +1085,12 @@
 % 在\LaTeX{}中，Chapter在目录中默认是没有点的,我们加上,另外我们一并将
 % 目录中的section和subsection设定好,
 % \changes{v0.991}{2009/08/18}{modify TOC baselineskip and font lineskip to 1.25}
+% \changes{v2.6}{2017/05/15}{更新使用zhnumber生成中文章节编号}
 %
 %    \begin{macrocode}
 %<*cls>
 \titlecontents{chapter}[0pt]{\vspace{0.25\baselineskip} \heiti \xiaosi[1.25]}
-    {第\CJKnumber{\thecontentslabel}章\quad}{}
+    {第\zhnumber{\thecontentslabel}章\quad}{}
     {\hspace{.5em}\titlerule*{.}\contentspage}
 \titlecontents{section}[2em]{\songti \xiaosi[1.25]}
     {\thecontentslabel\quad}{}
@@ -1217,12 +1221,13 @@
 % \changes{v1.9}{2010/10/28}{使用了ttltips.pdf的设置chapter距顶端距离的办法}
 % \changes{v2.3}{2013/12/27}{修改了footnotesize，当一页中有两个footnote时，间距调整正常}
 % \changes{v2.3}{2013/12/27}{修改了titleformat和titlespacing的定制，更改英文字体，修正间距}
+% \changes{v2.6}{2017/05/15}{更新使用zhnumber}
 %
 %    \begin{macrocode}
 %<*cls>
 \setcounter{secnumdepth}{3}
 \setlength{\footnotesep}{2.2ex \@minus 2bp}
-\titleformat{\chapter}{\filcenter\sf \heiti\sanhao[1.25]}{第\CJKnumber{\thechapter}章\,}{1em}{}
+\titleformat{\chapter}{\filcenter\sf \heiti\sanhao[1.25]}{第\zhnumber{\thechapter}章\,}{1em}{}
 \titleformat{\section}{\filcenter\bfseries \cusong\sihao[1.25]}{\thesection}{1em}{}
 \titleformat{\subsection}{\sf \heiti\xiaosi[1.25]}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\bfseries \cusong\xiaosi[1.25]}{\thesubsubsection}{1em}{}

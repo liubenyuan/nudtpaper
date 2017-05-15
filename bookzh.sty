@@ -52,7 +52,8 @@
 %\newcommand{\bm}[1]{\ensuremath{\mathbf{#1}}}
 %---------------------------------------------------------------%%
 \RequirePackage[amsmath,thmmarks,hyperref]{ntheorem}
-\RequirePackage[CJKnumber,CJKchecksingle,no-math]{xeCJK}
+\RequirePackage[CJKchecksingle,no-math]{xeCJK}
+\RequirePackage{zhnumber}
 \RequirePackage{indentfirst}
 % hypers & refs
 \RequirePackage[numbers,sort&compress]{natbib}
@@ -369,7 +370,7 @@
 \vspace*{0pt}%
 }
 \titlecontents{chapter}[0pt]{\vspace{0.25\baselineskip} \heiti \xiaosi[1.25]}
-    {第\CJKnumber{\thecontentslabel}章\quad}{}
+    {第\zhnumber{\thecontentslabel}章\quad}{}
     {\hspace{.5em}\titlerule*{.}\contentspage}
 \titlecontents{section}[2em]{\songti \xiaosi[1.25]}
     {\thecontentslabel\quad}{}
@@ -386,7 +387,7 @@
 \setcounter{secnumdepth}{3}
 \titleformat{\part}[display]
 {\filleft \bfseries\yihao[1.25]}{第{\thepart}篇\,}{1em}{}
-\titleformat{\chapter}{\filcenter \bfseries\erhao[1.25]}{第\CJKnumber{\thechapter}章\,}{1em}{}
+\titleformat{\chapter}{\filcenter \bfseries\erhao[1.25]}{第\zhnumber{\thechapter}章\,}{1em}{}
 \titleformat{\section}{\filcenter \bfseries\sanhao[1.25]}{\thesection}{1em}{}
 \titleformat{\subsection}{\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\bfseries}{\thesubsubsection}{1em}{}
