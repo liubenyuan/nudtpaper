@@ -29,7 +29,7 @@
 %% 
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{nudtpaper}
-[2017/05/15 v2.6 NUDT paper template]
+[2017/06/15 v2.7 NUDT paper template]
 \newif\ifismaster\ismastertrue
 \DeclareOption{master}{\ismastertrue}
 \DeclareOption{doctor}{\ismasterfalse}
@@ -389,7 +389,7 @@
 \displaywidowpenalty=5000
 \let\old@tabular\@tabular
 \def\thu@tabular{\wuhao[1.25]\old@tabular}
-\DeclareCaptionLabelFormat{thu}{{\wuhao[1.25]\song #1~\rmfamily #2}}
+\DeclareCaptionLabelFormat{thu}{{\wuhao[1.25]\song#1~\rmfamily #2}}
 \DeclareCaptionLabelSeparator{thu}{\hspace{1em}}
 \DeclareCaptionFont{thu}{\wuhao[1.25]}
 \captionsetup{labelformat=thu,labelsep=thu,font=thu}

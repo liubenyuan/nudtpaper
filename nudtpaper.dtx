@@ -16,9 +16,9 @@
 % \iffalse
 % <package>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
 % <package>\ProvidesPackage{nudtpaper}
-% <package>[2017/05/15 v2.6 By Liu Benyuan <liubenyuan@gmail.com>]
+% <package>[2017/06/15 v2.7 By Liu Benyuan <liubenyuan@gmail.com>]
 %<*driver>
-\ProvidesFile{nudtpaper.dtx}[2017/05/15 v2.6 NUDT]
+\ProvidesFile{nudtpaper.dtx}[2017/06/15 v2.7 NUDT]
 \documentclass[11pt]{ltxdoc}
 \usepackage{nudtx}
 \EnableCrossrefs
@@ -502,7 +502,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
 %<cls>\ProvidesClass{nudtpaper}
 %<cfg>\ProvidesFile{nudtpaper.cfg}
-%<cls|cfg>[2017/05/15 v2.6 NUDT paper template]
+%<cls|cfg>[2017/06/15 v2.7 NUDT paper template]
 %    \end{macrocode}
 %
 % \subsection{宏包配置}
@@ -1398,12 +1398,13 @@
 % belowskip为外距离，也就是标题与正文之间的距离。
 % \changes{v1.3}{2009/09/29}{缩小图片标题与下文的距离}
 % \changes{v1.7}{2010/04/30}{增添LT array命令，可修改Longtable字体大小}
+% \changes{v2.7}{2017/06/15}{{删除图标标题前的多余空格}}
 %
 %    \begin{macrocode}
 %<*cls>
 \let\old@tabular\@tabular
 \def\thu@tabular{\wuhao[1.25]\old@tabular}
-\DeclareCaptionLabelFormat{thu}{{\wuhao[1.25]\song #1~\rmfamily #2}}
+\DeclareCaptionLabelFormat{thu}{{\wuhao[1.25]\song#1~\rmfamily #2}}
 \DeclareCaptionLabelSeparator{thu}{\hspace{1em}}
 \DeclareCaptionFont{thu}{\wuhao[1.25]}
 \captionsetup{labelformat=thu,labelsep=thu,font=thu}
