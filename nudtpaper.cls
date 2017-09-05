@@ -437,7 +437,6 @@
 \theoremseparator{:\,}
 \newtheorem{proof}{证明}[chapter]
 \newtheorem{assumption}{假设}[chapter]
-%\newtheorem{definition}{定义}[chapter]
 
 \renewtheoremstyle{plain}%
 {\item[\hspace*{2em} \theorem@headerfont ##1\ ##2\theorem@separator]}%

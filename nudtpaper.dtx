@@ -84,7 +84,7 @@
 % \thispagestyle{empty}
 %
 % \begin{abstract}
-% 本模板旨在提供规范的国防科学技术大学\LaTeX{}写作模板环境，
+% 本模板旨在提供规范的国防科技大学\LaTeX{}写作模板环境，
 % 现支持硕士/博士学位论文格式，可以自动生成盲评、制作A3封面。
 % \end{abstract}
 %
@@ -94,7 +94,7 @@
 % \begin{enumerate}
 % \item 本模板的发布遵守 \LaTeX{} Project Public License，使用前请认真阅读协议内容
 % \item 本模板创立参照官方严格的论文写作手册，并同时参照硕士/博士学位论文\textbf{doc}文档对比修改
-% \item 国防科学技术大学对论文写作提供写作指南与官方\textbf{doc}模板，
+% \item 国防科技大学对论文写作提供写作指南与官方\textbf{doc}模板，
 % 同时提供官方的\LaTeX{}模板，本模板的出发点是方便大家使用专业的高效的论文书写工具，
 % 其有点在于注重排版质量、命令规范、使用方便、更新及时，符合论文撰写说明。
 % 但任何由于使用本模板而引起的论文格式审查问题均与本模板作者无关。
@@ -341,7 +341,7 @@
 %<*thesis>
 \title{国防科大学位论文\LaTeX{}模板\\
 使用手册}
-\displaytitle{国防科学技术大学学位论文\LaTeX{}模板}
+\displaytitle{国防科技大学学位论文\LaTeX{}模板}
 \author{张三}
 \zhdate{\zhtoday}
 \entitle{How to Use the \LaTeX{} Document Class for NUDT Dissertations}
@@ -493,7 +493,7 @@
 %
 % \section{实现细节}
 % 我们首先介绍文档模板的基本信息以及宏包和配置，
-% 然后依照国防科学技术大学论文模板的书写规范一节一节的介绍实现步骤。
+% 然后依照国防科技大学论文模板的书写规范一节一节的介绍实现步骤。
 %
 % \changes{v1.2}{2009/09/28}{添加了A3封面制作}
 %
@@ -995,7 +995,7 @@
 %    \begin{macrocode}
 %<*cls>
 \renewpagestyle{plain}{
-\sethead{}{\raisebox{.65\baselineskip}{\songti \wuhao \ifisanon{~}\else{国防科学技术大学研究生院\@optionpaperclass{}学位论文}\fi}}{}%
+\sethead{}{\raisebox{.65\baselineskip}{\songti \wuhao \ifisanon{~}\else{国防科技大学研究生院\@optionpaperclass{}学位论文}\fi}}{}%
 \setfoot{}{{\songti \wuhao 第~\thepage~页}}{}%
 \headrule%
 \footrule%
@@ -1499,7 +1499,6 @@
 \theoremseparator{:\,}
 \newtheorem{proof}{证明}[chapter]
 \newtheorem{assumption}{假设}[chapter]
-\newtheorem{definition}{定义}[chapter]
 
 \renewtheoremstyle{plain}%
 {\item[\hspace*{2em} \theorem@headerfont ##1\ ##2\theorem@separator]}%
@@ -1508,6 +1507,7 @@
 \theorembodyfont{\kai\xiaosi[1.3]}
 \theoremheaderfont{\hei\xiaosi[1.3]}
 \theoremsymbol{}
+\newtheorem{definition}{定义}[chapter]
 \newtheorem{lemma}{引理}[chapter]
 \newtheorem{theorem}{定理}[chapter]
 \newtheorem{axiom}{公理}[chapter]
@@ -1653,7 +1653,7 @@
 
   \par
   \vfill
-  {\centering \cusong \sanhao \ifisanon{~}\else{国防科学技术大学研究生院}\fi\\[0.8em]
+  {\centering \cusong \sanhao \ifisanon{~}\else{国防科技大学研究生院}\fi\\[0.8em]
     {\@zhdate \par}%
   }
   \vspace{1mm}
@@ -1708,7 +1708,7 @@ Defense Technology}\fi}\\
   {\fangsong\xiaosi %
 本人声明所呈交的学位论文是我本人在导师指导下进行的研究工
 作及取得的研究成果。尽我所知，除文中特别加以标注和致谢的地方外，论文中
-不包含其他人已经发表和撰写过的研究成果，也不包含为获得国防科学技术大学或
+不包含其他人已经发表和撰写过的研究成果，也不包含为获得国防科技大学或
 其他教育机构的学位或证书而使用过的材料。与我一同工作的同志对本研究所做的
 任何贡献均已在论文中作了明确的说明并表示谢意。\par
 学位论文题目：\vbox{\hbox to11cm{\hfil \the\displaytitle \hfil}
@@ -1720,8 +1720,8 @@ Defense Technology}\fi}\\
   \vspace*{2cm}
   {\cusong \erhao \centering 学位论文版权使用授权书\par\vspace{2cm}}
   {\fangsong\xiaosi %
-本人完全了解国防科学技术大学有关保留、使用学位论文的规定。
-本人授权国防科学技术大学可以保留并向国家有关部门或机构送交论文的复印件和电子
+本人完全了解国防科技大学有关保留、使用学位论文的规定。
+本人授权国防科技大学可以保留并向国家有关部门或机构送交论文的复印件和电子
 文档，允许论文被查阅和借阅; 可以将学位论文的全部或部分内容编入有关数据库
 进行检索，可以采用影印、缩印或扫描等复制手段保存、汇编学位论文。\par
 （保密学位论文在解密后适用本授权书。）\par
