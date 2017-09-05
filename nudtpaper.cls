@@ -225,7 +225,7 @@
     \rule{\linewidth}{1.5pt}}%
   \fi}
 \renewpagestyle{plain}{
-\sethead{}{\raisebox{.65\baselineskip}{\songti \wuhao \ifisanon{~}\else{国防科学技术大学研究生院\@optionpaperclass{}学位论文}\fi}}{}%
+\sethead{}{\raisebox{.65\baselineskip}{\songti \wuhao \ifisanon{~}\else{国防科技大学研究生院\@optionpaperclass{}学位论文}\fi}}{}%
 \setfoot{}{{\songti \wuhao 第~\thepage~页}}{}%
 \headrule%
 \footrule%
@@ -437,7 +437,7 @@
 \theoremseparator{:\,}
 \newtheorem{proof}{证明}[chapter]
 \newtheorem{assumption}{假设}[chapter]
-\newtheorem{definition}{定义}[chapter]
+%\newtheorem{definition}{定义}[chapter]
 
 \renewtheoremstyle{plain}%
 {\item[\hspace*{2em} \theorem@headerfont ##1\ ##2\theorem@separator]}%
@@ -446,6 +446,7 @@
 \theorembodyfont{\kai\xiaosi[1.3]}
 \theoremheaderfont{\hei\xiaosi[1.3]}
 \theoremsymbol{}
+\newtheorem{definition}{定义}[chapter]
 \newtheorem{lemma}{引理}[chapter]
 \newtheorem{theorem}{定理}[chapter]
 \newtheorem{axiom}{公理}[chapter]
@@ -548,7 +549,7 @@
 
   \par
   \vfill
-  {\centering \cusong \sanhao \ifisanon{~}\else{国防科学技术大学研究生院}\fi\\[0.8em]
+  {\centering \cusong \sanhao \ifisanon{~}\else{国防科技大学研究生院}\fi\\[0.8em]
     {\@zhdate \par}%
   }
   \vspace{1mm}
@@ -589,7 +590,7 @@ Defense Technology}\fi}\\
   {\fangsong\xiaosi %
 本人声明所呈交的学位论文是我本人在导师指导下进行的研究工
 作及取得的研究成果。尽我所知，除文中特别加以标注和致谢的地方外，论文中
-不包含其他人已经发表和撰写过的研究成果，也不包含为获得国防科学技术大学或
+不包含其他人已经发表和撰写过的研究成果，也不包含为获得国防科技大学或
 其他教育机构的学位或证书而使用过的材料。与我一同工作的同志对本研究所做的
 任何贡献均已在论文中作了明确的说明并表示谢意。\par
 学位论文题目：\vbox{\hbox to11cm{\hfil \the\displaytitle \hfil}
@@ -601,8 +602,8 @@ Defense Technology}\fi}\\
   \vspace*{2cm}
   {\cusong \erhao \centering 学位论文版权使用授权书\par\vspace{2cm}}
   {\fangsong\xiaosi %
-本人完全了解国防科学技术大学有关保留、使用学位论文的规定。
-本人授权国防科学技术大学可以保留并向国家有关部门或机构送交论文的复印件和电子
+本人完全了解国防科技大学有关保留、使用学位论文的规定。
+本人授权国防科技大学可以保留并向国家有关部门或机构送交论文的复印件和电子
 文档，允许论文被查阅和借阅; 可以将学位论文的全部或部分内容编入有关数据库
 进行检索，可以采用影印、缩印或扫描等复制手段保存、汇编学位论文。\par
 （保密学位论文在解密后适用本授权书。）\par
