@@ -78,6 +78,7 @@
 \RequirePackage{indentfirst}
 \RequirePackage[numbers,sort&compress,square]{natbib}
 \RequirePackage[colorlinks=true,linkcolor=blue,citecolor=red,pdfborder=0 1 1]{hyperref}
+\RequirePackage{datetime}
 \defaultfontfeatures{Mapping=tex-text}
 \xeCJKsetcharclass{"0}{"2E7F}{0}
 \xeCJKsetcharclass{"2E80}{"FFFF}{1}
@@ -213,7 +214,7 @@
 \renewcommand\appendixname{附录}
 \def\CJK@today{\zhdigits{\the\year} 年 \zhnumber{\the\month} 月}
 \renewcommand\zhtoday{\CJK@today}
-\newcommand\entoday{\today{}}
+\newcommand\entoday{\monthname{}, \the\year}
 \geometry{top=21mm,bottom=25.5mm,left=30mm,right=30mm}
 \geometry{headheight=9mm,headsep=1mm,footskip=9mm}
 \renewcommand\setheadrule[1]{%
@@ -485,7 +486,7 @@
   \optionas{Advisor}
 \else
   \optionpaperclass{博士}
-  \optionpaperclassen{Doctor}
+  \optionpaperclassen{PhD}
   \optionas{Supervisor}
 \fi
 \newcommand{\checkparameter}
@@ -539,8 +540,9 @@
         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@supervisor}\hfil{}} & \\[3.2ex]
         \cline{2-2}
       \ifx\@cosupervisor\@empty\else
-        & {\fs \hfil\raisebox{-3.7ex}[0pt]{\@cosupervisor}\hfil{}} & \\[3.2ex]
-        \cline{2-2}
+        \raisebox{-3.7ex}[0pt]{协助指导教师} &
+          {\fs \hfil\raisebox{-3.7ex}[0pt]{\@cosupervisor}\hfil{}} & \\[3.2ex]
+          \cline{2-2}
       \fi
     \end{tabular}
   }
@@ -565,7 +567,7 @@
     Candidate:\ & {\textsf{\@enauthor}}\\
     \@optionas{}:\ & {\textsf{\@ensupervisor}}\\
     \ifx\@encosupervisor\@empty\else
-      & {\textsf{\@encosupervisor}} \\
+      Associate \@optionas{}:\ & {\textsf{\@encosupervisor}} \\
     \fi
   \end{tabular}}
   \vfill\vfill\vfill\vfill
