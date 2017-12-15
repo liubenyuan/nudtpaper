@@ -482,7 +482,7 @@
 \ifismaster
   \optionpaperclass{硕士}
   \optionpaperclassen{Master}
-  \optionas{Advisor}
+  \optionas{Supervisor}
 \else
   \optionpaperclass{博士}
   \optionpaperclassen{Doctor}
@@ -526,20 +526,27 @@
   \vspace{45bp} %从WORD中得来
   {\heiti \sihao
     \begin{tabular}{cp{8cm}c}
-      \raisebox{-3.7ex}[0pt]{\@optionpaperclass{}生姓名} &
+	\ifismaster
+		\raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{硕\hspace{\fill}士\hspace{\fill}生\hspace{\fill}姓\hspace{\fill}名}} &
         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@author}\hfil{}} & \\[3.2ex]
         \cline{2-2}
-      \raisebox{-3.7ex}[0pt]{学\ 科\ 专\ 业} &
+	\else
+		\raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{博\hspace{\fill}士\hspace{\fill}生\hspace{\fill}姓\hspace{\fill}名}} &
+        {\fs \hfil\raisebox{-3.7ex}[0pt]{\@author}\hfil{}} & \\[3.2ex]
+        \cline{2-2}
+	\fi
+	\raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{学\hspace{\fill}科\hspace{\fill}专\hspace{\fill}业}} &
         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@subject}\hfil{}} & \\[3.2ex]
         \cline{2-2}
-      \raisebox{-3.7ex}[0pt]{研\ 究\ 方\ 向} &
+    \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{研\hspace{\fill}究\hspace{\fill}方\hspace{\fill}向}} &
         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@researchfield}\hfil{}} & \\[3.2ex]
         \cline{2-2}
-      \raisebox{-3.7ex}[0pt]{指\ 导\ 教\ 师} &
+    \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{指\hspace{\fill}导\hspace{\fill}教\hspace{\fill}师}}&
         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@supervisor}\hfil{}} & \\[3.2ex]
         \cline{2-2}
-      \ifx\@cosupervisor\@empty\else
-        & {\fs \hfil\raisebox{-3.7ex}[0pt]{\@cosupervisor}\hfil{}} & \\[3.2ex]
+     \ifx\@cosupervisor\@empty\else
+	 \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{协\hspace{\fill}助\hspace{\fill}指\hspace{\fill}导\hspace{\fill}教\hspace{\fill}师}} &
+        {\fs \hfil\raisebox{-3.7ex}[0pt]{\@cosupervisor}\hfil{}} & \\[3.2ex]
         \cline{2-2}
       \fi
     \end{tabular}
@@ -565,7 +572,7 @@
     Candidate:\ & {\textsf{\@enauthor}}\\
     \@optionas{}:\ & {\textsf{\@ensupervisor}}\\
     \ifx\@encosupervisor\@empty\else
-      & {\textsf{\@encosupervisor}} \\
+    Associate Supervisor  & {\textsf{\@encosupervisor}} \\
     \fi
   \end{tabular}}
   \vfill\vfill\vfill\vfill
