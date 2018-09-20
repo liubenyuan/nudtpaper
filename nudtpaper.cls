@@ -8,7 +8,7 @@
 %% 
 %% This is a generated file.
 %% 
-%% Copyright (C) 2018 by Liu Benyuan <liubenyuan@gmail.com>
+%% Copyright (C) 2017 by Liu Benyuan <liubenyuan@gmail.com>
 %% 
 %% This file may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3a
@@ -77,8 +77,7 @@
 \RequirePackage{zhnumber}
 \RequirePackage{indentfirst}
 \RequirePackage[numbers,sort&compress,square]{natbib}
-\RequirePackage[colorlinks=true,linkcolor=blue,citecolor=red,pdfborder=0 1 1]{hyperref}
-\RequirePackage{datetime}
+\RequirePackage[colorlinks=false,linkcolor=blue,citecolor=red,pdfborder=0 1 1]{hyperref}
 \defaultfontfeatures{Mapping=tex-text}
 \xeCJKsetcharclass{"0}{"2E7F}{0}
 \xeCJKsetcharclass{"2E80}{"FFFF}{1}
@@ -212,9 +211,9 @@
 \renewcommand\figurename{图}
 \renewcommand\tablename{表}
 \renewcommand\appendixname{附录}
-\def\CJK@today{\zhdigits{\the\year}年\zhnumber{\the\month}月}
+\def\CJK@today{\zhdigits{\the\year} 年 \zhnumber{\the\month} 月}
 \renewcommand\zhtoday{\CJK@today}
-\newcommand\entoday{\monthname{}, \the\year}
+\newcommand\entoday{\today{}}
 \geometry{top=21mm,bottom=25.5mm,left=30mm,right=30mm}
 \geometry{headheight=9mm,headsep=1mm,footskip=9mm}
 \renewcommand\setheadrule[1]{%
@@ -485,14 +484,14 @@
 \def\enpapertype#1{\def\@enpapertype{#1}} % Engineering, Science
 \def\optionpaperclass#1{\def\@optionpaperclass{#1}} % paperclass
 \def\optionpaperclassen#1{\def\@optionpaperclassen{#1}}
-\def\optionas#1{\def\@optionas{#1}} % Supervisor
+\def\optionas#1{\def\@optionas{#1}} % Advisor OR Supervisor
 \ifismaster
   \optionpaperclass{硕士}
   \optionpaperclassen{Master}
   \optionas{Supervisor}
 \else
   \optionpaperclass{博士}
-  \optionpaperclassen{PhD}
+  \optionpaperclassen{Doctor}
   \optionas{Supervisor}
 \fi
 \newcommand{\checkparameter}
@@ -533,7 +532,6 @@
   \vspace{45bp} %从WORD中得来
  {\heiti \sihao
     \begin{tabular}{cp{8cm}c}
-<<<<<<< HEAD
 	\raisebox{-3.7ex}{\makebox[3cm][s]{硕\hspace{\fill}士\hspace{\fill}生\hspace{\fill}姓\hspace{\fill}名}}&
         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@author}\hfil{}} & \\[3.2ex]
 		\cline{2-2}
@@ -551,29 +549,6 @@
         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@cosupervisor}\hfil{}} & \\[3.2ex]
         \cline{2-2}
     \fi
-=======
-      \ifismaster
-      \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{硕\hfill{}士\hfill{}生\hfill{}姓\hfill{}名}} &
-      \else
-      \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{博\hfill{}士\hfill{}生\hfill{}姓\hfill{}名}} &
-      \fi
-        {\fs \hfil\raisebox{-3.7ex}[0pt]{\@author}\hfil{}} & \\[3.2ex]
-        \cline{2-2}
-        \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{学\hfill{}科\hfill{}专\hfill{}业}} &
-        {\fs \hfil\raisebox{-3.7ex}[0pt]{\@subject}\hfil{}} & \\[3.2ex]
-        \cline{2-2}
-        \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{研\hfill{}究\hfill{}方\hfill{}向}} &
-        {\fs \hfil\raisebox{-3.7ex}[0pt]{\@researchfield}\hfil{}} & \\[3.2ex]
-        \cline{2-2}
-        \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{指\hfill{}导\hfill{}教\hfill{}师}} &
-        {\fs \hfil\raisebox{-3.7ex}[0pt]{\@supervisor}\hfil{}} & \\[3.2ex]
-        \cline{2-2}
-      \ifx\@cosupervisor\@empty\else
-      \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{协\hfill{}助\hfill{}指\hfill{}导\hfill{}教\hfill{}师}} &
-          {\fs \hfil\raisebox{-3.7ex}[0pt]{\@cosupervisor}\hfil{}} & \\[3.2ex]
-          \cline{2-2}
-      \fi
->>>>>>> 66896baace475dc6d3648616c91ac7997756529f
     \end{tabular}
   }
   \end{center}%
@@ -597,11 +572,7 @@
     Candidate:\ & {\textsf{\@enauthor}}\\
     \@optionas{}:\ & {\textsf{\@ensupervisor}}\\
     \ifx\@encosupervisor\@empty\else
-<<<<<<< HEAD
     Associate Supervisor  & {\textsf{\@encosupervisor}} \\
-=======
-      Associate \@optionas{}:\ & {\textsf{\@encosupervisor}} \\
->>>>>>> 66896baace475dc6d3648616c91ac7997756529f
     \fi
   \end{tabular}}
   \vfill\vfill\vfill\vfill
