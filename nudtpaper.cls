@@ -556,7 +556,7 @@
       \fi
     \end{tabular}
   }
-\end{center}%
+  \end{center}%
 
   \par
   \vfill
@@ -573,7 +573,7 @@
   {\erhao[1.25] \@entitle \par}
   {\sanhao[1.25]
   \vfill\vfill\vfill\vfill\vfill\vfill
-   \begin{tabular}{rl}
+  \begin{tabular}{rl}
     Candidate:\ & {\textsf{\@enauthor}}\\
     \@optionas{}:\ & {\textsf{\@ensupervisor}}\\
     \ifx\@encosupervisor\@empty\else
