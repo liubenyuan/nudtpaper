@@ -77,7 +77,7 @@
 \RequirePackage{zhnumber}
 \RequirePackage{indentfirst}
 \RequirePackage[numbers,sort&compress,square]{natbib}
-\RequirePackage[colorlinks=true,linkcolor=blue,citecolor=red,pdfborder=0 1 1]{hyperref}
+\RequirePackage[colorlinks=false,linkcolor=blue,citecolor=red,pdfborder=0 1 1]{hyperref}
 \defaultfontfeatures{Mapping=tex-text}
 \xeCJKsetcharclass{"0}{"2E7F}{0}
 \xeCJKsetcharclass{"2E80}{"FFFF}{1}
@@ -338,7 +338,7 @@
 \titlespacing{\subsubsection}{2em}{1ex \@minus 2bp}{1ex \@minus 2bp}
 \renewcommand\normalsize{%
 \@setfontsize\normalsize{12bp}{12.87bp}%
-\renewcommand{\baselinestretch}{1.3}%
+\renewcommand{\baselinestretch}{1.26}%
 \setlength\abovedisplayskip{10bp \@minus 1bp}%
 \setlength\abovedisplayshortskip{10bp \@minus 1bp}%
 \setlength\belowdisplayskip{\abovedisplayskip}%
@@ -358,11 +358,11 @@
    \chapter*{\bibname}%
    \list{\@biblabel{\@arabic\c@enumiv}}%
         {\renewcommand{\makelabel}[1]{##1\hfill}
-         \settowidth\labelwidth{1.1cm}
-         \setlength{\labelsep}{0.4em}
+         \settowidth{\labelwidth}{0.5cm}
+         \setlength{\labelsep}{0cm}
          \setlength{\itemindent}{0pt}
          \setlength{\leftmargin}{\labelwidth+\labelsep}
-         \addtolength{\itemsep}{-0.7em}
+         \addtolength{\itemsep}{-0.9em}
          \usecounter{enumiv}%
          \let\p@enumiv\@empty
          \renewcommand\theenumiv{\@arabic\c@enumiv}}%
@@ -415,6 +415,12 @@
     \setlength{\listparindent}{0pt} % 段落缩进量
     \setlength{\topsep}{0pt} % 标签与上文的间距
 }}{\end{list}}
+\newenvironment{myending}{%
+    \chapter*{结\hspace{1em}束\hspace{1em}语}%
+    \addcontentsline{toc}{chapter}{结束语}%
+    \xiaosi%
+    \@afterheading}
+    {\par\vspace{2em}\par}
 \newenvironment{ack}{%
     \chapter*{致\hspace{1em}谢}%
     \addcontentsline{toc}{chapter}{致谢}%
@@ -524,31 +530,25 @@
   \vspace{12bp}
   {\cusong\erhao[1.25] \@title \par}%
   \vspace{45bp} %从WORD中得来
-  {\heiti \sihao
+ {\heiti \sihao
     \begin{tabular}{cp{8cm}c}
-	\ifismaster
-		\raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{硕\hspace{\fill}士\hspace{\fill}生\hspace{\fill}姓\hspace{\fill}名}} &
+	\raisebox{-3.7ex}{\makebox[3cm][s]{硕\hspace{\fill}士\hspace{\fill}生\hspace{\fill}姓\hspace{\fill}名}}&
         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@author}\hfil{}} & \\[3.2ex]
-        \cline{2-2}
-	\else
-		\raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{博\hspace{\fill}士\hspace{\fill}生\hspace{\fill}姓\hspace{\fill}名}} &
-        {\fs \hfil\raisebox{-3.7ex}[0pt]{\@author}\hfil{}} & \\[3.2ex]
-        \cline{2-2}
-	\fi
-	\raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{学\hspace{\fill}科\hspace{\fill}专\hspace{\fill}业}} &
+		\cline{2-2}
+	\raisebox{-3.7ex}{\makebox[3cm][s]{学\hspace{\fill}科\hspace{\fill}专\hspace{\fill}业}} &
         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@subject}\hfil{}} & \\[3.2ex]
         \cline{2-2}
-    \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{研\hspace{\fill}究\hspace{\fill}方\hspace{\fill}向}} &
+	\raisebox{-3.7ex}{\makebox[3cm][s]{研\hspace{\fill}究\hspace{\fill}方\hspace{\fill}向}} &
         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@researchfield}\hfil{}} & \\[3.2ex]
         \cline{2-2}
-    \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{指\hspace{\fill}导\hspace{\fill}教\hspace{\fill}师}}&
+    \raisebox{-3.7ex}{\makebox[3cm][s]{指\hspace{\fill}导\hspace{\fill}教\hspace{\fill}师}} &
         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@supervisor}\hfil{}} & \\[3.2ex]
         \cline{2-2}
-     \ifx\@cosupervisor\@empty\else
-	 \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{协\hspace{\fill}助\hspace{\fill}指\hspace{\fill}导\hspace{\fill}教\hspace{\fill}师}} &
+    \ifx\@cosupervisor\@empty\else
+	\raisebox{-3.7ex}{\makebox[3cm][s]{协\hspace{\fill}助\hspace{\fill}指\hspace{\fill}导\hspace{\fill}教\hspace{\fill}师}} &
         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@cosupervisor}\hfil{}} & \\[3.2ex]
         \cline{2-2}
-      \fi
+    \fi
     \end{tabular}
   }
   \end{center}%
@@ -568,7 +568,7 @@
   {\erhao[1.25] \@entitle \par}
   {\sanhao[1.25]
   \vfill\vfill\vfill\vfill\vfill\vfill
-  \begin{tabular}{rl}
+    \begin{tabular}{rl}
     Candidate:\ & {\textsf{\@enauthor}}\\
     \@optionas{}:\ & {\textsf{\@ensupervisor}}\\
     \ifx\@encosupervisor\@empty\else
