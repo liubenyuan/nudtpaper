@@ -25,7 +25,9 @@
 \algsetup{indent=3em}
 \floatname{algorithm}{算法}
 \renewcommand{\algorithmicrequire}{\textbf{已知:}}
-\renewcommand{\algorithmicensure}{\textbf{求:}}
+\renewcommand{\algorithmicensure}{\textbf{求:\quad}}
+\renewcommand{\algorithmiccomment}[1]{\hfill$\rhd$ #1}
+% \renewcommand{\algorithmiccomment}[1]{\hfill$\blacktriangleright$ #1}
 
 \DefineVerbatimEnvironment{code}{Verbatim}%
   {frame=lines,framerule=0.5mm,rulecolor=\color{black},%
