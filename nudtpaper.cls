@@ -586,12 +586,14 @@ Defense Technology}\fi}\\
 ~\@endate~
   }
   \end{center}\vfill
+  
+\renewcommand{\baselinestretch}{1.5}%
+
+\ifisanon{~}\else{
   \cleardoublepage%
   \newpage
   \thispagestyle{empty}
-
   {\cusong \erhao \centering \ziju{12pt} 独创性声明 \par\vspace{2cm}}
-    \renewcommand{\baselinestretch}{1.5}%
   {\fangsong\xiaosi %
 本人声明所呈交的学位论文是我本人在导师指导下进行的研究工
 作及取得的研究成果。尽我所知，除文中特别加以标注和致谢的地方外，论文中
@@ -619,6 +621,7 @@ Defense Technology}\fi}\\
   \hfill 日期：\hfill\hfill 年\hfill 月 \hfill 日\par
 作者指导教师签名：\hrulefill\hrulefill\hrulefill\hrulefill\hrulefill
   \hfill 日期：\hfill\hfill 年\hfill 月 \hfill 日\par}
+}\fi
 
   \normalsize % normal, 正文开始
   \def\@tabular{\wuhao[1.25]\old@tabular} % 之后表格字体使用5号
