@@ -339,7 +339,7 @@
 \titlespacing{\subsubsection}{2em}{1ex \@minus 2bp}{1ex \@minus 2bp}
 \renewcommand\normalsize{%
 \@setfontsize\normalsize{12bp}{12.87bp}%
-\renewcommand{\baselinestretch}{1.3}%
+\renewcommand{\baselinestretch}{1.26}%
 \setlength\abovedisplayskip{10bp \@minus 1bp}%
 \setlength\abovedisplayshortskip{10bp \@minus 1bp}%
 \setlength\belowdisplayskip{\abovedisplayskip}%
@@ -359,11 +359,11 @@
    \chapter*{\bibname}%
    \list{\@biblabel{\@arabic\c@enumiv}}%
         {\renewcommand{\makelabel}[1]{##1\hfill}
-         \settowidth\labelwidth{1.1cm}
-         \setlength{\labelsep}{0.4em}
+         \settowidth{\labelwidth}{0.5cm}
+         \setlength{\labelsep}{0cm}
          \setlength{\itemindent}{0pt}
          \setlength{\leftmargin}{\labelwidth+\labelsep}
-         \addtolength{\itemsep}{-0.7em}
+         \addtolength{\itemsep}{-0.9em}
          \usecounter{enumiv}%
          \let\p@enumiv\@empty
          \renewcommand\theenumiv{\@arabic\c@enumiv}}%
@@ -416,6 +416,12 @@
     \setlength{\listparindent}{0pt} % 段落缩进量
     \setlength{\topsep}{0pt} % 标签与上文的间距
 }}{\end{list}}
+\newenvironment{myending}{%
+    \chapter*{结\hspace{1em}束\hspace{1em}语}%
+    \addcontentsline{toc}{chapter}{结束语}%
+    \xiaosi%
+    \@afterheading}
+    {\par\vspace{2em}\par}
 \newenvironment{ack}{%
     \chapter*{致\hspace{1em}谢}%
     \addcontentsline{toc}{chapter}{致谢}%
@@ -486,7 +492,7 @@
   \optionas{Supervisor}
 \else
   \optionpaperclass{博士}
-  \optionpaperclassen{PhD}
+  \optionpaperclassen{Doctor} %学校下发模板为Doctor of XXX
   \optionas{Supervisor}
 \fi
 \newcommand{\checkparameter}
@@ -571,7 +577,7 @@
     Candidate:\ & {\textsf{\@enauthor}}\\
     \@optionas{}:\ & {\textsf{\@ensupervisor}}\\
     \ifx\@encosupervisor\@empty\else
-      Associate \@optionas{}:\ & {\textsf{\@encosupervisor}} \\
+	Associate \@optionas{}:\ & {\textsf{\@encosupervisor}} \\
     \fi
   \end{tabular}}
   \vfill\vfill\vfill\vfill
@@ -586,14 +592,12 @@ Defense Technology}\fi}\\
 ~\@endate~
   }
   \end{center}\vfill
-  
-\renewcommand{\baselinestretch}{1.5}%
-
-\ifisanon{~}\else{
   \cleardoublepage%
   \newpage
   \thispagestyle{empty}
+
   {\cusong \erhao \centering \ziju{12pt} 独创性声明 \par\vspace{2cm}}
+    \renewcommand{\baselinestretch}{1.5}%
   {\fangsong\xiaosi %
 本人声明所呈交的学位论文是我本人在导师指导下进行的研究工
 作及取得的研究成果。尽我所知，除文中特别加以标注和致谢的地方外，论文中
@@ -621,7 +625,6 @@ Defense Technology}\fi}\\
   \hfill 日期：\hfill\hfill 年\hfill 月 \hfill 日\par
 作者指导教师签名：\hrulefill\hrulefill\hrulefill\hrulefill\hrulefill
   \hfill 日期：\hfill\hfill 年\hfill 月 \hfill 日\par}
-}\fi
 
   \normalsize % normal, 正文开始
   \def\@tabular{\wuhao[1.25]\old@tabular} % 之后表格字体使用5号
