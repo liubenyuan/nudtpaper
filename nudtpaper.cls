@@ -357,14 +357,13 @@
 \setlength{\parskip}{0bp \@minus 1bp}
 \newcommand*{\ziju}[1]{\renewcommand{\CJKglue}{\hskip #1}}
 \newlength\biblabelwd
-\settowidth\biblabelwd{\widthof{首行}} % 参考文献最少缩进2字符
-%\settowidth\biblabelwd{\widthof{[999]}} % Maximum Ref Num = 999
+\settowidth\biblabelwd{\widthof{[999]}} % Maximum Ref Num = 999
 \renewenvironment{thebibliography}[1]{%
   \chapter*{\bibname}%
   \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
-  \begin{enumerate}[label={[\arabic{enumi}]},itemsep=-0.5ex,labelwidth=\biblabelwd,labelsep=*,leftmargin=0pt,itemindent=\biblabelwd,align=left]
-  \@openbib@code
-  \sloppy\frenchspacing
+  \begin{enumerate}[label={[\arabic{enumi}]},itemsep=0pt,parsep=0pt,labelindent=\CJK@twochars,labelwidth=\biblabelwd,leftmargin=0pt,itemindent=*,align=left]
+  \@openbib@code%
+  \sloppy\frenchspacing%
   \clubpenalty4000%
   \widowpenalty4000%
   \interlinepenalty4000%
