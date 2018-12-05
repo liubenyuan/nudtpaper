@@ -66,6 +66,7 @@
 \RequirePackage{tabularx}
 \RequirePackage{slashbox}
 \RequirePackage[neverdecrease]{paralist}
+\RequirePackage{enumitem}
 \RequirePackage{xcolor}
 \RequirePackage{amsmath,amssymb}
 \RequirePackage[Symbolsmallscale]{upgreek}
@@ -355,26 +356,22 @@
 }
 \setlength{\parskip}{0bp \@minus 1bp}
 \newcommand*{\ziju}[1]{\renewcommand{\CJKglue}{\hskip #1}}
+\newlength\biblabelwd
+\settowidth\biblabelwd{\widthof{首行}} % 参考文献最少缩进2字符
+%\settowidth\biblabelwd{\widthof{[999]}} % Maximum Ref Num = 999
 \renewenvironment{thebibliography}[1]{%
-   \chapter*{\bibname}%
-   \list{\@biblabel{\@arabic\c@enumiv}}%
-        {\renewcommand{\makelabel}[1]{##1\hfill}
-         \settowidth\labelwidth{1.1cm}
-         \setlength{\labelsep}{0.4em}
-         \setlength{\itemindent}{0pt}
-         \setlength{\leftmargin}{\labelwidth+\labelsep}
-         \addtolength{\itemsep}{-0.7em}
-         \usecounter{enumiv}%
-         \let\p@enumiv\@empty
-         \renewcommand\theenumiv{\@arabic\c@enumiv}}%
-    \sloppy\frenchspacing
-    \clubpenalty4000%
-    \widowpenalty4000%
-    \interlinepenalty4000%
-    \sfcode`\.\@m}
-   {\def\@noitemerr
-     {\@latex@warning{Empty `thebibliography' environment}}%
-    \endlist\frenchspacing}
+  \chapter*{\bibname}%
+  \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+  \begin{enumerate}[label={[\arabic{enumi}]},itemsep=-0.5ex,labelwidth=\biblabelwd,labelsep=*,leftmargin=0pt,itemindent=\biblabelwd,align=left]
+  \@openbib@code
+  \sloppy\frenchspacing
+  \clubpenalty4000%
+  \widowpenalty4000%
+  \interlinepenalty4000%
+  \sfcode`\.\@m}
+  {\def\@noitemerr
+    {\@latex@warning{Empty `thebibliography' environment}}%
+     \end{enumerate}\frenchspacing}
 \setlength{\floatsep}{12bp}
 \setlength{\intextsep}{12bp}
 \setlength{\textfloatsep}{12bp}
