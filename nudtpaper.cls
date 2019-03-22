@@ -86,7 +86,8 @@
 
 \newcommand{\installttf}{
     %%%% Windows Thesis Fonts
-    \setmainfont{Times New Roman PS Std}
+    %\setmainfont{Times New Roman PS Std}
+    \setmainfont{Times New Roman}
     \setsansfont{Arial}
     \setmonofont{Courier New}
     %%%% Using Office Family Fonts
@@ -102,7 +103,8 @@
 
 \newcommand{\installotf}{
     %%%% Windows Thesis Fonts
-    \setmainfont{Times New Roman PS Std}
+    %\setmainfont{Times New Roman PS Std}
+    \setmainfont{Times New Roman}
     \setsansfont{Arial}
     \setmonofont{Courier New}
     %%%% Using Adobe Family Fonts
@@ -118,7 +120,8 @@
 
 \newcommand{\installfz}{
     %%%% Windows Thesis Fonts
-    \setmainfont{Times New Roman PS Std}
+    %\setmainfont{Times New Roman PS Std}
+    \setmainfont{Times New Roman}
     \setsansfont{Arial}
     \setmonofont{Courier New}
     %%%% Using Founder Family Fonts
@@ -134,7 +137,7 @@
 
 \newcommand{\installfandol}{
     %%%% Windows Thesis Fonts
-    \setmainfont{Times New Roman PS Std}
+    \setmainfont{Times New Roman}
     \setsansfont{Arial}
     \setmonofont{Courier New}
     %%%% Using Fandol Family Fonts
