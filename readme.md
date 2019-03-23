@@ -4,7 +4,9 @@
 
 ## 1. Introduction
 
-`make cls` and checkout `nudtpaper.pdf`
+Use `nudtpaper.cls` directly and modify **your** `thesis.tex`. The contents in `makefile` may help you with the compiling procedure. Any third party packages or macros can be added in `mynudt.sty`.
+
+**About Fonts:** FZ fonts are best for printing (your final version) and in-screen display.
 
 ## 2. Contribute to NUDTpaper
 
