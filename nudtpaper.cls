@@ -5,28 +5,28 @@
 %% The original source files were:
 %%
 %% nudtpaper.dtx  (with options: `cls')
-%% 
+%%
 %% This is a generated file.
-%% 
+%%
 %% Copyright (C) 2018 by Liu Benyuan <liubenyuan@gmail.com>
-%% 
+%%
 %% This file may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3a
 %% of this license or (at your option) any later version.
 %% The latest version of this license is in:
-%% 
+%%
 %% http://www.latex-project.org/lppl.txt
-%% 
+%%
 %% and version 1.3a or later is part of all distributions of LaTeX
 %% version 2004/10/01 or later.
-%% 
+%%
 %% To produce the documentation run the original source files ending with `.dtx'
 %% through LaTeX.
-%% 
+%%
 %% Any Suggestions : LiuBenYuan <liubenyuan@gmail.com>
 %% Thanks Xue Ruini <xueruini@gmail.com> for the thuthesis class!
 %% Thanks sofoot for the original NUDT paper class!
-%% 
+%%
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{nudtpaper}
 [2017/06/15 v2.7 NUDT paper template]
@@ -46,6 +46,17 @@
 \DeclareOption{otf}{\isotftrue}
 \DeclareOption{fz}{\isfztrue}
 \DeclareOption{fandol}{\isfandoltrue}
+
+%%add biber option
+%% if biber is set, use biblatex to generate bibliography
+\newif\ifisbiber\isbiberfalse
+\DeclareOption{biber}{\isbibertrue}
+
+%%add resumebib option
+%% if resumebib is set, use biblatex to generate resume
+\newif\ifisresumebib\isresumebibfalse
+\DeclareOption{resumebib}{\isresumebibtrue}
+
 \ProcessOptions\relax
 \RequirePackage{ifthen,calc}
 \ifistwoside
@@ -77,7 +88,45 @@
 \RequirePackage[CJKchecksingle,no-math]{xeCJK}
 \RequirePackage{zhnumber}
 \RequirePackage{indentfirst}
+
+%code for dealing option: biber
+\ifisbiber
+\RequirePackage[backend=biber,style=gb7714-2015,gbalign=gb7714-2015]{biblatex}%
+\addbibresource[location=local]{ref/refs.bib}
+\setlength{\biblabelsep}{2mm}
+\newlength{\refindent}
+\setlength{\refindent}{24pt}
+\renewcommand{\itemcmd}{%
+\setlength{\lengthid}{0cm}%
+\setlength{\lengthlw}{\textwidth}%
+\addtolength{\lengthlw}{-\lengthid}%
+\addvspace{\bibitemsep}%恢复\bibitemsep的作用 %\parshape 2 0em \textwidth \lengthid \lengthlw
+\hangindent\lengthid%
+\hspace{\refindent}\mkgbnumlabel{\printfield{labelnumber}}%
+\hspace{\biblabelsep}}
+\ifisresumebib
+\defbibenvironment{resumebib}%修改对齐环境-调整缩进
+  {\list
+     {\printtext[labelnumberwidth]{%
+        \printfield{labelprefix}%
+        \printfield{labelnumber}}}
+{\setlength{\labelwidth}{\labelnumberwidth}%
+      \setlength{\labelsep}{\biblabelsep}%
+      \setlength{\leftmargin}{\bibhang}%
+      \addtolength{\leftmargin}{\labelnumberwidth}%
+      \setlength{\itemindent}{\bibitemindent}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}%
+      \renewcommand*{\makelabel}[1]{\hss##1}}
+  {\endlist}
+  {\item}
+\fi
+\else
 \RequirePackage[numbers,sort&compress,square]{natbib}
+\newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}} % 上标形式引用
+\fi
+
+
 \RequirePackage[colorlinks=true,linkcolor=blue,citecolor=red,pdfborder=0 1 1]{hyperref}
 \RequirePackage{datetime}
 \defaultfontfeatures{Mapping=tex-text}
@@ -198,7 +247,7 @@
 \thu@define@fontsize{xiaoliu}{6.5bp}
 \thu@define@fontsize{qihao}{5.5bp}
 \thu@define@fontsize{bahao}{5bp}
-\newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}} % 上标形式引用
+
 \newcommand{\china}{中华人民共和国}
 \def\nudtpaper{\textsc{Nudt}\textsc{Paper}}
 \newcommand{\pozhehao}{\kern0.2em\rule[0.8ex]{1.6em}{0.1ex}\kern0.2em}
@@ -582,7 +631,7 @@ Defense Technology}\fi}\\
 ~\@endate~
   }
   \end{center}\vfill
-  
+
 \renewcommand{\baselinestretch}{1.5}%
 
 \ifisanon{~}\else{
