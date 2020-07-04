@@ -5,28 +5,28 @@
 %% The original source files were:
 %%
 %% nudtpaper.dtx  (with options: `thesis')
-%% 
+%%
 %% This is a generated file.
-%% 
+%%
 %% Copyright (C) 2018 by Liu Benyuan <liubenyuan@gmail.com>
-%% 
+%%
 %% This file may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3a
 %% of this license or (at your option) any later version.
 %% The latest version of this license is in:
-%% 
+%%
 %% http://www.latex-project.org/lppl.txt
-%% 
+%%
 %% and version 1.3a or later is part of all distributions of LaTeX
 %% version 2004/10/01 or later.
-%% 
+%%
 %% To produce the documentation run the original source files ending with `.dtx'
 %% through LaTeX.
-%% 
+%%
 %% Any Suggestions : LiuBenYuan <liubenyuan@gmail.com>
 %% Thanks Xue Ruini <xueruini@gmail.com> for the thuthesis class!
 %% Thanks sofoot for the original NUDT paper class!
-%% 
+%%
 %1. 规范硕士导言
 % \documentclass[master,ttf]{nudtpaper}
 %2. 规范博士导言
@@ -41,7 +41,13 @@
 %4. 如果想生成盲评，传递anon即可，仍需修改个人成果部分
 % \documentclass[master,otf,anon]{nudtpaper}
 %
-\documentclass[master,otf]{nudtpaper}
+%5. 参考文献若用biblatex生成，则使用biber选项
+% \documentclass[master,biber]{nudtpaper}
+%
+%6. 简历中的论文和成果用biblatex参考文献方式生成，则使用resumebib选项
+% \documentclass[master,biber,resumebib]{nudtpaper}
+%
+\documentclass[doctor,twoside,biber,resumebib]{nudtpaper}
 \usepackage{mynudt}
 
 \classification{TP957}
@@ -81,7 +87,7 @@
 \listoffigures
 
 % 如果不是送审论文，则将true改为false即可
-\newif\ifreview\reviewtrue
+\newif\ifreview\reviewfalse
 
 \midmatter
 \input{data/abstract}
@@ -97,8 +103,12 @@
 \cleardoublepage
 \phantomsection
 \addcontentsline{toc}{chapter}{参考文献}
+\ifisbiber
+\printbibliography[heading=bibliography, title=参考文献]
+\else
 \bibliographystyle{bstutf8}
 \bibliography{ref/refs}
+\fi
 
 \input{data/resume}
 % 最后，需要的话还要生成附录，全文随之结束。

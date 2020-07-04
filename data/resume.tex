@@ -2,6 +2,34 @@
 \ifreview
 该论文作者在学期间取得的阶段性成果（学术论文等）已满足我校博士学位评阅相关要求。为避免阶段性成果信息对专家评价学位论文本身造成干扰，特将论文作者的阶段性成果信息隐去。
 \else
+
+\ifisresumebib
+
+	\begin{refsection}[ref/resume.bib]
+	\settoggle{bbx:gbtype}{false}%局部设置不输出文献类型和载体标识符
+	\settoggle{bbx:gbannote}{true}%局部设置输出注释信息
+	\setcounter{gbnamefmtcase}{1}%局部设置作者的格式为familyahead格式   
+	\nocite{ref-1-1-Yang,ref-2-1-杨轶,ref-3-1-杨轶,ref-4-1-Yang,ref-5-1-Wu,ref-6-1-贾泽,ref-7-1-伍晓明}
+	
+	\setlength{\biblabelsep}{12pt}
+	\printbibliography[env=resumebib,heading=subbibliography,title={发表的学术论文}] % 发表的和录用的合在一起
+
+	\end{refsection}
+
+
+	\begin{refsection}[ref/resume.bib]
+	\settoggle{bbx:gbtype}{false}%局部设置不输出文献类型和载体标识符
+	\settoggle{bbx:gbannote}{true}%局部设置输出注释信息
+	\setcounter{gbnamefmtcase}{1}%局部设置作者的格式为familyahead格式
+	\nocite{ref-8-1-任天令,ref-9-1-Ren}
+	
+	\setlength{\biblabelsep}{12pt}
+	\printbibliography[env=resumebib,heading=subbibliography,title={研究成果}]
+
+	\end{refsection}
+
+\else
+
   \section*{发表的学术论文} % 发表的和录用的合在一起
 
   \begin{enumerate}[label={[\arabic*]}]
@@ -32,5 +60,6 @@
   \item Ren T L, Yang Y, Zhu Y P, et al. Piezoelectric micro acoustic sensor
     based on ferroelectric materials: USA, No.11/215, 102. (美国发明专利申请号.)
   \end{enumerate}
+\fi
 \fi
 \end{resume}

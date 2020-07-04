@@ -280,10 +280,18 @@
 %<thesis>%4. 如果想生成盲评，传递anon即可，仍需修改个人成果部分
 %<thesis>% \documentclass[master,otf,anon]{nudtpaper}
 %<thesis>%
+%<thesis>%5. 参考文献若用biblatex生成，则使用biber选项
+%<thesis>% \documentclass[master,biber]{nudtpaper}
+%<thesis>%
+%<thesis>%6. 简历中的论文和成果用biblatex参考文献方式生成，则使用resumebib选项
+%<thesis>% \documentclass[master,biber,resumebib]{nudtpaper}
+%<thesis>%
+
+
 %    \end{macrocode}
 %    \begin{macrocode}
 %<*thesis>
-\documentclass[master,otf]{nudtpaper}
+\documentclass[doctor,twoside,biber,resumebib]{nudtpaper}
 \usepackage{mynudt}
 
 %</thesis>
@@ -463,8 +471,12 @@
 \cleardoublepage
 \phantomsection
 \addcontentsline{toc}{chapter}{参考文献}
+\ifisbiber
+\printbibliography[heading=bibliography, title=参考文献]
+\else
 \bibliographystyle{bstutf8}
 \bibliography{ref/refs}
+\fi
 
 \input{data/resume}
 %</thesis>
@@ -532,6 +544,17 @@
 \DeclareOption{otf}{\isotftrue}
 \DeclareOption{fz}{\isfztrue}
 \DeclareOption{fandol}{\isfandoltrue}
+
+%%add biber option
+%% if biber is set, use biblatex to generate bibliography
+\newif\ifisbiber\isbiberfalse
+\DeclareOption{biber}{\isbibertrue}
+
+%%add resumebib option
+%% if resumebib is set, use biblatex to generate resume
+\newif\ifisresumebib\isresumebibfalse
+\DeclareOption{resumebib}{\isresumebibtrue}
+
 \ProcessOptions\relax
 %    \end{macrocode}
 %
@@ -660,7 +683,42 @@
 % \changes{v2.3}{2013/12/27}{加入色彩版hyperref}
 % \changes{v2.5}{2015/05/11}{提示用户在最终打印版时去掉链接颜色}
 %    \begin{macrocode}
+%code for dealing option: biber
+\ifisbiber
+\RequirePackage[backend=biber,style=gb7714-2015,gbalign=gb7714-2015]{biblatex}%
+\addbibresource[location=local]{ref/refs.bib}
+\setlength{\biblabelsep}{2mm}
+\newlength{\refindent}
+\setlength{\refindent}{24pt}
+\renewcommand{\itemcmd}{%
+\setlength{\lengthid}{0cm}%
+\setlength{\lengthlw}{\textwidth}%
+\addtolength{\lengthlw}{-\lengthid}%
+\addvspace{\bibitemsep}%恢复\bibitemsep的作用 %\parshape 2 0em \textwidth \lengthid \lengthlw
+\hangindent\lengthid%
+\hspace{\refindent}\mkgbnumlabel{\printfield{labelnumber}}%
+\hspace{\biblabelsep}}
+\ifisresumebib
+\defbibenvironment{resumebib}%修改对齐环境-调整缩进
+  {\list
+     {\printtext[labelnumberwidth]{%
+        \printfield{labelprefix}%
+        \printfield{labelnumber}}}
+{\setlength{\labelwidth}{\labelnumberwidth}%
+      \setlength{\labelsep}{\biblabelsep}%
+      \setlength{\leftmargin}{\bibhang}%
+      \addtolength{\leftmargin}{\labelnumberwidth}%
+      \setlength{\itemindent}{\bibitemindent}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}%
+      \renewcommand*{\makelabel}[1]{\hss##1}}
+  {\endlist}
+  {\item}
+\fi
+\else
 \RequirePackage[numbers,sort&compress,square]{natbib}
+\newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}} % 上标形式引用
+\fi
 \RequirePackage[colorlinks=true,linkcolor=blue,citecolor=red,pdfborder=0 1 1]{hyperref}
 \RequirePackage{datetime}
 %\RequirePackage[pdfborder=0 0 1]{hyperref}
@@ -898,7 +956,6 @@
 %
 %    \begin{macrocode}
 %<*cls>
-\newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}} % 上标形式引用
 \newcommand{\china}{中华人民共和国}
 \def\nudtpaper{\textsc{Nudt}\textsc{Paper}}
 \newcommand{\pozhehao}{\kern0.2em\rule[0.8ex]{1.6em}{0.1ex}\kern0.2em}
