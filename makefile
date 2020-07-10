@@ -1,8 +1,7 @@
 pdf: thesis.tex 
 	xelatex thesis
 	# makeindex -s nomencl.ist -o thesis.nls thesis.nlo
-	bibtex thesis
-	bibtex thesis
+	biber thesis
 	xelatex thesis
 	xelatex thesis
 # cls: nudtpaper.dtx nudtpaper.ins

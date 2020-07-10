@@ -8,7 +8,7 @@
 %%
 %% This is a generated file.
 %%
-%% Copyright (C) 2018 by Liu Benyuan <liubenyuan@gmail.com>
+%% Copyright (C) 2020 by Liu Benyuan <liubenyuan@gmail.com>
 %%
 %% This file may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3a
@@ -29,7 +29,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{nudtpaper}
-[2017/06/15 v2.7 NUDT paper template]
+[2020/07/01 v2.8 NUDT paper template]
 \newif\ifismaster\ismastertrue
 \DeclareOption{master}{\ismastertrue}
 \DeclareOption{doctor}{\ismasterfalse}
@@ -46,17 +46,14 @@
 \DeclareOption{otf}{\isotftrue}
 \DeclareOption{fz}{\isfztrue}
 \DeclareOption{fandol}{\isfandoltrue}
-
-%%add biber option
-%% if biber is set, use biblatex to generate bibliography
+%add biber option
+%if biber is set, use biblatex to generate bibliography
 \newif\ifisbiber\isbiberfalse
 \DeclareOption{biber}{\isbibertrue}
-
-%%add resumebib option
-%% if resumebib is set, use biblatex to generate resume
+%add resumebib option
+%if resumebib is set, use biblatex to generate resume
 \newif\ifisresumebib\isresumebibfalse
 \DeclareOption{resumebib}{\isresumebibtrue}
-
 \ProcessOptions\relax
 \RequirePackage{ifthen,calc}
 \ifistwoside
@@ -88,12 +85,16 @@
 \RequirePackage[CJKchecksingle,no-math]{xeCJK}
 \RequirePackage{zhnumber}
 \RequirePackage{indentfirst}
-
-%code for dealing option: biber
+\RequirePackage{xunicode-addon}
+\newcommand{\fttilde}{\fontspec{FreeSerif}\selectfont}
 \ifisbiber
-\RequirePackage[backend=biber,style=gb7714-2015,gbalign=gb7714-2015]{biblatex}%
+\RequirePackage[backend=biber,style=gb7714-2015,gbalign=gb7714-2015,%
+gbnamefmt=lowercase,gbpub=false]{biblatex}%
 \addbibresource[location=local]{ref/refs.bib}
-\setlength{\biblabelsep}{2mm}
+\setlength{\bibitemsep}{0ex}
+\setlength{\bibnamesep}{0ex}
+\setlength{\bibinitsep}{0ex}
+\setlength{\biblabelsep}{6pt}
 \newlength{\refindent}
 \setlength{\refindent}{24pt}
 \renewcommand{\itemcmd}{%
@@ -104,6 +105,61 @@
 \hangindent\lengthid%
 \hspace{\refindent}\mkgbnumlabel{\printfield{labelnumber}}%
 \hspace{\biblabelsep}}
+\DefineBibliographyExtras{english}{\renewcommand*{\bibrangedash}{{\fttilde\textsim}}}%将页码间隔符替换会英文的短横线
+%比如：～$\sim$\symbol{"FF5E}\symbol{"223C}\symbol{"2053}\symbol{"02DC}\symbol{"02F7}
+%\textsim \textbacksim \texttildebelow \texttildelow \texttilde
+\renewbibmacro*{cite:dump}{%
+  \ifnumgreater{\value{cbx@tempcnta}}{0}%
+    {\ifnumgreater{\value{cbx@tempcnta}}{0}%1改为0，可以将压缩起始3个编号改为2个编号
+       {-}%\textendash
+       {\multicitedelim}%
+     \bibhyperref[\cbx@lastkey]{%
+       \ifdef\cbx@lastprefix%
+         {\printtext[labelprefix]{\cbx@lastprefix}}%
+         {}%
+       \printtext[labelnumber]{\cbx@lastnumber}}}%
+    {}%
+  \setcounter{cbx@tempcnta}{0}%
+  \global\undef\cbx@lastprefix}
+\DeclareDelimFormat{streditortypes}{\bibopenparen%
+  \edef\userfieldabcde{userd}%
+  \ifcurrentname{editor}{\edef\userfieldabcde{userc}}{}%
+  \ifcurrentname{bookauthor}{\edef\userfieldabcde{userb}}{}%
+  \ifcase\value{gbbiblocalcase}%
+    \iffieldequalstr{\userfieldabcde}{chinese}{\bibstring{\thefield{editortype}scn}}{}%
+    \iffieldequalstr{\userfieldabcde}{korean}{\bibstring{\thefield{editortype}skr}}{}%
+    \iffieldequalstr{\userfieldabcde}{japanese}{\bibstring{\thefield{editortype}sjp}}{}%
+    \iffieldequalstr{\userfieldabcde}{english}{\bibstring{\thefield{editortype}s}}{}%
+    \iffieldequalstr{\userfieldabcde}{french}{\bibstring{\thefield{editortype}s}}{}%
+    \iffieldequalstr{\userfieldabcde}{russian}{\bibstring{\thefield{editortype}s}}{}%
+  \or%
+  \bibstring{\thefield{editortype}scn}%
+  \or%
+  \bibstring{\thefield{editortype}s}%
+  \fi\bibcloseparen}
+\DeclareDelimFormat{streditortype}{\bibopenparen%
+  \edef\userfieldabcde{userd}%
+  \ifcurrentname{editor}{\edef\userfieldabcde{userc}}{}%
+  \ifcurrentname{bookauthor}{\edef\userfieldabcde{userb}}{}%
+  \ifcase\value{gbbiblocalcase}%
+    \iffieldequalstr{\userfieldabcde}{chinese}{\bibstring{\thefield{editortype}cn}}{}%
+    \iffieldequalstr{\userfieldabcde}{korean}{\bibstring{\thefield{editortype}kr}}{}%
+    \iffieldequalstr{\userfieldabcde}{japanese}{\bibstring{\thefield{editortype}jp}}{}%
+    \iffieldequalstr{\userfieldabcde}{english}{\bibstring{\thefield{editortype}}}{}%
+    \iffieldequalstr{\userfieldabcde}{french}{\bibstring{\thefield{editortype}}}{}%
+    \iffieldequalstr{\userfieldabcde}{russian}{\bibstring{\thefield{editortype}}}{}%
+  \or%
+  \bibstring{\thefield{editortype}cn}%
+  \or%
+  \bibstring{\thefield{editortype}}%
+  \fi\bibcloseparen}
+\renewbibmacro*{in:}{%
+ \iftoggle{bbx:gbpunctin}{\printtext{\textbf{//}\allowbreak}}%\addthinspace
+                         {\setunit{\adddot\addspace}%
+                         \iffieldequalstr{userd}{chinese}%
+                         {\printtext{\bibstring{incn}}}%
+                         {\printtext{\bibstring{in}}}%
+                         }}%\newunit\newblock\intitlepunct
 \ifisresumebib
 \defbibenvironment{resumebib}%修改对齐环境-调整缩进
   {\list
@@ -125,8 +181,6 @@
 \RequirePackage[numbers,sort&compress,square]{natbib}
 \newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}} % 上标形式引用
 \fi
-
-
 \RequirePackage[colorlinks=true,linkcolor=blue,citecolor=red,pdfborder=0 1 1]{hyperref}
 \RequirePackage{datetime}
 \defaultfontfeatures{Mapping=tex-text}
@@ -247,7 +301,6 @@
 \thu@define@fontsize{xiaoliu}{6.5bp}
 \thu@define@fontsize{qihao}{5.5bp}
 \thu@define@fontsize{bahao}{5bp}
-
 \newcommand{\china}{中华人民共和国}
 \def\nudtpaper{\textsc{Nudt}\textsc{Paper}}
 \newcommand{\pozhehao}{\kern0.2em\rule[0.8ex]{1.6em}{0.1ex}\kern0.2em}
@@ -633,8 +686,7 @@ Defense Technology}\fi}\\
   \end{center}\vfill
 
 \renewcommand{\baselinestretch}{1.5}%
-
-\ifisanon{~}\else{
+\ifisanon{~}\else{%
   \cleardoublepage%
   \newpage
   \thispagestyle{empty}

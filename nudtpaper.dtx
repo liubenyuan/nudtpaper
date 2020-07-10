@@ -16,9 +16,9 @@
 % \iffalse
 % <package>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
 % <package>\ProvidesPackage{nudtpaper}
-% <package>[2017/06/15 v2.7 By Liu Benyuan <liubenyuan@gmail.com>]
+% <package>[2020/07/01 v2.8 By Liu Benyuan <liubenyuan@gmail.com>]
 %<*driver>
-\ProvidesFile{nudtpaper.dtx}[2017/06/15 v2.7 NUDT]
+\ProvidesFile{nudtpaper.dtx}[2020/07/01 v2.8 NUDT]
 \documentclass[11pt]{ltxdoc}
 \usepackage{nudtx}
 \EnableCrossrefs
@@ -33,7 +33,7 @@
 % \def\thuthesis{\textsc{Thu}\-\textsc{Thesis}}
 % \def\nudtpaper{\textsc{Nudt}\-\textsc{Paper}}
 %
-% \CheckSum{1245}
+% \CheckSum{1467}
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -161,8 +161,8 @@
 % \label{sec:install}
 %
 % \subsection{下载}
-% \textsc{NUDTpaper} 主页：\url{http://nudtpaper.googlecode.com}。
-% 模板的更新信息发布在\href{http://bbs.ctex.org}{Ctex论坛}。
+% \textsc{NUDTpaper} 主页：\url{http://github.com/liubenyuan/nudtpaper}。
+% 模板的更新信息发布在\href{http://github.com/liubenyuan/nudtpaper/release}{Ctex论坛}。
 % \nudtpaper{}的开发版本同样可以在\textsc{gitorious}上获得。
 %
 % \subsection{模板的组成部分}
@@ -220,12 +220,22 @@
 % 写作的过程就是将你的论文的内容放到\verb|data|文件夹中，
 % 图片放到\verb|figures|文件夹中，用\textsc{jabref}修改\verb|thesis.bib|即可。}
 %
-% 当用户需要编译生成自己的PDF版论文时，需要依次输入：（注意了，如果不是使用nomencl，
-% 则无需使用第二个命令）
+% 当用户需要编译生成自己的PDF版论文时，需要依次输入如下命令（注意了，如果不是使用nomencl，
+% 则无需使用第二个命令）。
+%
+% 若使用biber，则命令为：
 % \begin{shell}
 % $ xelatex thesis
 % $ # makeindex -s nomencl.ist -o thesis.nls thesis.nlo
-% $ bibtex thesis
+% $ biber thesis
+% $ xelatex thesis
+% $ xelatex thesis
+% \end{shell}
+%
+% 若使用bibtex，则命令为：
+% \begin{shell}
+% $ xelatex thesis
+% $ # makeindex -s nomencl.ist -o thesis.nls thesis.nlo
 % $ bibtex thesis
 % $ xelatex thesis
 % $ xelatex thesis
@@ -286,8 +296,6 @@
 %<thesis>%6. 简历中的论文和成果用biblatex参考文献方式生成，则使用resumebib选项
 %<thesis>% \documentclass[master,biber,resumebib]{nudtpaper}
 %<thesis>%
-
-
 %    \end{macrocode}
 %    \begin{macrocode}
 %<*thesis>
@@ -312,6 +320,10 @@
 % 选项。不论何种选项，都需要安装宋体中宋(STZHONGSONG)字体(Windows自带)。
 %\item[anon]
 % 是否为盲评版本，如需盲评，请加上anon。
+%\item[biber]
+% 是否利用biblatex生成参考文献，若使用biblatex，则加上biber选项，若适用bibtex，则去除该选项。
+%\item[resumebib]
+% 是否利用biblatex生成简历中成果，若使用biblatex，则加上resumebib选项，否则去除该选项。
 %\end{description}
 %
 % 如果需要使用自己定义的命令、宏包，请放于\verb|mynudt.sty|中。
@@ -442,6 +454,9 @@
 \listoftables
 \listoffigures
 
+%<thesis>%如果不是送审论文，则将true改为false即可
+\newif\ifreview\reviewfalse
+
 \midmatter
 \input{data/abstract}
 \input{data/denotation}
@@ -472,7 +487,11 @@
 \phantomsection
 \addcontentsline{toc}{chapter}{参考文献}
 \ifisbiber
+{\hyphenpenalty=500 %
+\tolerance=9900 %
 \printbibliography[heading=bibliography, title=参考文献]
+
+}
 \else
 \bibliographystyle{bstutf8}
 \bibliography{ref/refs}
@@ -514,7 +533,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
 %<cls>\ProvidesClass{nudtpaper}
 %<cfg>\ProvidesFile{nudtpaper.cfg}
-%<cls|cfg>[2017/06/15 v2.7 NUDT paper template]
+%<cls|cfg>[2020/07/01 v2.8 NUDT paper template]
 %    \end{macrocode}
 %
 % \subsection{宏包配置}
@@ -525,7 +544,7 @@
 % 当前的宏包选项在之前已经介绍了，下面是实现步骤，就是几个\verb|if|。
 %\changes{v1.6}{2009/12/01}{添加单独的单双面控制}
 %\changes{v2.0}{2010/11/09}{添加盲评控制}
-%
+%\changes{v2.8}{2020/07/01}{添加文献生成选项、添加成果论文生成选项}
 %    \begin{macrocode}
 \newif\ifismaster\ismastertrue
 \DeclareOption{master}{\ismastertrue}
@@ -544,17 +563,14 @@
 \DeclareOption{otf}{\isotftrue}
 \DeclareOption{fz}{\isfztrue}
 \DeclareOption{fandol}{\isfandoltrue}
-
-%%add biber option
-%% if biber is set, use biblatex to generate bibliography
+%<cls>%add biber option
+%<cls>%if biber is set, use biblatex to generate bibliography
 \newif\ifisbiber\isbiberfalse
 \DeclareOption{biber}{\isbibertrue}
-
-%%add resumebib option
-%% if resumebib is set, use biblatex to generate resume
+%<cls>%add resumebib option
+%<cls>%if resumebib is set, use biblatex to generate resume
 \newif\ifisresumebib\isresumebibfalse
 \DeclareOption{resumebib}{\isresumebibtrue}
-
 \ProcessOptions\relax
 %    \end{macrocode}
 %
@@ -620,6 +636,7 @@
 % 引入\textsf{paralist}来达到比较好看的列表环境
 %    \begin{macrocode}
 \RequirePackage[neverdecrease]{paralist}
+\RequirePackage{enumitem}
 %    \end{macrocode}
 %
 % 文档中还需要一定的色彩控制和字体控制
@@ -667,11 +684,14 @@
 % \changes{v2.2}{2011/07/03}{移除CJKtextspace, CJKmathspace, CJKnumber选项}
 % \changes{v2.4}{2015/02/09}{移除CJKnumber选项，添加新的CJKnumb宏包。旧版本TexLive无需更改。}
 % \changes{v2.6}{2017/05/15}{移除CJKnumb宏包，统一使用zhnumber宏包。推荐使用2016以后的TexLive版本。}
+% \changes{v2.8}{2020/07/01}{增加xunicode-addon宏包，设置FreeSerif字体，用于显示文献表中的波浪号。}
 %
 %    \begin{macrocode}
 \RequirePackage[CJKchecksingle,no-math]{xeCJK}
 \RequirePackage{zhnumber}
 \RequirePackage{indentfirst}
+\RequirePackage{xunicode-addon}
+\newcommand{\fttilde}{\fontspec{FreeSerif}\selectfont}
 %    \end{macrocode}
 %
 % 另外一个关键部分是文献索引，包括书签以及参考文献的索引，记得\textsf{hyperref}配合
@@ -682,12 +702,17 @@
 % \changes{v2.2}{2011/07/17}{移除hyperref的CJKbookmarks旋向}
 % \changes{v2.3}{2013/12/27}{加入色彩版hyperref}
 % \changes{v2.5}{2015/05/11}{提示用户在最终打印版时去掉链接颜色}
+% \changes{v2.8}{2020/07/01}{增加基于biblatex生成文献的方法}
 %    \begin{macrocode}
 %code for dealing option: biber
 \ifisbiber
-\RequirePackage[backend=biber,style=gb7714-2015,gbalign=gb7714-2015]{biblatex}%
+\RequirePackage[backend=biber,style=gb7714-2015,gbalign=gb7714-2015,%
+gbnamefmt=lowercase,gbpub=false]{biblatex}%
 \addbibresource[location=local]{ref/refs.bib}
-\setlength{\biblabelsep}{2mm}
+\setlength{\bibitemsep}{0ex}
+\setlength{\bibnamesep}{0ex}
+\setlength{\bibinitsep}{0ex}
+\setlength{\biblabelsep}{6pt}
 \newlength{\refindent}
 \setlength{\refindent}{24pt}
 \renewcommand{\itemcmd}{%
@@ -698,6 +723,61 @@
 \hangindent\lengthid%
 \hspace{\refindent}\mkgbnumlabel{\printfield{labelnumber}}%
 \hspace{\biblabelsep}}
+\DefineBibliographyExtras{english}{\renewcommand*{\bibrangedash}{{\fttilde\textsim}}}%将页码间隔符替换会英文的短横线
+%<cls>%比如：～$\sim$\symbol{"FF5E}\symbol{"223C}\symbol{"2053}\symbol{"02DC}\symbol{"02F7}
+%<cls>%\textsim \textbacksim \texttildebelow \texttildelow \texttilde
+\renewbibmacro*{cite:dump}{%
+  \ifnumgreater{\value{cbx@tempcnta}}{0}%
+    {\ifnumgreater{\value{cbx@tempcnta}}{0}%1改为0，可以将压缩起始3个编号改为2个编号
+       {-}%\textendash
+       {\multicitedelim}%
+     \bibhyperref[\cbx@lastkey]{%
+       \ifdef\cbx@lastprefix%
+         {\printtext[labelprefix]{\cbx@lastprefix}}%
+         {}%
+       \printtext[labelnumber]{\cbx@lastnumber}}}%
+    {}%
+  \setcounter{cbx@tempcnta}{0}%
+  \global\undef\cbx@lastprefix}
+\DeclareDelimFormat{streditortypes}{\bibopenparen%
+  \edef\userfieldabcde{userd}%
+  \ifcurrentname{editor}{\edef\userfieldabcde{userc}}{}%
+  \ifcurrentname{bookauthor}{\edef\userfieldabcde{userb}}{}%
+  \ifcase\value{gbbiblocalcase}%
+    \iffieldequalstr{\userfieldabcde}{chinese}{\bibstring{\thefield{editortype}scn}}{}%
+    \iffieldequalstr{\userfieldabcde}{korean}{\bibstring{\thefield{editortype}skr}}{}%
+    \iffieldequalstr{\userfieldabcde}{japanese}{\bibstring{\thefield{editortype}sjp}}{}%
+    \iffieldequalstr{\userfieldabcde}{english}{\bibstring{\thefield{editortype}s}}{}%
+    \iffieldequalstr{\userfieldabcde}{french}{\bibstring{\thefield{editortype}s}}{}%
+    \iffieldequalstr{\userfieldabcde}{russian}{\bibstring{\thefield{editortype}s}}{}%
+  \or%
+  \bibstring{\thefield{editortype}scn}%
+  \or%
+  \bibstring{\thefield{editortype}s}%
+  \fi\bibcloseparen}
+\DeclareDelimFormat{streditortype}{\bibopenparen%
+  \edef\userfieldabcde{userd}%
+  \ifcurrentname{editor}{\edef\userfieldabcde{userc}}{}%
+  \ifcurrentname{bookauthor}{\edef\userfieldabcde{userb}}{}%
+  \ifcase\value{gbbiblocalcase}%
+    \iffieldequalstr{\userfieldabcde}{chinese}{\bibstring{\thefield{editortype}cn}}{}%
+    \iffieldequalstr{\userfieldabcde}{korean}{\bibstring{\thefield{editortype}kr}}{}%
+    \iffieldequalstr{\userfieldabcde}{japanese}{\bibstring{\thefield{editortype}jp}}{}%
+    \iffieldequalstr{\userfieldabcde}{english}{\bibstring{\thefield{editortype}}}{}%
+    \iffieldequalstr{\userfieldabcde}{french}{\bibstring{\thefield{editortype}}}{}%
+    \iffieldequalstr{\userfieldabcde}{russian}{\bibstring{\thefield{editortype}}}{}%
+  \or%
+  \bibstring{\thefield{editortype}cn}%
+  \or%
+  \bibstring{\thefield{editortype}}%
+  \fi\bibcloseparen}
+\renewbibmacro*{in:}{%
+ \iftoggle{bbx:gbpunctin}{\printtext{\textbf{//}\allowbreak}}%\addthinspace
+                         {\setunit{\adddot\addspace}%
+                         \iffieldequalstr{userd}{chinese}%
+                         {\printtext{\bibstring{incn}}}%
+                         {\printtext{\bibstring{in}}}%
+                         }}%\newunit\newblock\intitlepunct
 \ifisresumebib
 \defbibenvironment{resumebib}%修改对齐环境-调整缩进
   {\list
@@ -1387,26 +1467,21 @@
 %
 %    \begin{macrocode}
 %<*cls>
+\newlength\biblabelwd
+\settowidth\biblabelwd{\widthof{[999]}} % Maximum Ref Num = 999
 \renewenvironment{thebibliography}[1]{%
-   \chapter*{\bibname}%
-   \list{\@biblabel{\@arabic\c@enumiv}}%
-        {\renewcommand{\makelabel}[1]{##1\hfill}
-         \settowidth\labelwidth{1.1cm}
-         \setlength{\labelsep}{0.4em}
-         \setlength{\itemindent}{0pt}
-         \setlength{\leftmargin}{\labelwidth+\labelsep}
-         \addtolength{\itemsep}{-0.7em}
-         \usecounter{enumiv}%
-         \let\p@enumiv\@empty
-         \renewcommand\theenumiv{\@arabic\c@enumiv}}%
-    \sloppy\frenchspacing
-    \clubpenalty4000%
-    \widowpenalty4000%
-    \interlinepenalty4000%
-    \sfcode`\.\@m}
-   {\def\@noitemerr
-     {\@latex@warning{Empty `thebibliography' environment}}%
-    \endlist\frenchspacing}
+  \chapter*{\bibname}%
+  \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+  \begin{enumerate}[label={[\arabic{enumi}]},itemsep=0pt,parsep=0pt,labelindent=\CJK@twochars,labelwidth=\biblabelwd,leftmargin=0pt,itemindent=*,align=left]
+  \@openbib@code%
+  \sloppy\frenchspacing%
+  \clubpenalty4000%
+  \widowpenalty4000%
+  \interlinepenalty4000%
+  \sfcode`\.\@m}
+  {\def\@noitemerr
+    {\@latex@warning{Empty `thebibliography' environment}}%
+     \end{enumerate}\frenchspacing}
 %</cls>
 %    \end{macrocode}
 %
@@ -1755,7 +1830,7 @@ Defense Technology}\fi}\\
 ~\@endate~
   }
   \end{center}\vfill
-  \cleardoublepage%
+
 %</cls>
 %    \end{macrocode}
 %
@@ -1763,11 +1838,12 @@ Defense Technology}\fi}\\
 % \changes{v2.1}{2010/12/29}{表格字体定为五号}
 %    \begin{macrocode}
 %<*cls>
+\renewcommand{\baselinestretch}{1.5}%
+\ifisanon{~}\else{%
+  \cleardoublepage%
   \newpage
   \thispagestyle{empty}
-
   {\cusong \erhao \centering \ziju{12pt} 独创性声明 \par\vspace{2cm}}
-    \renewcommand{\baselinestretch}{1.5}%
   {\fangsong\xiaosi %
 本人声明所呈交的学位论文是我本人在导师指导下进行的研究工
 作及取得的研究成果。尽我所知，除文中特别加以标注和致谢的地方外，论文中
@@ -1795,6 +1871,7 @@ Defense Technology}\fi}\\
   \hfill 日期：\hfill\hfill 年\hfill 月 \hfill 日\par
 作者指导教师签名：\hrulefill\hrulefill\hrulefill\hrulefill\hrulefill
   \hfill 日期：\hfill\hfill 年\hfill 月 \hfill 日\par}
+}\fi
 
   \normalsize % normal, 正文开始
   \def\@tabular{\wuhao[1.25]\old@tabular} % 之后表格字体使用5号

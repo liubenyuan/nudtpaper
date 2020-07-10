@@ -26,7 +26,7 @@ Adobe中文字体有四种：
 条目之间插入过多的行距，在下面这种情况可能正好，若用户需要
 {\kai 正文行距}的列表环境，可以使用compactitem环境，记住这点很重要，不要再
 用那种自己修改\verb|itemsep|的傻傻的办法了。
-\begin{itemize}
+\begin{compactitem}
 \item[初号] {\song\chuhao 陈赓大将}
 \item[小初] {\song\xiaochu 陈赓大将}
 \item[一号] {\song\yihao 陈赓大将}
@@ -39,7 +39,7 @@ Adobe中文字体有四种：
 \item[小四] {\song\xiaosi 陈赓大将}
 \item[五号] {\song\wuhao 陈赓大将}
 \item[小五] {\song\xiaowu 陈赓大将}
-\end{itemize}
+\end{compactitem}
 
 \section{表格明细}
 \label{sec:figure}
@@ -108,16 +108,16 @@ DVD & RS(208,192,17)码、RS(182,172,11)码 \\
   \centering
   \caption{复杂表格示例 1}
   \label{tab:tabexamp1}
-  \begin{minipage}[t]{0.8\textwidth} 
+  \begin{minipage}[t]{0.8\textwidth}
     \begin{tabularx}{\linewidth}{|l|X|X|X|X|}
       \hline
       \multirow{2}*{\backslashbox{x}{y}}  & \multicolumn{2}{c|}{First Half} & \multicolumn{2}{c|}{Second Half}\\
       \cline{2-5}
-      & 1st Qtr &2nd Qtr&3rd Qtr&4th Qtr \\ 
+      & 1st Qtr &2nd Qtr&3rd Qtr&4th Qtr \\
       \hline
       \multirow{2}*{East$^{*}$} &   20.4&   27.4&   90&     20.4 \\
-       &   30.6 &   38.6 &   34.6 &  31.6 \\ 
-      West$^{**}$ &   30.6 &   38.6 &   34.6 &  31.6 \\ 
+       &   30.6 &   38.6 &   34.6 &  31.6 \\
+      West$^{**}$ &   30.6 &   38.6 &   34.6 &  31.6 \\
       \hline
     \end{tabularx}\\[2pt]
     \footnotesize
@@ -136,7 +136,7 @@ DVD & RS(208,192,17)码、RS(182,172,11)码 \\
 上面那个表格就够用啦。
 
 浮动体的并排放置一般有两种情况：1）二者没有关系，为两个独立的浮动体；2）二者隶属
-于同一个浮动体。对表格来说并排表格既可以像表~\ref{tab:parallel1}、表~\ref{tab:parallel2} 
+于同一个浮动体。对表格来说并排表格既可以像表~\ref{tab:parallel1}、表~\ref{tab:parallel2}
 使用小页环境，也可以如表~\ref{tab:subtable}使用子表格来做。
 图与表同出一源，后面我们将讲解子图(subfloat)的例子。
 \begin{table}[htb]
@@ -198,7 +198,7 @@ DVD & RS(208,192,17)码、RS(182,172,11)码 \\
 \multicolumn{7}{c}{续表~\thetable\hskip1em 实验数据}\\
 
 \toprule[1.5pt]
- 测试程序 & \multicolumn{1}{c}{正常运行} & \multicolumn{1}{c}{同步} 
+ 测试程序 & \multicolumn{1}{c}{正常运行} & \multicolumn{1}{c}{同步}
 & \multicolumn{1}{c}{检查点}   & \multicolumn{1}{c}{卷回恢复}
 & \multicolumn{1}{c}{进程迁移} & \multicolumn{1}{c}{检查点} 	\\
 & \multicolumn{1}{c}{时间 (s)} & \multicolumn{1}{c}{时间 (s)}
@@ -264,7 +264,7 @@ jPicEdt 等等。本人强烈推荐\textsf{Ipe}。
 \end{figure}
 
 若子图共用一个计数器，
-那么请看图~\ref{fig:big1}，它包含两个小图，分别是图~\ref{fig:subfig1} 
+那么请看图~\ref{fig:big1}，它包含两个小图，分别是图~\ref{fig:subfig1}
 和图~\ref{fig:subfig2}。这里推荐使用\verb|\subfloat|，{\bf 不要再用}
 \verb|\subfigure|和\verb|\subtable|。
 \begin{figure}[htb]
@@ -328,16 +328,16 @@ $p(\mathbf{x})$为先验；分母$p(\mathbf{x})$ 为归一化因子，这是
 \begin{equation}
 \label{equ:chap1:bayes}
 p(y|\mathbf{x}) = \frac{p(\mathbf{x},y)}{p(\mathbf{x})}=
-\frac{p(\mathbf{x}|y)p(y)}{p(\mathbf{x})} 
+\frac{p(\mathbf{x}|y)p(y)}{p(\mathbf{x})}
 \end{equation}
 
 论文里面公式越多，\TeX{} 就越 happy。再看一个 \textsf{amsmath} 的例子：
-\newcommand{\envert}[1]{\left\lvert#1\right\rvert} 
+\newcommand{\envert}[1]{\left\lvert#1\right\rvert}
 \begin{equation}\label{detK2}
 \det\mathbf{K}(t=1,t_1,\dots,t_n)=\sum_{I\in\mathbf{n}}(-1)^{\envert{I}}
 \prod_{i\in I}t_i\prod_{j\in I}(D_j+\lambda_jt_j)\det\mathbf{A}
 ^{(\lambda)}(\overline{I}|\overline{I})=0.
-\end{equation} 
+\end{equation}
 
 大家在写公式的时候一定要好好看\textsf{amsmath}的文档，并参考模板中的用法：
 \begin{multline*}%\tag{[b]} % 这个出现在索引中的
@@ -433,22 +433,30 @@ $\beta_a=\lnot \left(\left[s_1\lor s_2\lor \cdots\lor s_m\right]^T\right)$，而
 \section{参考文献}
 \label{sec:bib}
 当然参考文献可以直接写 bibitem，虽然费点功夫，但是好控制，各种格式可以自己随意改
-写，在nudtpaper里面，建议使用JabRef编辑和管理文献，再结合\verb|bstutf8.bst|，
+写，在nudtpaper里面，建议使用JabRef编辑和管理文献，再结合指定的样式，
 对中文的支持非常不错，格式也很规范。
 
-本模板推荐使用 BIB\TeX，样式文件为 bstutf8.bst，符合学校的参考文献格式（如专利
+本模板推荐使用 biblatex，即使用biber编译文献数据，文献样式基于gb7714-2015样式针对科大要求专门定制。上标标签的引用命令可使用cite、upcite，行内标签的引用命令可使用parencite、inlinecite 等。例如：见文献
+\cite{ref-1-1-周融,ref-2-2-夏鲁惠,ref-3-3-Heider,ref-4-3-刘国钧,ref-5-5-Gill}，就是上标的例子。
+见文献\parencite{ref-6-6-李大伦,ref-7-7-French,ref-8-8-伍蠡甫,ref-9-9-Spivak,ref-10-10-Almarza}就是行内非上标的例子。
+
+本模板也可以使用 BIB\TeX，只要去掉文档类中biber选项即可，样式文件为 bstutf8.bst，符合学校的参考文献格式（如专利
 等引用未加详细测试）。看看这个例子，关于书的\upcite{tex, companion}，
 还有这些\upcite{Krasnogor2004e, clzs, zjsw}，关于杂志的\upcite{ELIDRISSI94,
   MELLINGER96, SHELL02}，硕士论文\upcite{zhubajie, metamori2004}，博士论文
 \upcite{shaheshang, FistSystem01}，标准文件\upcite{IEEE-1363}，会议论文\upcite{DPMG,kocher99}，%
-技术报告\upcite{NPB2}。中文参考文献\upcite{cnarticle}\textsf{特别注意}，需要在\verb|bibitem|中
+技术报告\upcite{NPB2}。
+
+使用bibtex时要特别注意：
+
+（1）中文参考文献\upcite{cnarticle}，需要在bib文件对应文献条目中
 增加\verb|language|域并设为\verb|zh|，英文此项可不填，之后由\verb|bstutf8|统一处理
 (具体就是决定一些文献在中英文不同环境下的显示格式，如等、etc)。
 若使用\verb|JabRef|，则你可按下面步骤来设置：
 选择\textsf{Options}$\rightarrow$\textsf{Set Up General Fields}，
 在\verb|General:|后加入\verb|language|就可以了。
 
-有时候不想要上标，那么可以这样 \cite{shaheshang}，这个非常重要。
+（2）上标形式的命令为upcite，而行内非上标形式命令式cite，注意与使用biber时的用法进行区分。
 
 \section{代码高亮}
 有些时候我们需要在论文中引入一段代码，用来衬托正文的内容，或者体现关键思路的实现。
@@ -482,11 +490,11 @@ void sort(int arr[], int beg, int end)
 // "Hello World!" on standard output
 
 public class HelloWorld {
- 
+
    public static void main(String[] args) {
       System.out.println("Hello World!");
    }
-      
+
 }   // end of class HelloWorld
 \end{lstlisting}
 
@@ -515,7 +523,7 @@ public class HelloWorld {
 
 \section{符号列表}
 
-{\hei 前面的话：}{\kai\color{blue} 
+{\hei 前面的话：}{\kai\color{blue}
 2.2版本后默认使用nomencl环境，如果你还是希望使用传统的\verb|definition.tex|，那么只需注释掉
 顶层文件中的nomenclature即可。}
 
@@ -603,7 +611,7 @@ R是Roman什么的，只要统一就好，只需记住，组间排列是按字�
 \section{中文习惯}
 \label{sec:chinese}
 
-对于itermize过大的行间距，用户可以使用compactitem环境来替代，但是模板中不进行默认替代，
+对于itemize过大的行间距，用户可以使用compactitem环境来替代，但是模板中不进行默认替代，
 因为只有用户真正发现列表不好看才会找到这里，而且在示例文件中，
 陈赓大将那个列表环境如果压缩了行距会很不好看。谢谢ZhangLei的建议！
 
