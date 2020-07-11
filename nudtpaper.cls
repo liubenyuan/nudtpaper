@@ -5,28 +5,28 @@
 %% The original source files were:
 %%
 %% nudtpaper.dtx  (with options: `cls')
-%%
+%% 
 %% This is a generated file.
-%%
+%% 
 %% Copyright (C) 2020 by Liu Benyuan <liubenyuan@gmail.com>
-%%
+%% 
 %% This file may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3a
 %% of this license or (at your option) any later version.
 %% The latest version of this license is in:
-%%
+%% 
 %% http://www.latex-project.org/lppl.txt
-%%
+%% 
 %% and version 1.3a or later is part of all distributions of LaTeX
 %% version 2004/10/01 or later.
-%%
+%% 
 %% To produce the documentation run the original source files ending with `.dtx'
 %% through LaTeX.
-%%
+%% 
 %% Any Suggestions : LiuBenYuan <liubenyuan@gmail.com>
 %% Thanks Xue Ruini <xueruini@gmail.com> for the thuthesis class!
 %% Thanks sofoot for the original NUDT paper class!
-%%
+%% 
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{nudtpaper}
 [2020/07/01 v2.8 NUDT paper template]
@@ -91,7 +91,7 @@
 \RequirePackage[backend=biber,style=gb7714-2015,gbalign=gb7714-2015,%
 gbnamefmt=lowercase,gbpub=false]{biblatex}%
 \addbibresource[location=local]{ref/refs.bib}
-\setlength{\bibitemsep}{0ex}
+\setlength{\bibitemsep}{1pt}
 \setlength{\bibnamesep}{0ex}
 \setlength{\bibinitsep}{0ex}
 \setlength{\biblabelsep}{6pt}
@@ -179,7 +179,11 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
 \fi
 \else
 \RequirePackage[numbers,sort&compress,square]{natbib}
-\newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}} % 上标形式引用
+\let\newcite=\cite
+\let\parencite=\newcite
+\let\inlinecite=\newcite
+\newcommand{\upcite}[1]{\textsuperscript{\newcite{#1}}} % 上标形式引用
+\renewcommand{\cite}[1]{\textsuperscript{\newcite{#1}}} % 上标形式引用
 \fi
 \RequirePackage[colorlinks=true,linkcolor=blue,citecolor=red,pdfborder=0 1 1]{hyperref}
 \RequirePackage{datetime}
