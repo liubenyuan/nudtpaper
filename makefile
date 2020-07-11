@@ -1,9 +1,16 @@
-pdf: thesis.tex 
+pdfbiber: thesis.tex data/*.tex
 	xelatex thesis
-	# makeindex -s nomencl.ist -o thesis.nls thesis.nlo
 	biber thesis
 	xelatex thesis
 	xelatex thesis
+
+pdfbibtex: thesis.tex data/*.tex
+	xelatex thesis
+	bibtex thesis
+	bibtex thesis
+	xelatex thesis
+	xelatex thesis
+
 # cls: nudtpaper.dtx nudtpaper.ins
 # 	xelatex nudtpaper.ins
 # 	xelatex nudtpaper.dtx
@@ -13,4 +20,4 @@ pdf: thesis.tex
 # 	xelatex nudtpaper.dtx
 
 clean:
-	rm -v *.aux *.log *.toc *.ind *.gls *.glo *.idx *.ilg *.out *.bbl *.thm *.blg *.lot *.lof *.pdf *.nls *.nlo
+	rm -fv *.aux *.log *.toc *.ind *.gls *.glo *.idx *.ilg *.out *.bbl *.thm *.blg *.lot *.lof *.pdf *.nls *.nlo *.bcf *.xml
