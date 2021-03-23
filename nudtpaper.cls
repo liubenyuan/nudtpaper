@@ -90,7 +90,6 @@
 \ifisbiber
 \RequirePackage[backend=biber,style=gb7714-2015,gbalign=gb7714-2015,%
 gbnamefmt=lowercase,gbpub=false]{biblatex}%
-\addbibresource[location=local]{ref/refs.bib}
 \setlength{\bibitemsep}{1pt}
 \setlength{\bibnamesep}{0ex}
 \setlength{\bibinitsep}{0ex}
