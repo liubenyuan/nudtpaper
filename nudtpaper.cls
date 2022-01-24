@@ -86,6 +86,7 @@
 \RequirePackage{zhnumber}
 \RequirePackage{indentfirst}
 \RequirePackage{xunicode-addon}
+\RequirePackage{notoccite}
 \newcommand{\fttilde}{\fontspec{FreeSerif}\selectfont}
 \ifisbiber
 \RequirePackage[backend=biber,style=gb7714-2015,gbalign=gb7714-2015,%
