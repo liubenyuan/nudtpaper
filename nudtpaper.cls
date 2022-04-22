@@ -37,6 +37,8 @@
 \DeclareOption{anon}{\isanontrue}
 \newif\ifistwoside\istwosidefalse
 \DeclareOption{twoside}{\istwosidetrue}
+\newif\ifisprof\isproffalse
+\DeclareOption{prof}{\isproftrue}
 \DeclareOption*{\PackageWarning{nudtpaper}{Unknown Option '\CurrentOption'}}
 \newif\ifisttf\isttffalse
 \newif\ifisotf\isotffalse
@@ -333,7 +335,7 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
     \rule{\linewidth}{1.5pt}}%
   \fi}
 \renewpagestyle{plain}{
-\sethead{}{\raisebox{.65\baselineskip}{\songti \wuhao \ifisanon{~}\else{国防科技大学研究生院\@optionpaperclass{}学位论文}\fi}}{}%
+\sethead{}{\raisebox{.65\baselineskip}{\songti \wuhao \ifisanon{~}\else{国防科技大学研究生院{\ifisprof{专业学位}\else{}\fi}\@optionpaperclass{}学位论文}\fi}}{}%
 \setfoot{}{{\songti \wuhao 第~\thepage~页}}{}%
 \headrule%
 \footrule%
@@ -623,7 +625,7 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
   }
   \par
   \vspace*{2.5cm} %插入空白
-  {\heiti\sanhao \@papertype{}\@optionpaperclass{}学位论文}\\
+  {\heiti\sanhao \ifisprof{专业学位}\else\@papertype{}\fi\@optionpaperclass{}学位论文}\\
   \vspace{12bp}
   {\cusong\erhao[1.25] \@title \par}%
   \vspace{45bp} %从WORD中得来
@@ -636,10 +638,18 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
       \fi
         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@author}\hfil{}} & \\[3.2ex]
         \cline{2-2}
+        \ifisprof
+        \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{专\hfill{}业\hfill{}学\hfill{}位\hfill{}类\hfill{}别}} &
+        \else
         \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{学\hfill{}科\hfill{}专\hfill{}业}} &
+        \fi
         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@subject}\hfil{}} & \\[3.2ex]
         \cline{2-2}
+        \ifisprof
+        \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{专\hfill{}业\hfill{}学\hfill{}位\hfill{}领\hfill{}域}} &
+        \else
         \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{研\hfill{}究\hfill{}方\hfill{}向}} &
+        \fi
         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@researchfield}\hfil{}} & \\[3.2ex]
         \cline{2-2}
         \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{指\hfill{}导\hfill{}教\hfill{}师}} &
@@ -678,9 +688,9 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
   \end{tabular}}
   \vfill\vfill\vfill\vfill
   {\sanhao[1.5]
-A dissertation\\
+A \ifisprof{thesis}\else{dissertation} \fi \\
 Submitted in partial fulfillment of the requirements\\
-for the degree of \textsf{\@optionpaperclassen{} of \@enpapertype}\\
+for the \ifisprof{professional }\else{}\fi degree of \textsf{\@optionpaperclassen{} of \@enpapertype}\\
 in \textsf{\@ensubject}\\
 \makebox[\textwidth]{\ifisanon{~}\else{Graduate School of National University of %
 Defense Technology}\fi}\\
