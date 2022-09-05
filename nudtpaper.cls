@@ -5,28 +5,28 @@
 %% The original source files were:
 %%
 %% nudtpaper.dtx  (with options: `cls')
-%% 
+%%
 %% This is a generated file.
-%% 
+%%
 %% Copyright (C) 2020 by Liu Benyuan <liubenyuan@gmail.com>
-%% 
+%%
 %% This file may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3a
 %% of this license or (at your option) any later version.
 %% The latest version of this license is in:
-%% 
+%%
 %% http://www.latex-project.org/lppl.txt
-%% 
+%%
 %% and version 1.3a or later is part of all distributions of LaTeX
 %% version 2004/10/01 or later.
-%% 
+%%
 %% To produce the documentation run the original source files ending with `.dtx'
 %% through LaTeX.
-%% 
+%%
 %% Any Suggestions : LiuBenYuan <liubenyuan@gmail.com>
 %% Thanks Xue Ruini <xueruini@gmail.com> for the thuthesis class!
 %% Thanks sofoot for the original NUDT paper class!
-%% 
+%%
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{nudtpaper}
 [2020/07/01 v2.8 NUDT paper template]
@@ -110,19 +110,8 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
 \DefineBibliographyExtras{english}{\renewcommand*{\bibrangedash}{{\fttilde\textsim}}}%将页码间隔符替换会英文的短横线
 %比如：～$\sim$\symbol{"FF5E}\symbol{"223C}\symbol{"2053}\symbol{"02DC}\symbol{"02F7}
 %\textsim \textbacksim \texttildebelow \texttildelow \texttilde
-\renewbibmacro*{cite:dump}{%
-  \ifnumgreater{\value{cbx@tempcnta}}{0}%
-    {\ifnumgreater{\value{cbx@tempcnta}}{0}%1改为0，可以将压缩起始3个编号改为2个编号
-       {-}%\textendash
-       {\multicitedelim}%
-     \bibhyperref[\cbx@lastkey]{%
-       \ifdef\cbx@lastprefix%
-         {\printtext[labelprefix]{\cbx@lastprefix}}%
-         {}%
-       \printtext[labelnumber]{\cbx@lastnumber}}}%
-    {}%
-  \setcounter{cbx@tempcnta}{0}%
-  \global\undef\cbx@lastprefix}
+\defbibheading{subbibliography}[\bibname]{%
+\section*{#1}}
 \DeclareDelimFormat{streditortypes}{\bibopenparen%
   \edef\userfieldabcde{userd}%
   \ifcurrentname{editor}{\edef\userfieldabcde{userc}}{}%
