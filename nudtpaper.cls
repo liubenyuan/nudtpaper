@@ -579,7 +579,7 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
   \optionas{Supervisor}
 \else
   \optionpaperclass{博士}
-  \optionpaperclassen{PhD}
+  \optionpaperclassen{Ph.D}
   \optionas{Supervisor}
 \fi
 \newcommand{\checkparameter}
