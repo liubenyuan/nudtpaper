@@ -407,9 +407,9 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
 \newcommand\cabstractname{摘\hspace{1em}要}
 \newcommand\eabstractname{ABSTRACT}
 \newcommand\ckeywordsname{关键词}
-\newcommand\ckeywords[1]{{\hei\xiaosi \ckeywordsname: #1}}
+\newcommand\ckeywords[1]{{\hei\xiaosi \ckeywordsname：#1}}
 \newcommand\ekeywordsname{Key Words}
-\newcommand\ekeywords[1]{\textbf{\textsf{\xiaosi \ekeywordsname: #1}}}
+\newcommand\ekeywords[1]{\textsf{\xiaosi \ekeywordsname：#1}}
 \newenvironment{cabstract}{%
     \chapter{\cabstractname}
     \xiaosi
@@ -579,7 +579,7 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
   \optionas{Supervisor}
 \else
   \optionpaperclass{博士}
-  \optionpaperclassen{PhD}
+  \optionpaperclassen{Ph.D}
   \optionas{Supervisor}
 \fi
 \newcommand{\checkparameter}
