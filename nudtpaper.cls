@@ -184,7 +184,8 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
 
 \newcommand{\installttf}{
     %%%% Windows Thesis Fonts
-    \setmainfont{Times New Roman PS Std}
+    %\setmainfont{Times New Roman PS Std}
+    \setmainfont{Times New Roman}
     \setsansfont{Arial}
     \setmonofont{Courier New}
     %%%% Using Office Family Fonts
@@ -200,7 +201,8 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
 
 \newcommand{\installotf}{
     %%%% Windows Thesis Fonts
-    \setmainfont{Times New Roman PS Std}
+    %\setmainfont{Times New Roman PS Std}
+    \setmainfont{Times New Roman}
     \setsansfont{Arial}
     \setmonofont{Courier New}
     %%%% Using Adobe Family Fonts
@@ -216,7 +218,8 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
 
 \newcommand{\installfz}{
     %%%% Windows Thesis Fonts
-    \setmainfont{Times New Roman PS Std}
+    %\setmainfont{Times New Roman PS Std}
+    \setmainfont{Times New Roman}
     \setsansfont{Arial}
     \setmonofont{Courier New}
     %%%% Using Founder Family Fonts
@@ -232,7 +235,7 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
 
 \newcommand{\installfandol}{
     %%%% Windows Thesis Fonts
-    \setmainfont{Times New Roman PS Std}
+    \setmainfont{Times New Roman}
     \setsansfont{Arial}
     \setmonofont{Courier New}
     %%%% Using Fandol Family Fonts
