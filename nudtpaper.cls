@@ -33,6 +33,13 @@
 \newif\ifismaster\ismastertrue
 \DeclareOption{master}{\ismastertrue}
 \DeclareOption{doctor}{\ismasterfalse}
+\newif\ifisgraduate\isgraduatefalse
+\DeclareOption{graduate}{\isgraduatetrue}
+\newif\ifisspline\issplinefalse
+\DeclareOption{spline}{\issplinetrue}
+\newif\ifisblind\isblindfalse
+\DeclareOption{blind}{\isblindtrue}
+
 \newif\ifisanon\isanonfalse
 \DeclareOption{anon}{\isanontrue}
 \newif\ifistwoside\istwosidefalse
@@ -84,15 +91,21 @@
 \RequirePackage{bm}
 \RequirePackage[T1]{fontenc}
 \RequirePackage[amsmath,thmmarks,hyperref]{ntheorem}
-\RequirePackage[CJKchecksingle,no-math]{xeCJK}
+\RequirePackage[CJKchecksingle,no-math,AutoFakeBold]{xeCJK}%,AutoFakeBold=true
 \RequirePackage{zhnumber}
 \RequirePackage{indentfirst}
 \RequirePackage{xunicode-addon}
 \RequirePackage{notoccite}
 \newcommand{\fttilde}{\fontspec{FreeSerif}\selectfont}
+\newfontfamily{\timesWinfont}{Times New Roman}
+\newcounter{numitemval}
+\newcounter{numitemslt} %selected
 \ifisbiber
 \RequirePackage[backend=biber,style=gb7714-2015,gbalign=gb7714-2015,%
-gbnamefmt=lowercase,gbpub=false]{biblatex}%
+gbnamefmt=lowercase,gbpub=false,url=false,doi=false]{biblatex}%,backref=true
+\DeclareDelimFormat[bib,biblist]{titletypedelim}{\iffieldequalstr{userd}{chinese}{}{\space}}
+\renewbibmacro{addendum+pubstate}{} %去掉放在addendum中的信息
+\renewcommand{\bibfont}{\timesWinfont} %当Times New Roman PS Std缺字符时可以更换参考文献的英文字体
 \setlength{\bibitemsep}{1pt}
 \setlength{\bibnamesep}{0ex}
 \setlength{\bibinitsep}{0ex}
@@ -107,8 +120,8 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
 \hangindent\lengthid%
 \hspace{\refindent}\mkgbnumlabel{\printfield{labelnumber}}%
 \hspace{\biblabelsep}}
-\DefineBibliographyExtras{english}{\renewcommand*{\bibrangedash}{{\fttilde\textsim}}}%将页码间隔符替换会英文的短横线
-%比如：～$\sim$\symbol{"FF5E}\symbol{"223C}\symbol{"2053}\symbol{"02DC}\symbol{"02F7}
+\DefineBibliographyExtras{english}{\renewcommand*{\bibrangedash}{\ifcitation{-}{\fttilde\textsim}}}%将页码间隔符替换会英文的短横线
+%比如：～$\sim$\symbol{"FF5E}\symbol{"223C}\symbol{"2053}\symbol{"02DC}\symbol{"02F7}\textendash
 %\textsim \textbacksim \texttildebelow \texttildelow \texttilde
 \defbibheading{subbibliography}[\bibname]{%
 \section*{#1}}
@@ -151,23 +164,6 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
                          {\printtext{\bibstring{incn}}}%
                          {\printtext{\bibstring{in}}}%
                          }}%\newunit\newblock\intitlepunct
-\ifisresumebib
-\defbibenvironment{resumebib}%修改对齐环境-调整缩进
-  {\list
-     {\printtext[labelnumberwidth]{%
-        \printfield{labelprefix}%
-        \printfield{labelnumber}}}
-{\setlength{\labelwidth}{\labelnumberwidth}%
-      \setlength{\labelsep}{\biblabelsep}%
-      \setlength{\leftmargin}{\bibhang}%
-      \addtolength{\leftmargin}{\labelnumberwidth}%
-      \setlength{\itemindent}{\bibitemindent}%
-      \setlength{\itemsep}{\bibitemsep}%
-      \setlength{\parsep}{\bibparsep}}%
-      \renewcommand*{\makelabel}[1]{\hss##1}}
-  {\endlist}
-  {\item}
-\fi
 \else
 \RequirePackage[numbers,sort&compress,square]{natbib}
 \let\newcite=\cite
@@ -176,11 +172,14 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
 \newcommand{\upcite}[1]{\textsuperscript{\newcite{#1}}} % 上标形式引用
 \renewcommand{\cite}[1]{\textsuperscript{\newcite{#1}}} % 上标形式引用
 \fi
-\RequirePackage[colorlinks=true,linkcolor=blue,citecolor=red,pdfborder=0 1 1]{hyperref}
+\RequirePackage[colorlinks=true,linkcolor=blue,citecolor=red,
+bookmarksnumbered=true,
+pdfborder=0 1 1]{hyperref}
 \RequirePackage{datetime}
 \defaultfontfeatures{Mapping=tex-text}
 \xeCJKsetcharclass{"0}{"2E7F}{0}
 \xeCJKsetcharclass{"2E80}{"FFFF}{1}
+\RequirePackage{pdfpages}
 
 \newcommand{\installttf}{
     %%%% Windows Thesis Fonts
@@ -204,7 +203,7 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
     \setsansfont{Arial}
     \setmonofont{Courier New}
     %%%% Using Adobe Family Fonts
-    \setCJKmainfont[BoldFont={STZhongsong}]{Adobe Song Std}
+    \setCJKmainfont[ItalicFont={Adobe Kaiti Std}]{Adobe Song Std}
     \setCJKsansfont{Adobe Heiti Std} % Hei
     \setCJKmonofont{Adobe Fangsong Std} % Fangsong
     %%%% alias
@@ -220,7 +219,7 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
     \setsansfont{Arial}
     \setmonofont{Courier New}
     %%%% Using Founder Family Fonts
-    \setCJKmainfont[BoldFont={FZYaSong-DB-GBK}]{FZShuSong_GB18030-Z01}
+    \setCJKmainfont[BoldFont={FZYaSong-DB-GBK},ItalicFont={FZKai-Z03},BoldItalicFont={FZYaSong-DB-GBK}]{FZShuSong_GB18030-Z01}
     \setCJKsansfont{FZHei-B01} % Hei
     \setCJKmonofont{FZFangSong-Z02} % fs
     %%%% alias
@@ -324,7 +323,8 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
     \rule{\linewidth}{1.5pt}}%
   \fi}
 \renewpagestyle{plain}{
-\sethead{}{\raisebox{.65\baselineskip}{\songti \wuhao \ifisanon{~}\else{国防科技大学研究生院{\ifisprof{专业学位}\else{}\fi}\@optionpaperclass{}学位论文}\fi}}{}%
+\sethead{}{\raisebox{.65\baselineskip}{\songti \wuhao \ifisanon{~}%
+\else{国防科技大学研究生院{\ifisprof{专业学位}\else{}\fi}\@optionpaperclass{}\@optiondegreestring{}论文}\fi}}{}%
 \setfoot{}{{\songti \wuhao 第~\thepage~页}}{}%
 \headrule%
 \footrule%
@@ -356,6 +356,14 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
 \renewcommand\cleardoublepage{\clearpage\if@openright \ifodd\c@page\else
   \newpage{}
   \thispagestyle{empty}
+  \vspace*{\fill}
+  \begin{center}
+  \end{center}
+  \vspace*{\fill}
+  \clearpage\fi\fi%
+}
+\newcommand\cleardoublepagewithhead{\clearpage\if@openright \ifodd\c@page\else
+  \newpage{}
   \vspace*{\fill}
   \begin{center}
   \end{center}
@@ -405,11 +413,11 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
   \fi
 }
 \newcommand\cabstractname{摘\hspace{1em}要}
-\newcommand\eabstractname{ABSTRACT}
+\newcommand\eabstractname{Abstract}
 \newcommand\ckeywordsname{关键词}
-\newcommand\ckeywords[1]{{\hei\xiaosi \ckeywordsname：#1}}
+\newcommand\ckeywords[1]{{\hei\xiaosi \ckeywordsname: #1}}
 \newcommand\ekeywordsname{Key Words}
-\newcommand\ekeywords[1]{\textsf{\xiaosi \ekeywordsname：#1}}
+\newcommand\ekeywords[1]{\textbf{\textsf{\xiaosi \ekeywordsname: #1}}}
 \newenvironment{cabstract}{%
     \chapter{\cabstractname}
     \xiaosi
@@ -529,6 +537,8 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
 \theorembodyfont{\kai\xiaosi[1.3]}
 \theoremheaderfont{\hei\xiaosi[1.3]}
 \theoremseparator{:\,}
+\theorempreskip{0.5em}
+\theorempostskip{0.5em}
 \newtheorem{proof}{证明}[chapter]
 \newtheorem{assumption}{假设}[chapter]
 
@@ -573,6 +583,7 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
 \def\optionpaperclass#1{\def\@optionpaperclass{#1}} % paperclass
 \def\optionpaperclassen#1{\def\@optionpaperclassen{#1}}
 \def\optionas#1{\def\@optionas{#1}} % Supervisor
+\def\optiongraduate#1{\def\@optiondegreestring{#1}}
 \ifismaster
   \optionpaperclass{硕士}
   \optionpaperclassen{Master}
@@ -582,6 +593,12 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
   \optionpaperclassen{Ph.D}
   \optionas{Supervisor}
 \fi
+\ifisgraduate
+    \optiongraduate{毕业}
+\else
+    \optiongraduate{学位}
+\fi
+
 \newcommand{\checkparameter}
 {
   \ifthenelse{\isundefined{\@cosupervisor}}{\cosupervisor{}}{}
@@ -614,7 +631,7 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
   }
   \par
   \vspace*{2.5cm} %插入空白
-  {\heiti\sanhao \ifisprof{专业学位}\else\@papertype{}\fi\@optionpaperclass{}学位论文}\\
+  {\heiti\sanhao \ifisprof{专业学位}\else\@papertype{}\fi\@optionpaperclass{}\@optiondegreestring{}论文}\\
   \vspace{12bp}
   {\cusong\erhao[1.25] \@title \par}%
   \vspace{45bp} %从WORD中得来
@@ -659,8 +676,12 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
     {\@zhdate \par}%
   }
   \vspace{1mm}
+  \ifisspline%
+  \includepdf[]{a3cover/spineinthesis.pdf}
+  \else%
   \cleardoublepage%
-  \newpage
+  \fi%
+  \newpage%
   \thispagestyle{empty}%
 
   \begin{center}\leavevmode
@@ -690,37 +711,9 @@ Defense Technology}\fi}\\
 
 \renewcommand{\baselinestretch}{1.5}%
 \ifisanon{~}\else{%
-  \cleardoublepage%
-  \newpage
-  \thispagestyle{empty}
-  {\cusong \erhao \centering \ziju{12pt} 独创性声明 \par\vspace{2cm}}
-  {\fangsong\xiaosi %
-本人声明所呈交的学位论文是我本人在导师指导下进行的研究工
-作及取得的研究成果。尽我所知，除文中特别加以标注和致谢的地方外，论文中
-不包含其他人已经发表和撰写过的研究成果，也不包含为获得国防科技大学或
-其他教育机构的学位或证书而使用过的材料。与我一同工作的同志对本研究所做的
-任何贡献均已在论文中作了明确的说明并表示谢意。\par
-学位论文题目：\vbox{\hbox to11cm{\hfil \the\displaytitle \hfil}
-  \protect\vspace{0.6truemm}\relax
-  \hrule depth0pt height0.15truemm width11cm}\par
-学位论文作者签名：\hrulefill\hrulefill\hrulefill\hrulefill\hrulefill
-  \hfill 日期：\hfill\hfill 年\hfill 月 \hfill 日\hspace{1cm}\par}
-
-  \vspace*{2cm}
-  {\cusong \erhao \centering 学位论文版权使用授权书\par\vspace{2cm}}
-  {\fangsong\xiaosi %
-本人完全了解国防科技大学有关保留、使用学位论文的规定。
-本人授权国防科技大学可以保留并向国家有关部门或机构送交论文的复印件和电子
-文档，允许论文被查阅和借阅; 可以将学位论文的全部或部分内容编入有关数据库
-进行检索，可以采用影印、缩印或扫描等复制手段保存、汇编学位论文。\par
-（保密学位论文在解密后适用本授权书。）\par
-学位论文题目：\vbox{\hbox to11cm{\hfil \the\displaytitle \hfil}
-  \protect\vspace{0.6truemm}\relax
-  \hrule depth0pt height0.15truemm width11cm}\par
-学位论文作者签名：\hrulefill\hrulefill\hrulefill\hrulefill\hrulefill
-  \hfill 日期：\hfill\hfill 年\hfill 月 \hfill 日\par
-作者指导教师签名：\hrulefill\hrulefill\hrulefill\hrulefill\hrulefill
-  \hfill 日期：\hfill\hfill 年\hfill 月 \hfill 日\par}
+\cleardoublepage%
+\newpage
+\includepdf[]{a3cover/originalitystatement.pdf}
 }\fi
 
   \normalsize % normal, 正文开始

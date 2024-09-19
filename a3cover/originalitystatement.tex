@@ -1,0 +1,134 @@
+\documentclass[a4paper,12pt,openright,twoside]{book}
+\usepackage{geometry}
+\geometry{top=27.5mm,bottom=25mm,left=30mm,right=30mm,headheight=9mm,headsep=1mm,footskip=9mm}
+\usepackage{graphicx}
+\usepackage{ifthen,calc}
+\usepackage[boldfont,slantfont]{xeCJK}
+    \setmainfont{Times New Roman PS Std}
+    \setsansfont{Arial}
+    \setmonofont{Courier New}
+    %%%% Using Office Family Fonts
+    \setCJKmainfont[BoldFont={STZhongsong}]{SimSun}
+    \setCJKsansfont{SimHei} % Hei
+    \setCJKmonofont{FangSong} % Fangsong
+    %%%% alias
+    \setCJKfamilyfont{song}{SimSun}
+    \setCJKfamilyfont{hei}{SimHei}
+    \setCJKfamilyfont{fs}{FangSong} % fang-song
+    \setCJKfamilyfont{kai}{KaiTi} % Kai
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{xcolor}
+\makeatletter
+\newcommand{\cusong}{\bfseries}
+\newcommand{\song}{\CJKfamily{song}}     % 宋体
+\newcommand{\fs}{\CJKfamily{fs}}         % 仿宋体
+\newcommand{\kai}{\CJKfamily{kai}}       % 楷体
+\newcommand{\hei}{\CJKfamily{hei}}       % 黑体
+\def\songti{\song}
+\def\fangsong{\fs}
+\def\kaishu{\kai}
+\def\heiti{\hei}
+\newcommand*{\ziju}[1]{\renewcommand{\CJKglue}{\hskip #1}}
+\newlength\thu@linespace
+\newcommand{\thu@choosefont}[2]{%
+    \setlength{\thu@linespace}{#2*\real{#1}}%
+    \fontsize{#2}{\thu@linespace}\selectfont}
+\def\thu@define@fontsize#1#2{%
+    \expandafter\newcommand\csname #1\endcsname[1][\baselinestretch]{%
+    \thu@choosefont{##1}{#2}}}
+\thu@define@fontsize{chuhao}{42bp}
+\thu@define@fontsize{xiaochu}{36bp}
+\thu@define@fontsize{yihao}{26bp}
+\thu@define@fontsize{xiaoyi}{24bp}
+\thu@define@fontsize{erhao}{22bp}
+\thu@define@fontsize{xiaoer}{18bp}
+\thu@define@fontsize{sanhao}{16bp}
+\thu@define@fontsize{xiaosan}{15bp}
+\thu@define@fontsize{sihao}{14bp}
+\thu@define@fontsize{banxiaosi}{13bp}
+\thu@define@fontsize{xiaosi}{12bp}
+\thu@define@fontsize{dawu}{11bp}
+\thu@define@fontsize{wuhao}{10.5bp}
+\thu@define@fontsize{xiaowu}{9bp}
+\thu@define@fontsize{liuhao}{7.5bp}
+\thu@define@fontsize{xiaoliu}{6.5bp}
+\thu@define@fontsize{qihao}{5.5bp}
+\thu@define@fontsize{bahao}{5bp}
+\parindent=24bp
+\def\optiongraduate#1{\def\@optiondegreestring{#1}}
+\def\title#1{\def\@title{#1}} % 中文题目
+\def\authorsignature#1{\def\@authorsig{\makebox[3cm][c]{#1}}}
+\def\advisersignature#1{\def\@advisersig{\makebox[3cm][c]{#1}}}
+\def\signatureyear#1{\def\@signatureyear{#1}}
+\def\signaturemonth#1{\def\@signaturemonth{#1}}
+\def\signatureday#1{\def\@signatureday{#1}}
+\makeatother
+
+
+\optiongraduate{学位} %或毕业
+\title{} %XXX研究
+%\authorsignature{\includegraphics[width=1.8cm]{qianzi2.jpg}}
+%\advisersignature{\includegraphics[width=2cm]{qianzi.jpg}}
+%\signatureyear{2024}
+%\signaturemonth{4}
+%\signatureday{18}
+\authorsignature{} %\includegraphics[width=1.8cm]{qianzi2.jpg}
+\advisersignature{} %\includegraphics[width=2cm]{qianzi.jpg}
+\signatureyear{} %2024
+\signaturemonth{} %4
+\signatureday{} %18
+
+
+
+\begin{document}
+
+%\noindent\begin{tikzpicture}[remember picture,overlay]
+%\node[inner sep=0pt,draw,rectangle,align=center] at ($(current page.center)$)
+%{\includegraphics[width=\paperwidth]{orignialityword.pdf}};
+%\end{tikzpicture}
+%\color{red}
+\renewcommand{\baselinestretch}{1.61}%
+\makeatletter
+  \thispagestyle{empty}
+  {\cusong\xiaoer\centering\hspace{-2mm}\ziju{18pt}独创性声明\par\vspace{1.1cm}}
+  {\fangsong\xiaosi%
+本人声明所呈交的\@optiondegreestring{}论文是我本人在导师指导下进行的研究工
+作及取得的研究成果。尽我所知，除了文中特别加以标注和致谢的地方外，论文中
+不包含其他人已经发表和撰写过的研究成果，也不包含为获得国防科技大学或
+其他教育机构的学位或证书而使用过的材料。与我一同工作的同志对本研究所做的
+任何贡献均已在论文中作了明确的说明并表示谢意。\par
+\@optiondegreestring{}论文题目：\vbox{\hbox to11cm{\hfil \@title \hfil}
+  \protect\vspace{0.6truemm}\relax
+  \hrule depth0.15mm height0truemm width11cm}\par
+\@optiondegreestring{}论文作者签名：
+\makebox[0pt][l]{\@authorsig}
+\hrulefill\hrulefill\hrulefill\hrulefill\hrulefill\hrulefill\hrulefill
+  \hfill 日期：\makebox[1.2cm][c]{\@signatureyear} 年 \makebox[0.6cm][c]{\@signaturemonth} 月 \makebox[0.45cm][c]{\@signatureday} 日%
+  \hspace{4mm}\mbox{}\par}
+
+  \vspace*{1.65cm}
+  {\cusong\xiaoer\centering \@optiondegreestring{}论文版权使用授权书\par\vspace{1.1cm}}
+  {\fangsong\xiaosi %
+本人完全了解国防科技大学有关保留、使用\@optiondegreestring{}论文的规定。
+本人授权国防科技大学可以保留并向国家有关部门或机构送交论文的复印件和电子
+文档，允许论文被查阅和借阅; 可以将\@optiondegreestring{}论文的全部或部分内容编入有关数据库进行检索，可以采用影印、缩印或扫描等复制手段保存、汇编\@optiondegreestring{}论文。\par
+\hspace{0.5mm}（保密\@optiondegreestring{}论文在解密后适用本授权书。）\par
+\@optiondegreestring{}论文题目：\vbox{\hbox to11cm{\hfil \@title \hfil}
+  \protect\vspace{0.6truemm}\relax
+  \hrule depth0.15mm height0truemm width11cm}\par
+\@optiondegreestring{}论文作者签名：
+\makebox[0pt][l]{\@authorsig}
+\hrulefill\hrulefill\hrulefill\hrulefill\hrulefill
+  \hfill 日期：\makebox[1.2cm][c]{\@signatureyear} 年 \makebox[0.6cm][c]{\@signaturemonth} 月 \makebox[0.45cm][c]{\@signatureday} 日%
+  \hspace{4mm}\mbox{}\par
+作者指导教师签名：
+\makebox[0pt][l]{\@advisersig}
+\hrulefill\hrulefill\hrulefill\hrulefill\hrulefill
+  \hfill 日期：\makebox[1.2cm][c]{\@signatureyear} 年 \makebox[0.6cm][c]{\@signaturemonth} 月 \makebox[0.45cm][c]{\@signatureday} 日%
+  \hspace{4mm}\mbox{}\par}
+
+\makeatother
+
+\end{document}
+

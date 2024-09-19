@@ -13,3 +13,122 @@ Use `nudtpaper.cls` directly and modify **your** `thesis.tex`. The contents in `
 **Fork** this project and commit a **pull** request (**PR**)!
 
 If `nudtpaper` helps you, please give it a **star**!
+
+
+## 3. 简要指南
+
+
+### 1) 学位类型选项
+
++  master    硕士论文(默认是学位论文)
++  doctor    博士论文(默认是学位论文)
++  prof      专硕(若是专硕，则加上此选项)
++  graduate  毕业论文(若论文用于毕业而不是申请学位则加上此选项，注意毕业论文对应的独创性说明也需要调整)
+
+### 2) 页面选项
+
++  twoside   双面打印，章节从单数页开始(博士论文的默认要求)。不使用该选项，则章节是连续的，无空白页。
++  spline    输出书脊，用于查重。查重论文需要在封面背面有一个带框书脊。使用该选项后会插入a3cover目录下的spineinthesis.pdf，该pdf在a3cover下利用对应的tex文件生成(需输入论文标题信息)。
+
+
+### 3) 字体选项
+
++  ttf       使用windows的字体
++  otf       使用Adobe字体
++  fz        使用方正字体(需要自己安装字体)
++  fandol    使用fandol字体
+
+
+### 4) 版本/生成选项
+
++  anon      盲评版本论文选项，用于评阅(其中成果信息全部隐去)。
++  blind     系统提交的盲评版本，在使用anon选项后，添加blind选项会列出“第一作者，XXX”为作者列表的相关成果信息。
++  不使用anon和blind选项时为明评版本，所有信息均提供，也包括独创性声明。生成明评版本前需在a3cover目录下生成originalitystatement.pdf等文档。
++  独创性声明**只需要保密审查时签字版本**，明评版本默认插入a3cover目录下的originalitystatement.pdf文件。最终版本，则利用签字扫描版替换利用tex生成的pdf。
++  biber     参考文献biblatex生成，不使用该选项时，则参考文献默认用bibtex生成。
++  resumebib 在使用biber选项时，使用resumebib选项，则成果列表信息也用biblatex生成，也就是利用一个bib文件维护成果信息，格式由模板设定。当不使用biber和resumebib时，成果列表需在data目录下的resume.tex中手工输入。由于成果列表信息的格式要求与参考文献格式要求相同，因此推荐使用biblatex生成成果列表。
+
+
+### 5) 打印材料
+
++  a3cover 目录下有a3cover.pdf，即a3封面pdf但不一定用得到。
++  a3cover 目录下有spinenoframe.pdf，即不带框的书脊页，打印时可能用得到
++  a3cover 目录下有originalitystatement.pdf，即独创性声明文件，当不给出指定的信息时则是一个空表，可用于打印后签字。该文件已经与最新模板的word版本做精确对比，已无明显差异。
+
+
+### 6) 其他宏包
+
++  算法宏包除了默认algorithmic外，也可以使用algorithm2e。可以在mynudt.sty中更换，比如将
+```
+\RequirePackage[chapter]{algorithm}
+\RequirePackage{algorithmic}
+```
+更换为：
+```
+\usepackage[ruled,linesnumbered,algochapter]{algorithm2e}
+\renewcommand{\algorithmcfname}{算法}
+\SetFuncArgSty{textrm}
+\SetArgSty{textrm}
+\let\subfigure=\subfloat
+```
++  旁注一般不使用，脚注和尾注，可以使用自行设置。比如：
+```
+\usepackage{marginnote}
+\renewcommand*{\marginfont}{\footnotesize\color{red}\sffamily}
+
+\counterwithout{footnote}{chapter}
+\usepackage{xcolor}
+\usepackage{circledtext}
+\circledtextset{resize=real,height=1.5ex,boxcolor=blue,charcolor=blue,boxlinewidth=1pt}
+\makeatletter
+\renewcommand\thefootnote{\circledtext*{\@arabic\c@footnote}}
+\makeatother
+
+%使用endnotes包的尾注
+%\usepackage{endnotes}
+%\def\enoteheading{}
+%\renewcommand\makeenmark{\textsuperscript{\circledtext{\theenmark}}}
+%输出时用\theendnotes %用于endnotes宏包
+
+%使用enotez包的尾注
+\usepackage{enotez}
+\setenotez{%设置宏包选项
+backref=true,
+list-name={},%把标题尾注内容改为一条线
+%reset = true,%每次\printendnotes后重设序号
+counter-format=arabic,%数字的样式是阿拉伯数字
+mark-format= {\circledtext[boxcolor=blue,charcolor=blue]},  %带圈符号
+list-heading={},%设置尾注标题的格式
+list-style = {custom}
+}
+%定义需要的序号方式，比如带圈，带括号什么的。
+\DeclareInstance{enotez-list}{custom}{paragraph}
+{
+heading = {},
+notes-sep = {4pt} ,%这是各个尾注之间的间距
+format = \normalsize ,
+number = \textsuperscript{\circledtext[boxcolor=blue,charcolor=blue]{#1}}
+}
+%输出时用\printendnotes[custom] %用于enotez宏包
+```
+
++  符号列表可以手工输入，也可以利用nomencl等宏包生成。
+
+
++  pdf文档的元信息可用hypersetup自行输入，比如：
+
+```
+\hypersetup{
+pdftitle={the title},
+pdfauthor={author’s name},
+bookmarksdepth=subsubsection,
+bookmarksopen=true, % Expand the bookmarks as soon as the pdf file is opened
+bookmarksopenlevel=4,
+}
+```
+
+
++  一些默认没有的书签信息可自行给出。比如：
+```
+\pdfbookmark[1]{封面}{pdftag:titlepage}
+```

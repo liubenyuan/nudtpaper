@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage[paperwidth=21cm,paperheight=29.7cm,
+  left=0cm, right=0cm,top=5cm,bottom=5cm]{geometry}
+\usepackage{graphicx}
+\usepackage[boldfont,slantfont]{xeCJK}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+%\usepackage[type=alledges]{fgruler}
+
+% 设定竖排字体，当前需要OTF字体！请参考说明文档进行下载
+%\setmainfont{Adobe Garamond Pro}
+\setCJKmainfont{Adobe Song Std}
+\setCJKfamilyfont{vert}[RawFeature={vertical}]{Adobe Song Std}
+
+\newcommand{\envert}[1]{\raisebox{-.4em}{#1}}
+
+% 你需要改动下面的变量(英文用\envert包含进来)
+\providecommand{\thesistitle}{\envert{XXX}研究}
+\providecommand{\thesisauthor}{}%作者不用写
+\parindent=0pt
+\pagestyle{empty}
+
+\begin{document}
+
+%
+\CJKfamily{vert}%
+\begin{tikzpicture}[remember picture,overlay]
+\node[inner sep=2pt,rectangle,xshift=3pt] at ($(current page.center)$)
+{\parbox[c][19.78cm][c]{0.77cm}{\centering{\vspace{0.5cm}\rotatebox{-90}{\thesistitle\qquad\thesisauthor}%
+\vfill\rotatebox{-90}{国防科学技术大学研究生院}\vspace{0.5cm}}}};
+\node[inner sep=2pt,draw,rectangle,align=center] at ($(current page.center)$)
+{\parbox[c][19.78cm][c]{0.77cm}{\mbox{}\vfill\mbox{}}};
+\end{tikzpicture}
+
+
+\end{document}
+

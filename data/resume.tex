@@ -1,45 +1,100 @@
 \begin{resume}
-\ifreview
-
-\ifismaster
-该论文作者在学期间取得的阶段性成果（学术论文等）已满足我校硕士学位评阅相关要求。为避免阶段性成果信息对专家评价学位论文本身造成干扰，特将论文作者的阶段性成果信息隐去。
-\else
-该论文作者在学期间取得的阶段性成果（学术论文等）已满足我校博士学位评阅相关要求。为避免阶段性成果信息对专家评价学位论文本身造成干扰，特将论文作者的阶段性成果信息隐去。
+\ifisanon
+    \ifisblind
+        \isanonfalse
+    \else
+        \ifismaster
+        该论文作者在学期间取得的阶段性成果（学术论文等）已满足我校硕士学位评阅相关要求。为避免阶段性成果信息对专家评价学位论文本身造成干扰，特将论文作者的阶段性成果信息隐去。
+        \else
+        该论文作者在学期间取得的阶段性成果（学术论文等）已满足我校博士学位评阅相关要求。为避免阶段性成果信息对专家评价学位论文本身造成干扰，特将论文作者的阶段性成果信息隐去。
+        \fi
+    \fi
+\else\relax
 \fi
 
+\ifisanon\relax
 \else
-
 \ifisresumebib
 
-	\begin{refsection}[ref/resume.bib]
-	\settoggle{bbx:gbtype}{false}%局部设置不输出文献类型和载体标识符
+\begingroup
+    \settoggle{bbx:gbtype}{false}%局部设置不输出文献类型和载体标识符
 	\settoggle{bbx:gbannote}{true}%局部设置输出注释信息
-	\setcounter{gbnamefmtcase}{1}%局部设置作者的格式为familyahead格式
-	\nocite{ref-1-1-Yang,ref-2-1-杨轶,ref-3-1-杨轶,ref-4-1-Yang,ref-5-1-Wu,ref-6-1-贾泽,ref-7-1-伍晓明}
-	
-	\setlength{\biblabelsep}{12pt}
-	\printbibliography[env=resumebib,heading=subbibliography,title={发表的学术论文}] % 发表的和录用的合在一起
+    \renewcommand{\bibfont}{\normalsize}%\fangsong
+	%\setcounter{gbnamefmtcase}{6}%局部设置作者的格式为familyahead格式
+    \makeatletter
+    \renewcommand*{\mkbibnamegiven}[1]{%通过作者注释局部调整作者的格式需与bib配合
+    \ifitemannotation{thesisauthor}
+    {\ifbibliography{{\textbf{#1}}}{#1}}%
+    {#1}\ifbibliography{\ifitemannotation{corresponding}{\textsuperscript{*}}{}}{}%
+    }
+    \renewcommand*{\mkbibnamefamily}[1]{%
+    \ifitemannotation{thesisauthor}
+    {\ifbibliography{{\textbf{#1}}}{#1}}
+    {#1}}
+    \def\blx@maxbibnames{9}
+    \def\blx@minbibnames{2}
+    %\defcounter{gbbiblocalcase}{1} %局部强迫中文本地化字符串
+    %\defcounter{gbbiblocalcase}{2} %局部强迫英文本地化字符串
+    %\setlocalbibstring{andotherscn}{et al.}
+    %\setlocalbibstring{andothers}{等}
+    \renewbibmacro*{author}{%
+      \ifboolexpr{
+        test \ifuseauthor
+        and
+        not test {\ifnameundef{author}}
+      }
+        {\ifisblind%
+           \setcounter{numitemval}{1}%
+           \whileboolexpr{test {\ifnumcomp{\value{numitemval}}{<}{\value{author}+1}}}
+               {\ifitemannotation[author][default][\thenumitemval]{thesisauthor}%
+                    {\setcounter{numitemslt}{\thenumitemval}}{}%
+               \stepcounter{numitemval}%
+               }%
+           \ifnumcomp{\value{numitemslt}}{>}{0}
+                {\textbf{\iffieldequalstr{userd}{chinese}{第\zhnum{numitemslt}作者}{\Ordinalstring{numitemslt}~Author}}, XXX.}
+                {\printnames{author}}
+         \else%
+            \printnames{author}%
+         \fi%%
+         \iffieldundef{authortype}
+           {}
+           {\setunit{\printdelim{authortypedelim}}%
+            \usebibmacro{authorstrg}}}
+        {}}
+    \makeatother
 
+
+	\begin{refsection}[ref/resume.bib]
+	\nocite{ref-1-1-Yang,ref-2-1-杨轶,ref-3-1-杨轶,ref-4-1-Yang,
+    ref-5-1-Wu,ref-6-1-贾泽,ref-7-1-伍晓明}
+	
+    \printbibliography[heading=subbibliography,title={发表的学术论文}]
+	\end{refsection}
+
+	\begin{refsection}[ref/resume.bib]
+	\nocite{ref-8-1-任天令,ref-9-1-Ren}%%
+	\printbibliography[heading=subbibliography,title={申请的发明专利}]
 	\end{refsection}
 
 
 	\begin{refsection}[ref/resume.bib]
-	\settoggle{bbx:gbtype}{false}%局部设置不输出文献类型和载体标识符
-	\settoggle{bbx:gbannote}{true}%局部设置输出注释信息
-	\setcounter{gbnamefmtcase}{1}%局部设置作者的格式为familyahead格式
-	\nocite{ref-8-1-任天令,ref-9-1-Ren}%
-	
-	\setlength{\biblabelsep}{12pt}
-	\printbibliography[env=resumebib,heading=subbibliography,title={研究成果}]
-
+	\nocite{比赛2021}%
+	\printbibliography[heading=subbibliography,title={获得的竞赛奖项}]
 	\end{refsection}
+
+	\begin{refsection}[ref/resume.bib]
+	\nocite{国自科2024}%
+	\printbibliography[heading=subbibliography,title={参与的科研项目}]
+	\end{refsection}
+\endgroup
+
 
 \else
 
   \section*{发表的学术论文} % 发表的和录用的合在一起
 
-  \begin{enumerate}[label={[\arabic*]}, leftmargin=0pt, itemindent=4em]
-  \addtolength{\itemsep}{-.36\baselineskip}%缩小条目之间的间距，下面类似
+  \begin{enumerate}[label={[\arabic*]},labelsep=6pt,topsep=0pt,partopsep=0pt,
+parsep=0pt,itemsep=1pt,leftmargin=0em,itemindent=42pt]
   \item Yang Y, Ren T L, Zhang L T, et al. Miniature microphone with silicon-
     based ferroelectric thin films. Integrated Ferroelectrics, 2003,
     52:229-235. (SCI 收录, 检索号:758FZ.)
@@ -58,14 +113,34 @@
     2003, 53:59-61.
   \end{enumerate}
 
-  \section*{研究成果} % 有就写，没有就删除
-  \begin{enumerate}[label=\textbf{[\arabic*]}, leftmargin=0pt, itemindent=4em]
-  \addtolength{\itemsep}{-.36\baselineskip}%
+  \section*{申请的发明专利} % 有就写，没有就删除
+  \begin{enumerate}[label={[\arabic*]},labelsep=6pt,topsep=0pt,partopsep=0pt,
+parsep=0pt,itemsep=1pt,leftmargin=0em,itemindent=42pt]
   \item 任天令, 杨轶, 朱一平, 等. 硅基铁电微声学传感器畴极化区域控制和电极连接的
     方法: 中国, CN1602118A. (中国专利公开号.)
   \item Ren T L, Yang Y, Zhu Y P, et al. Piezoelectric micro acoustic sensor
     based on ferroelectric materials: USA, No.11/215, 102. (美国发明专利申请号.)
   \end{enumerate}
+
+  \section*{获得的竞赛奖项} %
+
+\begin{enumerate}[label={[\arabic*]},labelsep=6pt,topsep=0pt,partopsep=0pt,
+parsep=0pt,itemsep=1pt,leftmargin=0em,itemindent=42pt]
+\normalsize
+\item 2021 年XXX大赛, 国
+家一等奖, 亚军.
+\end{enumerate}
+
+\section*{参与的科研项目} %
+
+  \begin{enumerate}[label={[\arabic*]},labelsep=6pt,topsep=0pt,partopsep=0pt,
+  parsep=0pt,itemsep=1pt,leftmargin=0em,itemindent=42pt]
+  \normalsize
+  \item XXX下的XXX方法研究（国家自然科学基金面上项目）. %2024.01-2027.12
+  \end{enumerate}
+
 \fi
 \fi
 \end{resume}
+
+
