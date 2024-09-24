@@ -1,0 +1,82 @@
+
+\documentclass{NUDTproposal}
+%使用说明：
+% 1. 开题报告的格式要求没那么严格，若提交没有格式异议则不用改。
+% 2. 若需修改，可以直接在cls中做修改，或在github上提问题，关键是提供最新的word模板。
+% 3. 字体若要更换，自行在cls文件中切换
+% 4. 参考文献使用biblatex，需要用biber编译。
+% 5. 图、表、公式，正常用figure,table,equation写即可。
+
+%其他：
+%添加想用的其他宏包，比如数学定理环境等等。
+%设置参考文献数据库
+\addbibresource{ref.bib}
+
+
+\begin{document}
+
+%设置论文信息
+\NUDTvalueset
+{
+    author={谭同学},                % 作者
+    title={这是一个很长的很长的学位论文题目这是一个很长的学位论文XXX大学开题报告\LaTeX{} 模板},                          % 论文标题
+    schoollogo={\includegraphics[scale=0.13]{nudt_logo_new}},
+    schooltext={\includegraphics[scale=0.35]{nudt_text_new}},
+    proposaltype={\CJKunderline{博士}研究生学位论文}, % 研究生类别：硕士，博士需下划线
+    classification={公开},          % 密级：公开，秘密，机密或者绝密
+    proposalnumber={\underline{\makebox[1cm][c]{XXX}}},  % 编号：默认是下划线
+    authorid={160590xx},            % 学号
+    major={控制科学与工程},         % 一级学科
+    field={图像处理},               % 研究方向
+    advisor={张老师},               % 导师
+    advisortitle={教~~~~授},        % 职称
+    institute={信息系统与管理学院}, % 学院
+    date={2017~年~03~月~01日},      % 开题日期
+    mark={国防科技大学研究生院制},  % 制表单位信息
+}
+
+%绘制封面
+\makecover
+
+
+%正文内容
+\zihao{5}
+
+%各节可以在各个文件中给出，也可以直接在本文件中写。
+\input{1_background}%
+\clearpage
+
+\input{2_referenceSummary.tex}%
+\clearpage
+
+\input{3_researchContent}%
+\clearpage
+
+\input{4_researchCondition.tex}%
+\clearpage
+
+\input{5_schedule.tex}%
+\clearpage
+
+
+%参考文献使用biblatex，用biber编译
+%参考文献的表格若行高不够，则利用命令\setlength\tabrowheight{1cm}设置更大的行高
+\section{主要参考文献}
+{\renewcommand{\bibfont}{\footnotesize}
+\printbibtabular[heading=none]
+}
+\clearpage
+
+
+%导师评价，可以先签字后替换或者利用电子签名
+\input{7_advisorComments.tex}%
+\clearpage
+
+%评审意见直接插进来就行，最终版用签字扫描版替代
+\includepdf[pages=-]{研究生学位论文开题报告评议表.pdf}
+\clearpage
+
+
+
+
+\end{document} 

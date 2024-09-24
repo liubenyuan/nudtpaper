@@ -15,7 +15,13 @@ Use `nudtpaper.cls` directly and modify **your** `thesis.tex`. The contents in `
 If `nudtpaper` helps you, please give it a **star**!
 
 
-## 3. 简要指南
+## 3. 开题报告简要指南
+
++ 开题报告模板在 proposal 目录下
++ 开题报告格式与内容完全分离，使用非常简单，按正常latex文档写即可
++ 开题报告格式若与要求的格式差异较大时，请及时反馈
+
+## 4. 学位论文简要指南
 
 
 ### 1) 学位类型选项
