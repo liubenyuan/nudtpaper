@@ -4,6 +4,9 @@
 %% Proposal template created by <hzzmail@163.com>
 %% 2024.09.24
 %% Some codes origin from nudtproposal by Hanlin Tan <hanlin_tan@nudt.edu.cn>
+%% 2024.11.07
+%% Adjusted and adapted to the June 2023 template for the Graduate School
+
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{NUDTproposal}[2024/09/24 v1.0 A simple proposal document class for NUDT]
@@ -11,18 +14,36 @@
 \LoadClass[12pt]{article}
 \RequirePackage[usenames,dvipsnames,table]{xcolor}%
 \RequirePackage[stixtwo]{fontsetup}
+\hbadness 99999
+\hfuzz=25pt
+
+\RequirePackage{silence}
+\WarningFilter{fancyhdr}{\headheight}
+\WarningFilter{latex}{Overfull}
+
+\usepackage{fontspec}
+\setmainfont{Times New Roman}%设置全局默认字体
+
+\RequirePackage{pifont}
 %\RequirePackage{amsmath,amssymb,amstext}
 \RequirePackage{ctex,CJKfntef}
+\setCJKfamilyfont{MyCJKfzxbs}{FZXiaoBiaoSong-B05S} %方正小标宋简体,用于首页"国防科技大学"和扉页"说明"
+\setCJKfamilyfont{MyCJKsyht}{Source Han Sans CN Heavy} %思源黑体heavy，用于首页加粗黑体字体
+\setCJKfamilyfont{MyCJKkati}{楷体_gb2312.ttf} %楷体_GB2312，用于正文二级标题
+\newcommand{\fzxbs}{\CJKfamily{MyCJKfzxbs}}  
+\newcommand{\syht}{\CJKfamily{MyCJKsyht}}  
+\newcommand{\kaiti}{\CJKfamily{MyCJKkati}}
+
 \RequirePackage{geometry}
-\geometry{a4paper,includeheadfoot,top=27mm,bottom=25.4mm,left=31mm,right=31mm}
-\geometry{headheight=7.7mm,headsep=4.3mm,footskip=7.9mm}
+\geometry{a4paper,includeheadfoot,top=15mm,bottom=25.4mm,left=31mm,right=31mm}%
+\geometry{headheight=7.7mm,headsep=4.3mm,footskip=7.9mm,voffset=0mm}
 %\usepackage[type=alledges]{fgruler}
 
 \RequirePackage{enumitem}
 \AddEnumerateCounter{\chinese}{\chinese}{}
 \RequirePackage{tikz}
 \usetikzlibrary{calc}
-\RequirePackage{ctable,makecell,longtable}
+\RequirePackage{ctable,makecell,array,longtable,booktabs}
 \RequirePackage{graphicx}
 \RequirePackage{pdfpages}
 \graphicspath{{Img/}}% search path for figures
@@ -33,10 +54,9 @@
 
 \RequirePackage{fancyhdr} % 设置正文页眉
 \fancyhf{}
-\fancyhead[C]{\songti 国防科技大学研究生学位论文开题报告\\
-\centerline{\rule[0pt]{\textwidth+2mm}{0.4pt}}%
-}%
-\fancyfoot[C]{\footnotesize\thepage}
+\fancyhead[C]{\songti 国防科技大学研究生学位论文开题报告%
+\\\centerline{\rule[5pt]{\textwidth+3mm}{0.7pt}}}%
+\fancyfoot[C]{- \thepage \ - }
 \renewcommand{\headrulewidth}{0pt}% header rule
 \renewcommand{\footrulewidth}{0pt}% footer rule
 
@@ -52,20 +72,20 @@ or test {\ifnumgreater{\value{page}}{\pageafsecseven}}
 }
 {}{%
 \ifnumequal{\value{page}}{\sectionpage}
-{\tikz{\draw[line width=0.4pt] (0,0) rectangle (\textwidth+2mm,\textheight-0.6cm);}}
-{\tikz{\draw[line width=0.4pt] (0,0) rectangle (\textwidth+2mm,\textheight+0.5mm);}}%
+{\tikz{\draw[line width=0.7pt] (0,0) rectangle (\textwidth+2mm,\textheight-0.6cm);}}
+{\tikz{\draw[line width=0.7pt] (0,0) rectangle (\textwidth+2mm,\textheight+0.5mm);}}%
 }%
 }
 \DraftwatermarkOptions{anchor=lb, pos={3cm,26.45cm},markcmd=\FrameforSectionWM}
 
 \usepackage{titlesec}
-\titleformat{\section}{\heiti\zihao{-4}}{\thesection .}{5 pt}{}[\numgdef\sectionpage{\number\value{page}}
+\titleformat{\section}{\heiti\zihao{-4}}{\zhnum{section}、}{0pt}{}[\numgdef\sectionpage{\number\value{page}}
 \ifnumequal{\value{section}}{7}{\numgdef\pageafsecseven{\number\value{page}}}{}]
 \titlespacing*{\section}{-1mm}{0ex}{.2ex} % 设置标题前后间距
-\titleformat{\subsection}{\kaishu \zihao{5} \bfseries}{\thesubsection}{5 pt}{}
-\titlespacing*{\subsection} {0pt}{0ex}{.2ex}
-\titleformat{\subsubsection}{\kaishu \zihao{5}}{\thesubsubsection}{5 pt}{}
-\titlespacing*{\subsubsection} {0pt}{0ex}{.2ex}
+\titleformat{\subsection}{\kaiti \zihao{5}}{\arabic{subsection}.}{5 pt}{}
+\titlespacing*{\subsection} {2em}{0ex}{6pt}
+\titleformat{\subsubsection}{\songti \zihao{5}}{\arabic{subsubsection}}{5 pt}{}
+\titlespacing*{\subsubsection} {2em}{0ex}{.2ex}
 
 \RequirePackage{hyperref}
 \hypersetup{% set hyperlinks.
@@ -88,24 +108,28 @@ gbpub=false,url=false,gbnamefmt=lowercase]{biblatex} % 设定引用格式
 \RequirePackage{biblatex-ext-tabular}
 
 \let\upcite=\cite
-\newlength\tabrowheight
-\setlength\tabrowheight{1cm}
+
+\newcolumntype{L}[1]{%
+    >{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{%
+    >{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 \defbibtabular{bibtabular}
-  {\setlength{\LTpre}{0pt}%
-   \setlength{\LTpost}{0pt}%
-   \begin{longtable}{%
-     @{}|@{}m{0.10\textwidth}@{}| % < {\centering}
-      m{0.88\textwidth}@{}|@{}}
-     \hline
-     {\songti \parbox[c][\tabrowheight][c]{0.10\textwidth}{\centering 序号} }
-     & {\songti\parbox[c][\tabrowheight][c]{0.86\textwidth}{\centering 文献目录(作者、题目、刊物名、出版时间、页次)}  } \\
-     \hline
-     \endfirsthead}
-  {\end{longtable}}
-  {\parbox[c][\tabrowheight][c]{0.10\textwidth}{\centering \anchorlang{\mkgbnumlabel{\printfield{labelnumber}}}}
-  & \parbox[c][\tabrowheight][c]{0.86\textwidth}{\driver{}}\\\hline}
-
+    {\setlength{\LTpre}{0pt}%
+    \setlength{\LTpost}{0pt}%
+    \renewcommand*{\arraystretch}{1}%
+    \begin{longtable}{%
+        @{}
+        |C{\dimexpr0.1\textwidth-\tabcolsep\relax}|
+        L{\dimexpr0.9\textwidth-\tabcolsep\relax}|
+        @{}}
+        \hline
+        {\kaiti 序号} & \multicolumn{1}{c|}{\kaiti 文献目录(作者、题目、刊物名、出版时间、页次)}\\
+        \hline
+        \endfirsthead}
+    {\end{longtable}}
+    {\anchor{\mkgbnumlabel{\printfield{labelnumber}}}&\driver{}\\
+    \hline}
 
 \ExplSyntaxOn
 
@@ -167,18 +191,51 @@ text~depth=0.1\baselineskip,font=\fangsong,anchor=north~west]
 \NewDocumentCommand \nodedblpairsinglerow {m m m m} {
     \pgfcoordinate{BasePoint}{\lastrowbasepoint}
     \node[singleshortrow]  (noderight) at (BasePoint)
-    {\parbox{105pt}{\centering #2}};
+    {\parbox{125pt}{\centering #2}};
     \draw [lineunderrow] ($(noderight.south~east)+(0,-0.5mm)$) --
     ($(noderight.south~west)+(0,-0.5mm)$);
     \node[singlelabel]  (nodeleft)  at
     (noderight.north~west){\makebox[\rowlabelwidth][s]{#1}};
     \node[singlelabel,anchor=north~west]  (noderighta)
-    at (noderight.north~east){\makebox[\rowlabelwidth][s]{#3}};
+    at (noderight.north~east){\makebox[\rowlabelwidth-20pt][s]{#3}};
     \node[singleshortrow]  (noderightb) at (noderighta.north~east)
     {\parbox{105pt}{\centering #4}};
-    \draw [lineunderrow] ($(noderightb.south~east)+(0,-0.5mm)$)
-    -- ($(noderightb.south~west)+(0,-0.5mm)$);
+    \draw [lineunderrow] ($(noderightb.south~east)+(0pt,-0.5mm)$)
+    -- ($(noderightb.south~west)+(-20pt,-0.5mm)$);
     \def\lastrowbasepoint{\pgfpointanchor{noderight}{south~west}}
+}
+
+%绘制带单行文本的行，但有七列
+\NewDocumentCommand \nodesvlpairsinglerow {m m m m m m m} {
+    \pgfcoordinate{BasePoint}{\lastrowbasepoint}
+    \node[singleshortrow]  (noderight) at ($(BasePoint.south~east)+(-10pt,-0mm)$)
+    {\parbox{80pt}{\centering #2}};
+    \draw [lineunderrow] ($(noderight.south~east)+(-5pt,-0.5mm)$) --
+    ($(noderight.south~west)+(10pt,-0.5mm)$);
+    \node[singlelabel]  (nodeleft)  at
+    (noderight.north~west){\makebox[\rowlabelwidth-20pt][s]{#1}};
+
+    \node[singlelabel,anchor=north~west]  (noderighta)
+    at ($(noderight.north~east)+(-20pt,-0mm)$){\makebox[\rowlabelwidth-40pt][s]{#3}};
+
+
+    \node[singleshortrow]  (noderightb) at ($(noderight.north~east)+(-5pt,0mm)$)
+    {\parbox{50pt}{\centering #4}};
+    \draw [lineunderrow] ($(noderightb.south~east)+(-20pt,-0.5mm)$)
+    -- ($(noderightb.south~west)+(25pt,-0.5mm)$);
+
+    \node[singlelabel,anchor=north~west]  (noderighta)
+    at ($(noderight.north~east)+(80pt,0mm)$){\makebox[\rowlabelwidth-20pt][s]{#5}};
+%$(BasePoint.south~east)+(-20pt,-0.5mm)$
+    \node[singleshortrow]  (noderightb) at ($(noderight.north~east)+(90pt,0mm)$)
+    {\parbox{50pt}{\centering #6}};
+    \draw [lineunderrow] ($(noderightb.south~east)+(-25pt,-0.5mm)$)
+    -- ($(noderightb.south~west)+(20pt,-0.5mm)$);
+
+    \node[singlelabel,anchor=north~west]  (noderighta)
+    at ($(noderight.north~east)+(170pt,0mm)$){\makebox[\rowlabelwidth-20pt][s]{#7}};
+    \def\lastrowbasepoint{\pgfpointanchor{noderight}{south~west}}
+
 }
 
 %定义两套Key-value设置，一套是NUDTlabelset，一套是NUDTvalueset
@@ -188,13 +245,13 @@ text~depth=0.1\baselineskip,font=\fangsong,anchor=north~west]
 \NewDocumentCommand\NUDTvalueset{m}{\keys_set:nn {NUDTvalue} { #1 }}
 \clist_const:Nn \l_NUDT_keys {author,title,author,title,schoollogo,schooltext,
 proposaltype,classification,proposalnumber,authorid,major,field,advisor,
-advisortitle,institute,date,formdate,mark}%在clist中定义key
+advisortitle,institute,date,dateyear,datemonth,dateday,formdate,mark}%在clist中定义key
 \clist_map_inline:Nn \l_NUDT_keys{\definekey{NUDTlabel}{#1}}
 \clist_map_inline:Nn \l_NUDT_keys{\definekey{NUDTvalue}{#1}}
 
 %设置标签信息
 \NUDTlabelset
-{   author={姓\hspace{2em}名：},
+{   author={姓名：},
     title={论文题目：},
     schoollogo={},
     schooltext={},
@@ -202,13 +259,16 @@ advisortitle,institute,date,formdate,mark}%在clist中定义key
     classification={密级：},
     proposalnumber={编号：},
     authorid={学\hspace{2em}号：},
-    major={一级学科：},
+    major={学科专业：},
     field={研究方向：},
     advisor={指导教师：},
-    advisortitle={职\hspace{2em}称：},
+    advisortitle={职称：},
     institute={学\hspace{2em}院：},
     date={开题时间：},
-    formdate={二〇一八年一月},% 制表月份
+    dateyear={年},
+    datemonth={月},
+    dateday={日},
+    formdate={二〇二三年六月},% 制表月份
     mark={}, %XXX大学研究生院制
 }
 
@@ -222,26 +282,27 @@ advisortitle,institute,date,formdate,mark}%在clist中定义key
 %\end{tikzpicture}
 \begin{tikzpicture}[remember~picture,overlay]
   \begin{scope}
-    \linespread{1.4}
-    \node[anchor=center] at ($(current~page.north~west)+(5.45cm,-5.35cm)$)
+    \linespread{2}
+    \node[anchor=center] at ($(current~page.north~west)+(3.78cm,-3.68cm)$)
         {\l_NUDTvalue_schoollogo_tl};
     \node[font=\zihao{4}\mdseries\heiti] at
-        ($(current~page.north~east)+(-5.7cm,-5.5cm)$)
+        ($(current~page.north~east)+(-4.7cm,-3.68cm)$)
         {\begin{tabular}{c c}
         \l_NUDTlabel_classification_tl &   {\fangsong\l_NUDTvalue_classification_tl} \\
         \l_NUDTlabel_proposalnumber_tl &   {\fangsong\l_NUDTvalue_proposalnumber_tl} \\
        \end{tabular}};
   \end{scope}
   \begin{scope}
-    \node[] at ($(current~page.north~west)+(10.5cm,-8.3cm)$)
-        {\bfseries\l_NUDTvalue_schooltext_tl};
-    \node[] at ($(current~page.north~west)+(10.5cm,-11.3cm)$)
-       {\mdseries\fontsize{28}{12}\selectfont
+    \node[] at ($(current~page.north~west)+(10.50cm,-7.75cm)$)
+        {\fzxbs\zihao{1} 国防科技大学};
+    \node[] at ($(current~page.north~west)+(10.3cm,-11.3cm)$)
+       {\syht\fontsize{28}{17}\selectfont
        \begin{tabular}{c}
         \l_NUDTvalue_proposaltype_tl \\
-        开题报告\\
+        \\~
+        \textbf{开题报告}\\
        \end{tabular}};
-    \linespread{1.68}\zihao{3}\bfseries\heiti
+    \linespread{1.68}\zihao{3}\syht
     \nodeonepairmultirow{\l_NUDTlabel_title_tl}{\l_NUDTvalue_title_tl}
     \nodedblpairsinglerow{\l_NUDTlabel_authorid_tl}
         {\l_NUDTvalue_authorid_tl}{\l_NUDTlabel_author_tl}
@@ -255,9 +316,14 @@ advisortitle,institute,date,formdate,mark}%在clist中定义key
         {\l_NUDTvalue_advisortitle_tl}
     \nodeonepairsinglerow{\l_NUDTlabel_institute_tl}
         {\l_NUDTvalue_institute_tl}
-    \nodeonepairsinglerow{\l_NUDTlabel_date_tl}{\l_NUDTvalue_date_tl}
-    \node[] at ($(current~page.north~west)+(10.5cm,-25.5cm)$)
-        {\begin{tabular}{p{400pt}<{\centering}}
+    %\nodeonepairsinglerow{\l_NUDTlabel_date_tl}{\l_NUDTvalue_date_tl}
+    \nodesvlpairsinglerow{\l_NUDTlabel_date_tl}{\l_NUDTvalue_dateyear_tl}
+        {\l_NUDTlabel_dateyear_tl}{\l_NUDTvalue_datemonth_tl}
+        {\l_NUDTlabel_datemonth_tl}{\l_NUDTvalue_dateday_tl}
+        {\l_NUDTlabel_dateday_tl}
+    \node[] at ($(current~page.north~west)+(10.5cm,-26cm)$)
+        {\linespread{1.7}\zihao{-3}\heiti
+        \begin{tabular}{p{400pt}<{\centering}}
         {\mdseries\l_NUDTvalue_mark_tl}  \\
         {\mdseries\l_NUDTlabel_formdate_tl}
         \end{tabular}};
@@ -266,26 +332,35 @@ advisortitle,institute,date,formdate,mark}%在clist中定义key
   \clearpage
 
   %%%% 说明页
-  \thispagestyle{empty}
-  \begin{center}
-  	{\heiti \zihao{2} 说 \qquad 明}
-  \end{center}
-{\songti\zihao{-4}\SetEnumitemKey{noenumsep}{labelsep=0pt,topsep=0pt,partopsep=0pt,itemsep=0pt,parsep=0pt}
-\begin{enumerate}[label={\chinese*、},noenumsep]
-  		\item 开题报告应按下述要求打印后装订成册：
-\begin{enumerate}[label={\arabic*.},noenumsep]
-  			\item 	使用A4白纸，双面打印；
-  			\item 	封面中填写内容使用小3号仿宋字体；
-  			\item 	表中填写内容使用5号楷体字体。
-  		\end{enumerate}
-  		\item 封面中的编号由学院填写，采用八位数编码，前四位为审批日期，精确到年月即可，第五位为院别，后三位为审批流水号（按年）。如15016100，为6院15年审批的第100位开题申请者，审批时间为15年1月份。院别代码与编制序列一致，海洋科学与工程研究院代码为0。
-  		\item 开题报告表中学员填写的内容包括学位论文选题的立论依据、文献综述、研究内容、研究条件、学位论文工作计划、主要参考文献等，指导教师认可学员开题报告内容后，对学员学位论文选题价值、对国内/外研究现状的了解情况、研究内容、研究方案等方面予以评价。
-  		\item 开题报告评议小组一般由3-5名具有正高级专业技术职务的专家（包括导师）组成，其中一名为跨一级学科的专家。
-		\item 若开题报告获得通过，应根据评议小组意见对开题报告进行修改，并在开题报告会后两周内，将评议表和修订后开题报告纸质版原件交学院备案；若开题报告未获得通过，则填报延期开题申请，由原开题报告评议小组重新组织开题报告会。
-	\end{enumerate}}
-\clearpage%
-\pagestyle{fancy}%
+\pagestyle{fancy}
+\begin{center}
+    {\fzxbs\zihao{2} 说 \hspace{1.5em} 明}
+\end{center}
+
+{\setlength\parskip{0pt}
+\songti\zihao{-4}
+\SetEnumitemKey{noenumsep}{topsep=0pt,parskip=0pt,partopsep=0pt,listparindent=0em}
+\begin{enumerate}[label={\chinese*、\hspace{-.5em}},leftmargin=4em,parsep=0pt,itemsep=2em]
+\item 开题报告应按下述要求打印后装订成册：
+    \begin{enumerate}[label={\arabic*.},leftmargin=-.8em,parsep=0pt,itemsep=0em]
+    \item 	使用A4白纸，双面打印；
+    \item 	封面中填写内容使用三号仿宋字体；
+    \item 	表中填写内容使用小四号宋体字体。
+    \end{enumerate}
+\item 编号由学院教学科研处（教务处）填写，由9位数字组成。\\
+
+\hspace*{-2em}\underline{2311}\quad \underline{02}\quad \underline{001}\quad 计算机学院于2023年11月审批的第一份开题报告\\
+\hspace*{-1.5em} \ding{172} \hspace*{1.8em} \ding{173} \hspace*{1.5em} \ding{174}
+
+    \begin{itemize}[leftmargin=-4em,itemindent=3.5em,parsep=0pt,itemsep=0em]
+    \item[\ding{172}:] 	审批时间代码。精确到年月，如2311代表审批时间为2023年11月；
+    \item[\ding{173}:]  审批单位代码。01-理学院，02-计算机学院，03-电子科学学院，04-前沿交叉学科学院，05-智能科学学院，06-系统工程学院，07-空天科学学院，08-国际关系学院，09-信息通信学院，10-电子对抗学院，11-气象海洋学院，12-军政基础教育学院，00-其他单位；
+    \item[\ding{174}:]  审批流水号代码。
+    \end{itemize}
+
+\end{enumerate}}
 \pagenumbering{arabic}
+\newpage
 }
 \ExplSyntaxOff
 

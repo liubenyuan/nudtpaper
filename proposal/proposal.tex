@@ -18,20 +18,22 @@
 %设置论文信息
 \NUDTvalueset
 {
-    author={谭同学},                % 作者
+    author={张~~~~三},                % 作者
     title={这是一个很长的很长的学位论文题目这是一个很长的学位论文XXX大学开题报告\LaTeX{} 模板},                          % 论文标题
     schoollogo={\includegraphics[scale=0.13]{nudt_logo_new}},
-    schooltext={\includegraphics[scale=0.35]{nudt_text_new}},
-    proposaltype={\CJKunderline{博士}研究生学位论文}, % 研究生类别：硕士，博士需下划线
-    classification={公开},          % 密级：公开，秘密，机密或者绝密
-    proposalnumber={\underline{\makebox[1cm][c]{XXX}}},  % 编号：默认是下划线
-    authorid={160590xx},            % 学号
-    major={控制科学与工程},         % 一级学科
-    field={图像处理},               % 研究方向
-    advisor={张老师},               % 导师
+    schooltext={},
+    proposaltype={\textbf{博士研究生学位论文}}, % 研究生类别：硕士，博士
+    classification={\underline{\qquad 公开\qquad}},          % 密级：公开，秘密，机密或者绝密
+    proposalnumber={\underline{\makebox[3cm][c]{~~}}},  % 编号：默认是下划线
+    authorid={},            % 学号
+    major={},         % 一级学科
+    field={},               % 研究方向
+    advisor={},               % 导师
     advisortitle={教~~~~授},        % 职称
-    institute={信息系统与管理学院}, % 学院
-    date={2017~年~03~月~01日},      % 开题日期
+    institute={}, % 学院
+    dateyear={2025},      % 开题日期\年
+    datemonth={01},      % 开题日期\月
+    dateday={02},      % 开题日期\日
     mark={国防科技大学研究生院制},  % 制表单位信息
 }
 
@@ -62,9 +64,9 @@
 %参考文献使用biblatex，用biber编译
 %参考文献的表格若行高不够，则利用命令\setlength\tabrowheight{1cm}设置更大的行高
 \section{主要参考文献}
-{\renewcommand{\bibfont}{\footnotesize}
+%\renewcommand{\bibfont}{\footnotesize}
 \printbibtabular[heading=none]
-}
+
 \clearpage
 
 
