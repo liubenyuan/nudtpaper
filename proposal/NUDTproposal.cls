@@ -99,6 +99,8 @@ gbpub=false,url=false,gbnamefmt=lowercase]{biblatex} % 设定引用格式
 \RequirePackage{biblatex-ext-tabular}
 
 \let\upcite=\cite
+
+% 参考文献表格统一行高，在此处设置
 \newlength\tabrowheight
 \setlength\tabrowheight{1cm}
 
@@ -109,8 +111,8 @@ gbpub=false,url=false,gbnamefmt=lowercase]{biblatex} % 设定引用格式
      @{}|@{}m{0.10\textwidth}@{}| % < {\centering}
       m{0.88\textwidth}@{}|@{}}
      \hline
-     {\kaiti \parbox[c][\tabrowheight][c]{0.10\textwidth}{\centering 序号} }
-     & {\kaiti\parbox[c][\tabrowheight][c]{0.86\textwidth}{\centering 文献目录(作者、题目、刊物名、出版时间、页次)}  } \\
+     {\kaiti \parbox[c][1cm][c]{0.10\textwidth}{\centering 序号} }
+     & {\kaiti\parbox[c][1cm][c]{0.86\textwidth}{\centering 文献目录(作者、题目、刊物名、出版时间、页次)}  } \\
      \hline
      \endfirsthead}
   {\end{longtable}}
