@@ -5,7 +5,7 @@
 %% 2024.09.24
 %% Some codes origin from nudtproposal by Hanlin Tan <hanlin_tan@nudt.edu.cn>
 %% 2024.11.07
-%% Adjusted and adapted to the June 2023 template for the Graduate School 
+%% Adjusted and adapted to the template released by the Graduate School 2023.06
 %% by Yang Ding <yangding12@nudt.edu.cn>
 
 
