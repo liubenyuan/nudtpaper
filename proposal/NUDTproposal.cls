@@ -5,7 +5,8 @@
 %% 2024.09.24
 %% Some codes origin from nudtproposal by Hanlin Tan <hanlin_tan@nudt.edu.cn>
 %% 2024.11.07
-%% Adjusted and adapted to the June 2023 template for the Graduate School
+%% Adjusted and adapted to the June 2023 template for the Graduate School 
+%% by Yang Ding <yangding12@nudt.edu.cn>
 
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
@@ -14,14 +15,6 @@
 \LoadClass[12pt]{article}
 \RequirePackage[usenames,dvipsnames,table]{xcolor}%
 \RequirePackage[stixtwo]{fontsetup}
-\hbadness 99999
-\hfuzz=25pt
-
-\RequirePackage{silence}
-\WarningFilter{fancyhdr}{\headheight}
-\WarningFilter{latex}{Overfull}
-
-\usepackage{fontspec}
 \setmainfont{Times New Roman}%设置全局默认字体
 
 \RequirePackage{pifont}
@@ -29,10 +22,8 @@
 \RequirePackage{ctex,CJKfntef}
 \setCJKfamilyfont{MyCJKfzxbs}{FZXiaoBiaoSong-B05S} %方正小标宋简体,用于首页"国防科技大学"和扉页"说明"
 \setCJKfamilyfont{MyCJKsyht}{Source Han Sans CN Heavy} %思源黑体heavy，用于首页加粗黑体字体
-\setCJKfamilyfont{MyCJKkati}{楷体_gb2312.ttf} %楷体_GB2312，用于正文二级标题
 \newcommand{\fzxbs}{\CJKfamily{MyCJKfzxbs}}  
 \newcommand{\syht}{\CJKfamily{MyCJKsyht}}  
-\newcommand{\kaiti}{\CJKfamily{MyCJKkati}}
 
 \RequirePackage{geometry}
 \geometry{a4paper,includeheadfoot,top=15mm,bottom=25.4mm,left=31mm,right=31mm}%
@@ -60,8 +51,8 @@
 \renewcommand{\headrulewidth}{0pt}% header rule
 \renewcommand{\footrulewidth}{0pt}% footer rule
 
-\usepackage{etoolbox}
-\usepackage{draftwatermark} %用其绘制框线
+\RequirePackage{etoolbox}
+\RequirePackage{draftwatermark} %用其绘制框线
 \numgdef\sectionpage{0}
 \numgdef\pageafsecseven{10000}
 \newcommand\FrameforSectionWM{%
@@ -78,7 +69,7 @@ or test {\ifnumgreater{\value{page}}{\pageafsecseven}}
 }
 \DraftwatermarkOptions{anchor=lb, pos={3cm,26.45cm},markcmd=\FrameforSectionWM}
 
-\usepackage{titlesec}
+\RequirePackage{titlesec}
 \titleformat{\section}{\heiti\zihao{-4}}{\zhnum{section}、}{0pt}{}[\numgdef\sectionpage{\number\value{page}}
 \ifnumequal{\value{section}}{7}{\numgdef\pageafsecseven{\number\value{page}}}{}]
 \titlespacing*{\section}{-1mm}{0ex}{.2ex} % 设置标题前后间距
@@ -108,28 +99,23 @@ gbpub=false,url=false,gbnamefmt=lowercase]{biblatex} % 设定引用格式
 \RequirePackage{biblatex-ext-tabular}
 
 \let\upcite=\cite
-
-\newcolumntype{L}[1]{%
-    >{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-\newcolumntype{C}[1]{%
-    >{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newlength\tabrowheight
+\setlength\tabrowheight{1cm}
 
 \defbibtabular{bibtabular}
-    {\setlength{\LTpre}{0pt}%
-    \setlength{\LTpost}{0pt}%
-    \renewcommand*{\arraystretch}{1}%
-    \begin{longtable}{%
-        @{}
-        |C{\dimexpr0.1\textwidth-\tabcolsep\relax}|
-        L{\dimexpr0.9\textwidth-\tabcolsep\relax}|
-        @{}}
-        \hline
-        {\kaiti 序号} & \multicolumn{1}{c|}{\kaiti 文献目录(作者、题目、刊物名、出版时间、页次)}\\
-        \hline
-        \endfirsthead}
-    {\end{longtable}}
-    {\anchor{\mkgbnumlabel{\printfield{labelnumber}}}&\driver{}\\
-    \hline}
+  {\setlength{\LTpre}{0pt}%
+   \setlength{\LTpost}{0pt}%
+   \begin{longtable}{%
+     @{}|@{}m{0.10\textwidth}@{}| % < {\centering}
+      m{0.88\textwidth}@{}|@{}}
+     \hline
+     {\kaiti \parbox[c][\tabrowheight][c]{0.10\textwidth}{\centering 序号} }
+     & {\kaiti\parbox[c][\tabrowheight][c]{0.86\textwidth}{\centering 文献目录(作者、题目、刊物名、出版时间、页次)}  } \\
+     \hline
+     \endfirsthead}
+  {\end{longtable}}
+  {\parbox[c][\tabrowheight][c]{0.10\textwidth}{\centering \anchorlang{\mkgbnumlabel{\printfield{labelnumber}}}}
+  & \parbox[c][\tabrowheight][c]{0.86\textwidth}{\driver{}}\\\hline}
 
 \ExplSyntaxOn
 
@@ -300,7 +286,7 @@ advisortitle,institute,date,dateyear,datemonth,dateday,formdate,mark}%在clist�
        \begin{tabular}{c}
         \l_NUDTvalue_proposaltype_tl \\
         \\~
-        \textbf{开题报告}\\
+        开题报告\\
        \end{tabular}};
     \linespread{1.68}\zihao{3}\syht
     \nodeonepairmultirow{\l_NUDTlabel_title_tl}{\l_NUDTvalue_title_tl}
