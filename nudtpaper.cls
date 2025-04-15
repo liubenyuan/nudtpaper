@@ -623,9 +623,9 @@ pdfborder=0 1 1]{hyperref}
   \begin{center}\leavevmode % 表格环境
   {\fangsong \wuhao[1.25]%
     \begin{tabular}{llcll}
-    分类号  & \entry{1}{3.2cm}{\@classification} & \hspace*{4.8cm}%
+    分类号  & \entry{1}{3.2cm}{\@classification} & \hspace*{4.8cm} &%
     学号    & \entry{1}{3.2cm}{\@serialno}         \\[5mm]    %
-    U\ D\ C & \entry{1}{3.2cm}{\@UDC} &            \hspace*{4.8cm}
+    U\ D\ C & \entry{1}{3.2cm}{\@UDC} &            \hspace*{4.8cm} &
     密级 & \entry{1}{3.2cm}{\@confidentiality}
     \end{tabular}
   }
