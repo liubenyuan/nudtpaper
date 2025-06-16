@@ -20,10 +20,7 @@
 \RequirePackage{pifont}
 %\RequirePackage{amsmath,amssymb,amstext}
 \RequirePackage{ctex,CJKfntef}
-\setCJKfamilyfont{MyCJKfzxbs}{FZXiaoBiaoSong-B05S} %方正小标宋简体,用于首页"国防科技大学"和扉页"说明"
-\setCJKfamilyfont{MyCJKsyht}{Source Han Sans CN Heavy} %思源黑体heavy，用于首页加粗黑体字体
-\newcommand{\fzxbs}{\CJKfamily{MyCJKfzxbs}}  
-\newcommand{\syht}{\CJKfamily{MyCJKsyht}}  
+
 
 \RequirePackage{geometry}
 \geometry{a4paper,includeheadfoot,top=15mm,bottom=25.4mm,left=31mm,right=31mm}%
