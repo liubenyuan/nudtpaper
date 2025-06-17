@@ -37,11 +37,11 @@ If `nudtpaper` helps you, please give it a **star**!
 +  **spline**    输出书脊，用于查重版本。查重论文需要在封面背面有一个带框书脊。使用该选项后会插入a3cover目录下的spineinthesis.pdf，该pdf在a3cover下利用对应的spineinthesis.tex文件生成(需输入论文标题信息)。生成方法为：编辑a3cover文件夹中的spineinthesis.tex文件，运行makeothers.bat，得到的spineinthesis.pdf即为a4大小的书脊页。
 
 
-### 3) 字体选项
+### 3) 字体选项(注意：若提示默认使用的字体不存在则尝试切换选项或根据所缺字体下载安装)
 
 +  **ttf**       使用windows的字体
 +  **otf**       使用Adobe字体
-+  **fz**        使用方正字体(需要自己安装字体)
++  **fz**        使用方正字体(需要自己安装字体，下载见[地址](https://github.com/liubenyuan/nudtpaper/issues/67))
 +  **fandol**    使用fandol字体
 
 
