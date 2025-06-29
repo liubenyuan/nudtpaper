@@ -22,10 +22,10 @@
 \RequirePackage{ctex,CJKfntef}
 
 
-\RequirePackage[showframe]{geometry}
+\RequirePackage{geometry}%[showframe]
 \geometry{a4paper,includeheadfoot,top=15mm,bottom=25.4mm,left=31mm,right=31mm}%
 \geometry{headheight=7.7mm,headsep=4.3mm,footskip=7.9mm,voffset=0mm}
-\usepackage[type=alledges]{fgruler}
+%\usepackage[type=alledges]{fgruler}
 
 \RequirePackage{enumitem}
 \AddEnumerateCounter{\chinese}{\chinese}{}
