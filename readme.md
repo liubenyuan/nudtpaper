@@ -44,6 +44,23 @@ If `nudtpaper` helps you, please give it a **star**!
 +  **fz**        使用方正字体(需要自己安装字体，下载见[地址](https://github.com/liubenyuan/nudtpaper/issues/67))
 +  **fandol**    使用fandol字体
 
++  若使用上述选项且安装字体后仍提升缺字体，则可自行设置字体，方法是在导言区加入如下代码，其中的字体名为系统内存在的字体(可用fc-list命令查看)。
+```
+   %英文字体
+    \setmainfont{Times New Roman} %times.ttf
+    \setsansfont{Arial} %arial.ttf
+    \setmonofont{Courier New} %cour.ttf
+    %中文字体
+    \setCJKmainfont[BoldFont={STZhongsong}]{SimSun}  STZHONGS.TTF，simsun.ttc
+    \setCJKsansfont{SimHei} % simhei.ttf
+    \setCJKmonofont{FangSong} % simfang.ttf
+    %要用的命令
+    \setCJKfamilyfont{song}{SimSun}
+    \setCJKfamilyfont{hei}{SimHei}
+    \setCJKfamilyfont{fs}{FangSong} 
+    \setCJKfamilyfont{kai}{KaiTi} 
+```
+
 
 ### 4) 版本/生成选项
 
