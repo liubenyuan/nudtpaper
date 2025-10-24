@@ -399,7 +399,7 @@ pdfborder=0 1 1]{hyperref}
   \vspace*{\fill}
   \clearpage\fi\fi%
 }
-\titlecontents{chapter}[0pt]{\vspace{0.25\baselineskip} \heiti \xiaosi[1.25]}
+\titlecontents{chapter}[0pt]{\vspace{0.25\baselineskip} \sf\heiti \xiaosi[1.25]}
     {第\zhnumber{\thecontentslabel}章\quad}{}
     {\hspace{.5em}\titlerule*{.}\contentspage}
 \titlecontents{section}[2em]{\songti \xiaosi[1.25]}
@@ -444,7 +444,7 @@ pdfborder=0 1 1]{hyperref}
 \newcommand\cabstractname{摘\hspace{1em}要}
 \newcommand\eabstractname{Abstract}
 \newcommand\ckeywordsname{关键词}
-\newcommand\ckeywords[1]{{\hei\xiaosi \ckeywordsname: #1}}
+\newcommand\ckeywords[1]{{\sf\hei\xiaosi \ckeywordsname: #1}}
 \newcommand\ekeywordsname{Key Words}
 \newcommand\ekeywords[1]{\textbf{\textsf{\xiaosi \ekeywordsname: #1}}}
 \newenvironment{cabstract}{%
