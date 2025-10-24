@@ -345,11 +345,40 @@ pdfborder=0 1 1]{hyperref}
     \@mainmattertrue
     \pagenumbering{arabic}
     \pagestyle{plain}}
+% --- Appendix Numbering Logic ---
+\RequirePackage{etoolbox}
+\newcounter{appendices}
+\AtEndDocument{%
+  \if@filesw
+    \immediate\write\@auxout{\string\gdef\string\totalappendices{\the\value{appendices}}}%
+  \fi
+}
+\newcommand{\singleappendixsetup}{%
+  \renewcommand{\thesection}{\arabic{section}}
+  \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+  \renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+  \renewcommand{\thefigure}{\arabic{figure}}
+  \renewcommand{\thetable}{\arabic{table}}
+  \renewcommand{\theequation}{\arabic{equation}}
+}
+\pretocmd{\appendix}{%
+  \ifdefined\totalappendices
+    \ifnum\totalappendices=1
+      \singleappendixsetup
+    \fi
+  \fi
+  \setcounter{appendices}{0}%
+  \pretocmd{\chapter}{\stepcounter{appendices}}{}{}%
+}{}{}
+% --- End Appendix Logic ---
 \renewcommand\backmatter{%
     \if@openright\cleardoublepage\else\clearpage\fi
-    \titleformat{\chapter}{\filcenter \heiti \sanhao}{附录\,\thechapter\,}{1em}{}
+    \titleformat{\chapter}
+      {\filcenter \heiti \sanhao}
+      {\ifdefined\totalappendices\ifnum\totalappendices=1 附录\else 附录\,\thechapter\fi\else 附录\,\thechapter\fi}
+      {1em}{}
     \titlecontents{chapter}[0pt]{\vspace{0.25\baselineskip} \heiti \xiaosi[1.25]}
-      {附录\,\thecontentslabel\quad}{}
+      {\ifdefined\totalappendices\ifnum\totalappendices=1 附录\else 附录\,\thecontentslabel\fi\else 附录\,\thecontentslabel\fi\quad}{}
       {\hspace{.5em}\titlerule*{.}\contentspage}
     \@mainmattertrue
     \pagestyle{plain}}
