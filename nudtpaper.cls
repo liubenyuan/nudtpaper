@@ -527,7 +527,7 @@ pdfborder=0 1 1]{hyperref}
 \newenvironment{resume}{%
     \chapter*{作者在学期间取得的学术成果}
     \addcontentsline{toc}{chapter}{作者在学期间取得的学术成果}
-    \xiaosi
+    \renewcommand{\baselinestretch}{1.5}\xiaosi
     \@afterheading}
     {\par\vspace{2em}\par}
 \renewtheoremstyle{nonumberplain}%
