@@ -345,11 +345,40 @@ pdfborder=0 1 1]{hyperref}
     \@mainmattertrue
     \pagenumbering{arabic}
     \pagestyle{plain}}
+% --- Appendix Numbering Logic ---
+\RequirePackage{etoolbox}
+\newcounter{appendices}
+\AtEndDocument{%
+  \if@filesw
+    \immediate\write\@auxout{\string\gdef\string\totalappendices{\the\value{appendices}}}%
+  \fi
+}
+\newcommand{\singleappendixsetup}{%
+  \renewcommand{\thesection}{\arabic{section}}
+  \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+  \renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+  \renewcommand{\thefigure}{\arabic{figure}}
+  \renewcommand{\thetable}{\arabic{table}}
+  \renewcommand{\theequation}{\arabic{equation}}
+}
+\pretocmd{\appendix}{%
+  \ifdefined\totalappendices
+    \ifnum\totalappendices=1
+      \singleappendixsetup
+    \fi
+  \fi
+  \setcounter{appendices}{0}%
+  \pretocmd{\chapter}{\stepcounter{appendices}}{}{}%
+}{}{}
+% --- End Appendix Logic ---
 \renewcommand\backmatter{%
     \if@openright\cleardoublepage\else\clearpage\fi
-    \titleformat{\chapter}{\filcenter \heiti \sanhao}{附录\,\thechapter\,}{1em}{}
+    \titleformat{\chapter}
+      {\filcenter \heiti \sanhao}
+      {\ifdefined\totalappendices\ifnum\totalappendices=1 附录\else 附录\,\thechapter\fi\else 附录\,\thechapter\fi}
+      {1em}{}
     \titlecontents{chapter}[0pt]{\vspace{0.25\baselineskip} \heiti \xiaosi[1.25]}
-      {附录\,\thecontentslabel\quad}{}
+      {\ifdefined\totalappendices\ifnum\totalappendices=1 附录\else 附录\,\thecontentslabel\fi\else 附录\,\thecontentslabel\fi\quad}{}
       {\hspace{.5em}\titlerule*{.}\contentspage}
     \@mainmattertrue
     \pagestyle{plain}}
@@ -370,7 +399,7 @@ pdfborder=0 1 1]{hyperref}
   \vspace*{\fill}
   \clearpage\fi\fi%
 }
-\titlecontents{chapter}[0pt]{\vspace{0.25\baselineskip} \heiti \xiaosi[1.25]}
+\titlecontents{chapter}[0pt]{\vspace{0.25\baselineskip} \sf\heiti \xiaosi[1.25]}
     {第\zhnumber{\thecontentslabel}章\quad}{}
     {\hspace{.5em}\titlerule*{.}\contentspage}
 \titlecontents{section}[2em]{\songti \xiaosi[1.25]}
@@ -415,7 +444,7 @@ pdfborder=0 1 1]{hyperref}
 \newcommand\cabstractname{摘\hspace{1em}要}
 \newcommand\eabstractname{Abstract}
 \newcommand\ckeywordsname{关键词}
-\newcommand\ckeywords[1]{{\hei\xiaosi \ckeywordsname: #1}}
+\newcommand\ckeywords[1]{{\sf\hei\xiaosi \ckeywordsname: #1}}
 \newcommand\ekeywordsname{Key Words}
 \newcommand\ekeywords[1]{\textbf{\textsf{\xiaosi \ekeywordsname: #1}}}
 \newenvironment{cabstract}{%
@@ -527,7 +556,7 @@ pdfborder=0 1 1]{hyperref}
 \newenvironment{resume}{%
     \chapter*{作者在学期间取得的学术成果}
     \addcontentsline{toc}{chapter}{作者在学期间取得的学术成果}
-    \xiaosi
+    \renewcommand{\baselinestretch}{1.5}\xiaosi
     \@afterheading}
     {\par\vspace{2em}\par}
 \renewtheoremstyle{nonumberplain}%
