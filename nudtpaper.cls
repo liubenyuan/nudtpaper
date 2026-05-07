@@ -176,6 +176,7 @@ gbnamefmt=lowercase,gbpub=false,url=false,doi=false]{biblatex}%,backref=true
 bookmarksnumbered=true,
 pdfborder=0 1 1]{hyperref}
 \RequirePackage{datetime}
+\RequirePackage{environ}
 \defaultfontfeatures{Mapping=tex-text}
 \xeCJKsetcharclass{"0}{"2E7F}{0}
 \xeCJKsetcharclass{"2E80}{"FFFF}{1}
@@ -546,13 +547,16 @@ pdfborder=0 1 1]{hyperref}
     \setlength{\listparindent}{0pt} % 段落缩进量
     \setlength{\topsep}{0pt} % 标签与上文的间距
 }}{\end{list}}
-\newenvironment{ack}{%
+\NewEnviron{ack}{%
     \chapter*{致\hspace{1em}谢}%
     \addcontentsline{toc}{chapter}{致谢}%
-    \ifisanon\color{white}\else\relax\fi%
-    \xiaosi%
-    \@afterheading}
-    {\par\vspace{2em}\par}
+    \unless\ifisanon%
+        \xiaosi%
+        \@afterheading
+        \BODY
+        \par\vspace{2em}\par
+    \fi
+}
 \newenvironment{resume}{%
     \chapter*{作者在学期间取得的学术成果}
     \addcontentsline{toc}{chapter}{作者在学期间取得的学术成果}
