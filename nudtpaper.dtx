@@ -1127,7 +1127,7 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
 %    \begin{macrocode}
 %<*cls>
 \renewpagestyle{plain}{
-\sethead{}{\raisebox{.65\baselineskip}{\songti \wuhao \ifisanon{~}\else{国防科技大学研究生院\@optionpaperclass{}学位论文}\fi}}{}%
+\sethead{}{\raisebox{.65\baselineskip}{\songti \wuhao \ifisanon{~}\else{国防科技大学\@optionpaperclass{}\@optiondegreestring{}论文}\fi}}{}%
 \setfoot{}{{\songti \wuhao 第~\thepage~页}}{}%
 \headrule%
 \footrule%
@@ -1752,7 +1752,8 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
   }
   \par
   \vspace*{2.5cm} %插入空白
-  {\heiti\sanhao \@papertype{}\@optionpaperclass{}学位论文}\\
+  {\heiti\sanhao \@optionpaperclass{}\@optiondegreestring{}论文\\}
+  {\heiti\sihao （\ifisprof 专业学位\else 学术学位\fi）\\}
   \vspace{12bp}
   {\cusong\erhao[1.25] \@title \par}%
   \vspace{45bp} %从WORD中得来
@@ -1785,7 +1786,7 @@ gbnamefmt=lowercase,gbpub=false]{biblatex}%
 
   \par
   \vfill
-  {\centering \cusong \sanhao \ifisanon{~}\else{国防科技大学研究生院}\fi\\[0.8em]
+  {\centering \cusong \sanhao \ifisanon{~}\else{国防科技大学}\fi\\[0.8em]
     {\@zhdate \par}%
   }
   \vspace{1mm}
@@ -1818,8 +1819,7 @@ A dissertation\\
 Submitted in partial fulfillment of the requirements\\
 for the degree of \textsf{\@optionpaperclassen{} of \@enpapertype}\\
 in \textsf{\@ensubject}\\
-\makebox[\textwidth]{\ifisanon{~}\else{Graduate School of National University of %
-Defense Technology}\fi}\\
+\makebox[\textwidth]{\ifisanon{~}\else{National University of Defense Technology}\fi}\\
 \ifisanon{~}\else{Changsha, Hunan, P.\ R.\ China}\fi\\[5mm]
 ~\@endate~
   }
