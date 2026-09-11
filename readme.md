@@ -97,18 +97,10 @@ If `nudtpaper` helps you, please give it a **star**!
 \SetArgSty{textrm}
 \let\subfigure=\subfloat
 ```
-+  旁注一般不使用，脚注和尾注，可以使用自行设置。比如：
++  页脚脚注已在 `mynudt.sty` 中设置为黑色空心圈编号，人工智能工具注释示例见下文。旁注一般不使用；旁注和尾注可按需另行设置，例如：
 ```
 \usepackage{marginnote}
 \renewcommand*{\marginfont}{\footnotesize\color{red}\sffamily}
-
-\counterwithout{footnote}{chapter}
-\usepackage{xcolor}
-\usepackage{circledtext}
-\circledtextset{resize=real,height=1.5ex,boxcolor=blue,charcolor=blue,boxlinewidth=1pt}
-\makeatletter
-\renewcommand\thefootnote{\circledtext*{\@arabic\c@footnote}}
-\makeatother
 
 %使用endnotes包的尾注
 %\usepackage{endnotes}
@@ -158,3 +150,29 @@ bookmarksopenlevel=4,
 ```
 \pdfbookmark[1]{封面}{pdftag:titlepage}
 ```
+
+### 7) 人工智能工具使用脚注
+
+`mynudt.sty` 已加载 `circledtext`、`tablefootnote` 和 `needspace`，页脚脚注采用 ①、②、③ 等空心圈并在全文连续编号。`data/chap01.tex` 演示章标题、节标题、正文和表格标题的注释，`thesis.tex` 的 biblatex 分支演示参考文献标题注释。示例文字来自学校提供的附件，使用时应填写实际的工具及版本、用途、日期时间、提示词或输入内容，以及作者的复核或修改情况。
+
+正文直接使用 `\footnote{使用说明}`。章、节标题将标记与脚注正文分开，短标题不含脚注，避免将标记带入目录、页眉或 PDF 书签：
+
+```latex
+\section[选题背景]{选题背景\texorpdfstring{\protect\footnotemark}{}}
+\footnotetext{本节使用了……}
+```
+
+章标题将 `\section` 换为 `\chapter` 即可。表格标题使用 `\tablefootnote`，以 `[H]` 固定位置，并用 `\Needspace` 为表格及页脚注释预留空间；局部关闭标题试排可避免重复生成注释。本例预留 12 行，增加表格行数或注释长度时应相应调整：
+
+```latex
+\Needspace{12\baselineskip}
+\begin{table}[H]
+  \centering
+  \captionsetup{singlelinecheck=false,justification=centering}
+  \caption[实验数据对比分析]{%
+    实验数据对比分析\protect\tablefootnote{本内容使用了……}}
+  % 表格内容
+\end{table}
+```
+
+参考文献示例使用 `aiannotated` 标题，在标题后立即输出脚注正文，使其出现在参考文献第一页。若不需要该注释，将 `\printbibliography` 的 `heading=aiannotated` 改回 `heading=bibliography` 即可。

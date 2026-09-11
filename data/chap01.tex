@@ -1,12 +1,25 @@
-\chapter{第一章题目}
+% 章节标题的可选短标题不含脚注，供目录和页眉使用。
+\chapter[第一章题目]{第一章题目\texorpdfstring{\protect\footnotemark}{}}
+\footnotetext{本章使用了DeepSeek-V2来完善研究方案逻辑性与完整性。
+使用此工具的日期和时间为2026年1月1日8时至10时，并通过输入方案框架和提示词
+“对上述方案进行完善”生成相关内容，作者在此基础上进行了修改完善。}
 
 本章的主要内容与学校提供的Word模板中内容一致，图片与表格均采用原始设定大小，%
 主要是为了说明格式的统一。%
 但是，\LaTeX{}的一些禁则，专业排版的能力，对公式及文献的处理都是得天独厚的，%
 我们不必刻意去追求与Word的完美匹配。而且你将会发现，用\LaTeX{}书写论文的美！ %
 
-\section{（1.1 题目）}
-正文内容
+本章的人工智能工具使用脚注取自学校提供的注释示例，展示章节标题、正文和表格标题的标注方式。
+
+\section[（1.1 题目）]{（1.1 题目）\texorpdfstring{\protect\footnotemark}{}}
+\footnotetext{本节使用了DeepSeek-V3.2来辅助获取潜在研究选题建议。
+使用此工具的日期和时间为2026年1月1日8时至10时，并通过提示词
+“梳理AIGC领域的研究热点”生成相关内容，作者在此基础上进行了审核论证。}
+
+语言不应该成为学术交流与科学传播的障碍。AIGC可以作为高标准语言检查器，
+提高稿件可读性和写作质量，以消除研究传播中的语言障碍\footnote{%
+本内容使用了Doubao 3.5来文本润色。使用此工具的日期和时间为2026年1月1日8时至10时，
+并通过提示词“AIGC对消除研究传播中语言障碍的作用”生成相关内容，作者在此基础上进行了修改。}。
 
 \subsection{（1.1.1 题目）}
 正文内容
@@ -49,9 +62,15 @@
 
 正文内容
 
-\begin{table}[htp]
+% H 固定带脚注表格的位置；关闭标题试排，避免重复生成脚注。
+% 为本例的表格和页脚注释预留空间，避免注释被挤到下一页。
+\Needspace{12\baselineskip}
+\begin{table}[H]
 \centering
-\caption{表 1.2 名称}
+\captionsetup{singlelinecheck=false,justification=centering}
+\caption[表 1.2 名称]{表 1.2 名称\protect\tablefootnote{%
+本内容使用了Qwen-V2来进行数据处理。使用此工具的日期和时间为2026年1月1日8时至10时，
+并通过输入原始实验数据以及提示词“根据输入数据进行统计”生成相关数据，作者在此基础上进行交叉验证。}}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \makebox[2.07cm][0pt]{} & \makebox[2.07cm][0pt]{} & \makebox[2.07cm][0pt]{} & \makebox[2.07cm][0pt]{} & \makebox[2.07cm][0pt]{} \\

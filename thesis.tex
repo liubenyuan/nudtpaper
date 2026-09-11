@@ -113,7 +113,14 @@
 {\hyphenpenalty=500 %
 \tolerance=9900 %
 \renewcommand{\baselinestretch}{1.35}
-\printbibliography[heading=bibliography, title=参考文献]
+% 参考文献标题的人工智能工具使用脚注示例，正文紧接标题输出。
+\defbibheading{aiannotated}[参考文献]{%
+  \chapter*{#1\texorpdfstring{\protect\footnotemark}{}}%
+  \footnotetext{本内容使用了Qwen-4来进行文献初筛。
+  使用此工具的日期和时间为2026年1月1日8时至10时，并通过提示词
+  “搜集整理近5年AIGC领域的文献资料”生成相关内容，作者在此基础上进行了复核。}%
+}
+\printbibliography[heading=aiannotated, title=参考文献]
 
 }
 \else
