@@ -1,0 +1,61 @@
+% !TEX root = ../thesis.tex
+% 由 nudtpaper.cls 在独创性声明后直接载入，无需单独编译。
+% 保留模板示例；使用时按实际情况修改勾选项、表格和签名信息。
+\begingroup
+\newgeometry{top=37mm,bottom=35mm,left=28mm,right=26mm,ignoreheadfoot}
+% 类文件的零 topskip 会使清页残留空白页；仅在本页恢复正常值。
+\setlength{\topskip}{12bp}
+\pagestyle{empty}
+\thispagestyle{empty}
+\renewcommand{\baselinestretch}{1}
+\normalfont
+\raggedbottom
+\setlength{\parindent}{24bp}
+\setlength{\parskip}{0pt}
+
+{\centering\songti\cusong\erhao[1.3]
+  人工智能工具使用声明\par}
+\vspace{18bp}
+
+{\fangsong\xiaosi[2.4]
+本人声明所呈交学位论文/实践成果
+\underline{\mbox{$\square$未使用/$\square$已合理规范使用}}
+人工智能工具，符合国家相关法律法规及学校要求。学位论文/实践成果中使用人工智能工具的情况已全部完整披露，并在对应内容位置进行了规范标注，不存在违法违规使用人工智能工具或隐瞒使用行为。本人对人工智能工具生成或修改的全部内容进行了审核确认，并保留了可追溯的使用记录以备核查。违反本声明所产生的责任与后果，由本人独立承担。\par}
+\vspace{14bp}
+
+{\centering\fangsong\xiaosi[1.2]
+\setlength{\tabcolsep}{5bp}
+\renewcommand{\arraystretch}{1.95}
+\begin{tabular}{|>{\centering\arraybackslash}m{13.7mm}|
+                 >{\centering\arraybackslash}m{39.5mm}|
+                 >{\centering\arraybackslash}m{41mm}|
+                 >{\centering\arraybackslash}m{37mm}|}
+  \hline
+  {\heiti 序号} & {\heiti 人工智能工具及版本} & {\heiti 用途} & {\heiti 章节范围} \\
+  \hline
+  示例1 & DeepSeek-V3.2 & 选题构思论证 & 第1.1节 \\
+  \hline
+  示例2 & DeepSeek-V2 & 研究方案设计 & 第2章 \\
+  \hline
+  示例3 & Qwen-4 & 文献资料梳理 & 第1.2节 \\
+  \hline
+  示例4 & Qwen-Max & 数据处理分析 & 第5.1节 \\
+  \hline
+  示例5 & 豆包 4.0 & 图表图像制作 & 第3.1节、4.2节 \\
+  \hline
+  示例6 & 豆包 3.5 & 语言润色与格式规范 & 第2.3节 \\
+  \hline
+        & …… & & \\
+  \hline
+\end{tabular}\par}
+\vspace{5bp}
+{\kaishu\xiaosi[1.2] 注：如未使用，不填写此表。\par}
+\vspace{40bp}
+
+{\fangsong\xiaosi[2.4]
+学位论文/实践成果题目：\underline{\makebox[9.2cm]{}}\par
+作者签名：\underline{\makebox[3.3cm]{}}\hfill
+日期：\makebox[1.2cm]{}年\makebox[0.8cm]{}月\hspace*{5mm}\par}
+
+\restoregeometry
+\endgroup

@@ -68,6 +68,7 @@ If `nudtpaper` helps you, please give it a **star**!
 +  **blind**     系统提交的盲评版本，在使用anon选项后，添加blind选项会列出“第一作者，XXX”为作者列表的相关成果信息。
 +  **不使用anon和blind选项时** 为明评版本，所有信息均提供，也包括独创性声明。生成明评版本前需在a3cover目录下生成(或扫描得到)originalitystatement.pdf，生成查重版本需在a3cover目录下生成spineinthesis.pdf。
 +  独创性声明**只需要保密审查时的签字版本**(也就是其签字时间应于保密审查时间一致，这一版本扫描后可以在后续评阅、打印中一直使用)，明评版本默认插入a3cover目录下的originalitystatement.pdf文件。最终版本，则利用签字扫描版替换利用tex生成的pdf。
++  人工智能工具使用声明紧接独创性声明插入，直接编辑 `a3cover/aitoolstatement.tex` 即可，无需单独编译。该页保留附件模板的示例行、未勾选选项及空白题目、签名和日期，使用时请按实际情况填写；启用 `anon` 时与独创性声明一同省略。
 +  **biber**     参考文献使用biblatex生成。不使用该选项时，则参考文献默认用bibtex生成。
 +  **resumebib** 在使用biber选项时，使用resumebib选项，则成果列表信息也用biblatex生成，也就是利用一个bib文件维护成果信息，格式由模板设定。当不使用biber和resumebib时，成果列表需在data目录下的resume.tex中手工输入。由于成果列表信息的格式要求与参考文献格式要求相同，因此推荐使用biblatex生成成果列表。保存成果信息的bib文件是ref目录下的resume.bib文件，注意其中使用了author+an的数据注解方式来突出显示论文作者。
 

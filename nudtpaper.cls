@@ -747,6 +747,7 @@ Defense Technology}\fi}\\
 \cleardoublepage%
 \newpage
 \includepdf[]{a3cover/originalitystatement.pdf}
+\input{a3cover/aitoolstatement.tex}
 }\fi
 
   \normalsize % normal, 正文开始
