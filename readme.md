@@ -68,6 +68,7 @@ If `nudtpaper` helps you, please give it a **star**!
 +  **blind**     系统提交的盲评版本，在使用anon选项后，添加blind选项会列出“第一作者，XXX”为作者列表的相关成果信息。
 +  **不使用anon和blind选项时** 为明评版本，所有信息均提供，也包括独创性声明。生成明评版本前需在a3cover目录下生成(或扫描得到)originalitystatement.pdf，生成查重版本需在a3cover目录下生成spineinthesis.pdf。
 +  独创性声明**只需要保密审查时的签字版本**(也就是其签字时间应于保密审查时间一致，这一版本扫描后可以在后续评阅、打印中一直使用)，明评版本默认插入a3cover目录下的originalitystatement.pdf文件。最终版本，则利用签字扫描版替换利用tex生成的pdf。
++  人工智能工具使用声明紧接独创性声明插入，直接编辑 `a3cover/aitoolstatement.tex` 即可，无需单独编译。该页保留附件模板的示例行、未勾选选项及空白题目、签名和日期，使用时请按实际情况填写；启用 `anon` 时与独创性声明一同省略。
 +  **biber**     参考文献使用biblatex生成。不使用该选项时，则参考文献默认用bibtex生成。
 +  **resumebib** 在使用biber选项时，使用resumebib选项，则成果列表信息也用biblatex生成，也就是利用一个bib文件维护成果信息，格式由模板设定。当不使用biber和resumebib时，成果列表需在data目录下的resume.tex中手工输入。由于成果列表信息的格式要求与参考文献格式要求相同，因此推荐使用biblatex生成成果列表。保存成果信息的bib文件是ref目录下的resume.bib文件，注意其中使用了author+an的数据注解方式来突出显示论文作者。
 
@@ -96,18 +97,10 @@ If `nudtpaper` helps you, please give it a **star**!
 \SetArgSty{textrm}
 \let\subfigure=\subfloat
 ```
-+  旁注一般不使用，脚注和尾注，可以使用自行设置。比如：
++  页脚脚注已在 `mynudt.sty` 中设置为黑色空心圈编号，人工智能工具注释示例见下文。旁注一般不使用；旁注和尾注可按需另行设置，例如：
 ```
 \usepackage{marginnote}
 \renewcommand*{\marginfont}{\footnotesize\color{red}\sffamily}
-
-\counterwithout{footnote}{chapter}
-\usepackage{xcolor}
-\usepackage{circledtext}
-\circledtextset{resize=real,height=1.5ex,boxcolor=blue,charcolor=blue,boxlinewidth=1pt}
-\makeatletter
-\renewcommand\thefootnote{\circledtext*{\@arabic\c@footnote}}
-\makeatother
 
 %使用endnotes包的尾注
 %\usepackage{endnotes}
@@ -157,3 +150,29 @@ bookmarksopenlevel=4,
 ```
 \pdfbookmark[1]{封面}{pdftag:titlepage}
 ```
+
+### 7) 人工智能工具使用脚注
+
+`mynudt.sty` 已加载 `circledtext`、`tablefootnote` 和 `needspace`，页脚脚注采用 ①、②、③ 等空心圈并在全文连续编号。`data/chap01.tex` 演示章标题、节标题、正文和表格标题的注释，`thesis.tex` 的 biblatex 分支演示参考文献标题注释。示例文字来自学校提供的附件，使用时应填写实际的工具及版本、用途、日期时间、提示词或输入内容，以及作者的复核或修改情况。
+
+正文直接使用 `\footnote{使用说明}`。章、节标题将标记与脚注正文分开，短标题不含脚注，避免将标记带入目录、页眉或 PDF 书签：
+
+```latex
+\section[选题背景]{选题背景\texorpdfstring{\protect\footnotemark}{}}
+\footnotetext{本节使用了……}
+```
+
+章标题将 `\section` 换为 `\chapter` 即可。表格标题使用 `\tablefootnote`，以 `[H]` 固定位置，并用 `\Needspace` 为表格及页脚注释预留空间；局部关闭标题试排可避免重复生成注释。本例预留 12 行，增加表格行数或注释长度时应相应调整：
+
+```latex
+\Needspace{12\baselineskip}
+\begin{table}[H]
+  \centering
+  \captionsetup{singlelinecheck=false,justification=centering}
+  \caption[实验数据对比分析]{%
+    实验数据对比分析\protect\tablefootnote{本内容使用了……}}
+  % 表格内容
+\end{table}
+```
+
+参考文献示例使用 `aiannotated` 标题，在标题后立即输出脚注正文，使其出现在参考文献第一页。若不需要该注释，将 `\printbibliography` 的 `heading=aiannotated` 改回 `heading=bibliography` 即可。

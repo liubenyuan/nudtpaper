@@ -9,6 +9,12 @@
 \RequirePackage[chapter]{algorithm}
 \RequirePackage{algorithmic}
 
+% 人工智能工具使用脚注：黑色空心圈，全文连续编号。
+\RequirePackage{circledtext,tablefootnote,needspace}
+\counterwithout{footnote}{chapter}
+\circledtextset{resize=real,height=1.5ex,boxcolor=black,charcolor=black,boxlinewidth=0.4pt}
+\renewcommand{\thefootnote}{\protect\circledtext{\arabic{footnote}}}
+
 % 配置Lstlisting
 \lstset{
   columns=flexible,sensitive=true,lineskip=-3pt,
