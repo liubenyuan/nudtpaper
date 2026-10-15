@@ -325,7 +325,7 @@ pdfborder=0 1 1]{hyperref}
   \fi}
 \renewpagestyle{plain}{
 \sethead{}{\raisebox{.65\baselineskip}{\songti \wuhao \ifisanon{~}%
-\else{国防科技大学研究生院{\ifisprof{专业学位}\else{}\fi}\@optionpaperclass{}\@optiondegreestring{}论文}\fi}}{}%
+\else{国防科技大学\@optionpaperclass{}\@optiondegreestring{}论文}\fi}}{}%
 \setfoot{}{{\songti \wuhao 第~\thepage~页}}{}%
 \headrule%
 \footrule%
@@ -664,7 +664,8 @@ pdfborder=0 1 1]{hyperref}
   }
   \par
   \vspace*{2.5cm} %插入空白
-  {\heiti\sanhao \ifisprof{专业学位}\else\@papertype{}\fi\@optionpaperclass{}\@optiondegreestring{}论文}\\
+  {\heiti\sanhao \@optionpaperclass{}\@optiondegreestring{}论文\\}
+  {\heiti\sanhao \ifisprof 专业学位\else 学术学位\fi\\}
   \vspace{12bp}
   {\cusong\erhao[1.25] \@title \par}%
   \vspace{45bp} %从WORD中得来
@@ -705,7 +706,7 @@ pdfborder=0 1 1]{hyperref}
 
   \par
   \vfill
-  {\centering \cusong \sanhao \ifisanon{~}\else{国防科技大学研究生院}\fi\\[0.8em]
+  {\centering \cusong \sanhao \ifisanon{~}\else{国防科技大学}\fi\\[0.8em]
     {\@zhdate \par}%
   }
   \vspace{1mm}
@@ -735,8 +736,7 @@ A \ifisprof{thesis}\else{dissertation} \fi \\
 Submitted in partial fulfillment of the requirements\\
 for the \ifisprof{professional }\else{}\fi degree of \textsf{\@optionpaperclassen{} of \@enpapertype}\\
 in \textsf{\@ensubject}\\
-\makebox[\textwidth]{\ifisanon{~}\else{Graduate School of National University of %
-Defense Technology}\fi}\\
+\makebox[\textwidth]{\ifisanon{~}\else{National University of Defense Technology}\fi}\\
 \ifisanon{~}\else{Changsha, Hunan, P.\ R.\ China}\fi\\[5mm]
 ~\@endate~
   }
